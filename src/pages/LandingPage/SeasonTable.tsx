@@ -36,15 +36,15 @@ const SeasonTable: React.FC = () => {
   ];
 
   return (
-    <section className="bg-bg/80 p-6 rounded-lg overflow-auto">
+    <section className="p-2 rounded-lg overflow-auto">
       <h2 className="text-2xl font-semibold text-myflame mb-4">
         📊 Season Stats
       </h2>
-      <table className="min-w-full text-fg">
-        <thead>
+      <table className="table table-compact w-full text-center">
+        <thead className="bg-myflame/90">
           <tr>
             {["Season", "Games", "Goals", "Ice time (h)"].map((h) => (
-              <th key={h} className="border-b pb-2 text-left">
+              <th key={h} className="text-left">
                 {h}
               </th>
             ))}
@@ -52,8 +52,8 @@ const SeasonTable: React.FC = () => {
         </thead>
         <tbody>
           {data.map((r, i) => (
-            <tr key={i} className="even:bg-bg/70">
-              <td className="py-1 text-myflame">{r.season}</td>
+            <tr key={i} className="hover">
+              <td className="font-medium text-myflame">{r.season}</td>
               <td>{r.games}</td>
               <td>{r.goals}</td>
               <td>{r.iceTime}</td>

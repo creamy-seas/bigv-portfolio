@@ -33,7 +33,7 @@ const GameGraph: React.FC = () => {
   }, [data, cumulative]);
 
   return (
-    <div className="p-4 max-w-4xl mx-auto">
+    <div className="p-2 max-w-4xl mx-auto">
       <h2 className="text-2xl font-semibold text-myflame mb-4">
         📈 Game Stats
       </h2>

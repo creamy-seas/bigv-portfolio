@@ -37,7 +37,7 @@ const Highlights: React.FC = () => {
   ];
 
   return (
-    <section className="bg-bg/80 p-6 rounded-lg overflow-auto">
+    <section className="p-2 rounded-lg overflow-auto">
       <h2 className="text-2xl font-semibold text-myflame mb-4">
         🎉 Highlights
       </h2>
