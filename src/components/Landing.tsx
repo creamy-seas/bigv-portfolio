@@ -7,7 +7,24 @@ const Landing: React.FC = () => {
   const goals = 4;
     const hours = 368;
     return (
-        <section className="flex md:flex-row items-center bg-bg p-6 rounded-lg shadow-lg">
+        <section className="flex flex-col md:flex-row items-center bg-bg p-6 rounded-lg shadow-lg">
+            <img
+                src={profileUrl}
+                alt="Player Photo"
+                className="
+                    block
+                    order-first
+   w-full        /* full width on mobile */
+   h-auto       /* preserve aspect ratio */
+   rounded-[5%]
+   mb-4
+
+   md:order-last
+   md:mb-0
+   md:w-[360px]
+   md:h-auto
+                            flex-shrink-0       /* don’t let flexbox squash or overlap it */"
+            />
             <div className="flex-1 space-y-2 md:space-y-4">
                 <h2 className="text-2xl font-bold">Viktor Antonov</h2>
                 <dl className="grid grid-cols-2 gap-y-2">
@@ -26,11 +43,6 @@ const Landing: React.FC = () => {
                     ))}
                 </dl>
             </div>
-            <img
-                src={profileUrl}
-                alt="Player Photo"
-                className="flex-shrink-0 rounded-[5%] max-w-[360px] h-[360px]"
-            />
         </section>
     )
 }

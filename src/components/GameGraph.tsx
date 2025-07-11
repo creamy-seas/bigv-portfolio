@@ -53,7 +53,6 @@ function GameGraph() {
           takeaways: row.Takeaways,
         }))
         setData(formatted)
-                console.log(formatted)
       },
     })
   }, [])
