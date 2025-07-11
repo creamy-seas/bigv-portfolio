@@ -1,39 +1,23 @@
-import React from "react";
-
-interface Season {
-  season: string;
-  games: string;
-  goals: string;
-  iceTime: number;
-}
+import React, { useEffect, useMemo, useState } from "react";
+import { loadGameStats, type GameStats } from "../../utils/loadGameStats";
+import { loadTimeLog, type TimeLog } from "../../utils/loadTimeLog";
+import { buildSeasonTable } from "../../utils/buildSeasonTable";
 
 const SeasonTable: React.FC = () => {
-  const data: Season[] = [
-    {
-      season: "2021-2022",
-      games: "",
-      goals: "",
-      iceTime: 15,
-    },
-    {
-      season: "2022-2023",
-      games: "",
-      goals: "",
-      iceTime: 52,
-    },
-    {
-      season: "2023-2024",
-      games: "",
-      goals: "",
-      iceTime: 120,
-    },
-    {
-      season: "2024-2025",
-      games: "17",
-      goals: "4",
-      iceTime: 184,
-    },
-  ];
+  const [gameStats, setGameStats] = useState<GameStats[] | null>(null);
+  useEffect(() => {
+    loadGameStats().then(setGameStats);
+  }, []);
+
+  const [timeLog, setTimeLog] = useState<TimeLog[] | null>(null);
+  useEffect(() => {
+    loadTimeLog().then(setTimeLog);
+  }, []);
+
+  const data = useMemo(() => {
+    if (timeLog === null || gameStats === null) return [];
+    return buildSeasonTable(gameStats, timeLog);
+  }, [timeLog, gameStats]);
 
   return (
     <section className="p-2 rounded-lg overflow-auto">
@@ -56,7 +40,7 @@ const SeasonTable: React.FC = () => {
               <td className="font-medium text-myflame">{r.season}</td>
               <td>{r.games}</td>
               <td>{r.goals}</td>
-              <td>{r.iceTime}</td>
+              <td>{r.timeOnIceH}</td>
             </tr>
           ))}
         </tbody>
