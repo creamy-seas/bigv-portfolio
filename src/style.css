@@ -14,9 +14,3 @@ body {
   padding: 2rem;
 }
 #root { width: 100%; max-width: var(--max-width) }
-
-.split {
-  display: flex;
-  gap: 2rem;
-}
-.split > div { flex: 1 }

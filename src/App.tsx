@@ -3,23 +3,34 @@ import Landing from './components/Landing'
 import Gallery from './components/Gallery'
 import Highlights from './components/Highlights'
 import SeasonTable from './components/SeasonTable'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Link, Navigate, Route, Routes } from 'react-router-dom'
 
 // Home page combines hero, highlights & table
 const HomePage: React.FC = () => (
-    <>
+    <div className="container mx-auto px-4 space-y-8">
         <Landing />
-        <div className="split">
+        <div className="text-center">
+            <Link
+                to="/gallery"
+                className="
+          text-accent text-3xl font-bold
+          underline decoration-accent underline-offset-4
+          hover:text-accent/80
+        "
+            >
+                View Gallery
+            </Link>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Highlights />
             <SeasonTable />
         </div>
-    </>
+    </div>
 )
 
 // Gallery page
 const GalleryPage: React.FC = () => (
     <>
-        <h2 className="accent">View Gallery</h2>
         <Gallery />
     </>
 )
@@ -27,7 +38,16 @@ const GalleryPage: React.FC = () => (
 const App: React.FC = () => (
     <>
         <div style={{ textAlign: 'center', margin: '2rem 0' }}>
-            <h2 className="text-accent text-3xl font-bold">🏒 BigV Webpage 🏒</h2>
+            <Link
+                to="/"
+                className="
+          text-accent text-3xl font-bold
+          decoration-accent underline-offset-4
+          hover:text-accent/80
+        "
+            >
+                🏒 BigV Webpage 🏒
+            </Link>
         </div>
         <Routes>
             <Route path="/" element={<HomePage />} />

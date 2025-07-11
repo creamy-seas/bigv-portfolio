@@ -1,47 +1,64 @@
-import React, { useEffect, useState } from 'react'
-import Papa from 'papaparse'
+import React from 'react'
 
-interface SeasonData {
-  Season: string
-  Games: string
-  Goals: string
-  Hours: string
+interface Season {
+    season: string;
+  games: string;
+  goals: string;
+  iceTime: number
 }
 
 const SeasonTable: React.FC = () => {
-  const [data, setData] = useState<SeasonData[]>([])
+  const data: Season[] = [
+    {
+  season: "2021-2022",
+  games: "",
+  goals: "",
+      iceTime: 15,
+        },
+    {
+            season: "2022-2023",
+            games: "",
+            goals: "",
+            iceTime: 52,
+        },
+    {
+            season: "2023-2024",
+            games: "",
+            goals: "",
+            iceTime: 120,
+        },
+    {
+            season: "2024-2025",
+            games: "17",
+            goals: "4",
+            iceTime: 184,
+        }
+    ]
 
-  useEffect(() => {
-    fetch('/src/data/seasons.csv')
-      .then(r => r.text())
-      .then(txt => {
-        const result = Papa.parse<SeasonData>(txt, { header: true })
-        setData(result.data.filter(d => d.Season))
-      })
-  }, [])
-
-  return (
-    <section>
-      <h3>📊 Season Stats</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Season</th><th>Games</th><th>Goals</th><th>Hours</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((r, i) => (
-            <tr key={i}>
-              <td>{r.Season}</td>
-              <td>{r.Games}</td>
-              <td>{r.Goals}</td>
-              <td>{r.Hours}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
-  )
+    return (
+        <section className="bg-bg/80 p-6 rounded-lg overflow-auto">
+            <h2 className="text-2xl font-semibold text-accent mb-4">📊 Season Stats</h2>
+            <table className="min-w-full text-fg">
+                <thead>
+                    <tr>
+                        {['Season', 'Games', 'Goals', 'Ice time (h)'].map(h => (
+                            <th key={h} className="border-b pb-2 text-left">{h}</th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.map((r, i) => (
+                        <tr key={i} className="even:bg-bg/70">
+                            <td className="py-1 text-accent">{r.season}</td>
+                            <td>{r.games}</td>
+                            <td>{r.goals}</td>
+                            <td>{r.iceTime}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </section>
+    )
 }
 
 export default SeasonTable
