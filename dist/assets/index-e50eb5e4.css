@@ -1,0 +1,1 @@
+:root{--bg: #111;--fg: #eee;--accent: sandybrown;--max-width: 800px}body{background:var(--bg);color:var(--fg);font-family:system-ui,sans-serif;line-height:1.5;display:flex;justify-content:center;padding:2rem}#root{width:100%;max-width:var(--max-width)}
