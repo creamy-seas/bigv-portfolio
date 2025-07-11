@@ -4,6 +4,7 @@ import Gallery from './components/Gallery'
 import Highlights from './components/Highlights'
 import SeasonTable from './components/SeasonTable'
 import { Link, Navigate, Route, Routes } from 'react-router-dom'
+import GameGraph from './components/GameGraph'
 
 // Home page combines hero, highlights & table
 const HomePage: React.FC = () => (
@@ -25,6 +26,7 @@ const HomePage: React.FC = () => (
             <Highlights />
             <SeasonTable />
         </div>
+        <GameGraph/>
     </div>
 )
 
