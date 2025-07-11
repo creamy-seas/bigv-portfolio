@@ -1,10 +1,11 @@
 import { useState } from "react"
+import playUrl from '../assets/play.svg'
 
 export interface GalleryItem {
-  src:     string
-  caption: string
-  date:    string
-  type:    'image' | 'video'
+    src: string
+    caption: string
+    date: string
+    type: 'image' | 'video'
 }
 
 export interface SeasonGallery {
@@ -95,7 +96,7 @@ function Gallery() {
                                         />
                                     ) : (
                                         <img
-                                            src="/play.png"
+                                            src={playUrl}
                                             alt={item.caption}
                                             className="w-full h-32 object-cover rounded-lg"
                                         />

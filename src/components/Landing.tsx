@@ -1,8 +1,9 @@
 import React from 'react'
 import { AGE, TEAM, CURRENT_SEASON } from '../config'
+import profileUrl from '../assets/profile.jpeg'
 
 const Landing: React.FC = () => {
-  const games = 18;
+    const games = 18;
   const goals = 4;
     const hours = 368;
     return (
@@ -26,7 +27,7 @@ const Landing: React.FC = () => {
                 </dl>
             </div>
             <img
-                src="/profile.jpeg"
+                src={profileUrl}
                 alt="Player Photo"
                 className="flex-shrink-0 rounded-[5%] max-w-[360px] h-[360px]"
             />
