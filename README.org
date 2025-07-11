@@ -1,0 +1,15 @@
+#+title: BigV Website
+
+* Tasks
+- [X] Time on ice
+- [X] CSV with career timeline
+- [ ] CSV with photos - get old old skating photos. see /home/antonov/Desktop/photos-sotr/phone
+- [ ] CSV with game log - get final videos from Maria
+- [ ] Main page
+  - Photo
+  - Career ice time: 352 hours
+  - Career games: 17
+  - Career goals: 4
+  - Graph of cumulative stats: Goal, Shots, Passes, Puck carries, Takeaways
+- [ ] Highlights page
+- [ ] Highlights per season
