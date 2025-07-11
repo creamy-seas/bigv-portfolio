@@ -84,7 +84,7 @@ function Gallery() {
     return (
         <>
             <section className="container mx-auto px-4 mb-12">
-                <h2 className="text-2xl font-semibold text-accent mb-4">
+                <h2 className="text-2xl font-semibold text-myflame mb-4">
                     {GALLERIES[0].title}
                 </h2>
 
@@ -139,7 +139,7 @@ function Gallery() {
     p-3
     bg-white bg-opacity-90 hover:bg-opacity-100
     rounded-full shadow-lg
-    focus:outline-none focus:ring-2 focus:ring-accent
+    focus:outline-none focus:ring-2 focus:ring-myflame
     text-2xl text-gray-800   /* <<< ensure large, dark arrows */
                                     "
                         >
@@ -153,7 +153,7 @@ function Gallery() {
     p-3
     bg-white bg-opacity-90 hover:bg-opacity-100
     rounded-full shadow-lg
-    focus:outline-none focus:ring-2 focus:ring-accent
+    focus:outline-none focus:ring-2 focus:ring-myflame
     text-2xl text-gray-800   /* <<< ensure large, dark arrows */
                                     "
                         >
@@ -171,7 +171,7 @@ function Gallery() {
                             />
                         </div>
 
-                        <h3 className="text-xl font-semibold text-accent mt-4">
+                        <h3 className="text-xl font-semibold text-myflame mt-4">
                             {items[selectedIdx].caption}
                         </h3>
                         <p className="text-sm text-gray-400">

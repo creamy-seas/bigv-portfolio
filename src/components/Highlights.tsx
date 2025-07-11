@@ -38,7 +38,7 @@ const Highlights: React.FC = () => {
 
 return (
     <section className="bg-bg/80 p-6 rounded-lg overflow-auto">
-        <h2 className="text-2xl font-semibold text-accent mb-4">🎉 Highlights</h2>
+        <h2 className="text-2xl font-semibold text-myflame mb-4">🎉 Highlights</h2>
         <ul className="steps steps-vertical p-4">
             {highlights.map((step, i) => (
                 <li key={i} className="step step-primary mb-2">

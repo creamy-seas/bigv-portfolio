@@ -14,9 +14,9 @@ const HomePage: React.FC = () => (
             <Link
                 to="/gallery"
                 className="
-          text-accent text-3xl font-bold
-          underline decoration-accent underline-offset-4
-          hover:text-accent/80
+          text-myflame text-3xl font-bold
+          underline decoration-myflame underline-offset-4
+          hover:text-myflame/80
         "
             >
                 View Gallery
@@ -43,9 +43,9 @@ const App: React.FC = () => (
             <Link
                 to="/"
                 className="
-          text-accent text-3xl font-bold
-          decoration-accent underline-offset-4
-          hover:text-accent/80
+          text-myflame text-3xl font-bold
+          decoration-myflame underline-offset-4
+          hover:text-myflame/80
         "
             >
                 🏒 BigV Webpage 🏒

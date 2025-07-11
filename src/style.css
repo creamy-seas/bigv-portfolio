@@ -1,16 +1,23 @@
-:root {
-  --bg: #111;
-  --fg: #eee;
-  --accent: sandybrown;
-  --max-width: 800px;
+@import "tailwindcss";
+
+@theme {
+  /** Define the colours that can be used text-COLOURNAME across the app */
+  --color-myflame: sandybrown;
+  --color-bg: #111;
+  --color-fg: #eee;
+
+  /** Max size off the page */
+  --size-root: 800px;
 }
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: system-ui, sans-serif;
-  line-height: 1.5;
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
+
+@layer base {
+  body {
+    /** Page content is centered and coloured */
+    @apply flex justify-center p-8 bg-bg text-fg;
+  }
+  #root {
+    /** Constrain the page size */
+     width: 100%;
+     max-width: var(--size-root);
+  }
 }
-#root { width: 100%; max-width: var(--max-width) }

@@ -37,7 +37,7 @@ const SeasonTable: React.FC = () => {
 
     return (
         <section className="bg-bg/80 p-6 rounded-lg overflow-auto">
-            <h2 className="text-2xl font-semibold text-accent mb-4">📊 Season Stats</h2>
+            <h2 className="text-2xl font-semibold text-myflame mb-4">📊 Season Stats</h2>
             <table className="min-w-full text-fg">
                 <thead>
                     <tr>
@@ -49,7 +49,7 @@ const SeasonTable: React.FC = () => {
                 <tbody>
                     {data.map((r, i) => (
                         <tr key={i} className="even:bg-bg/70">
-                            <td className="py-1 text-accent">{r.season}</td>
+                            <td className="py-1 text-myflame">{r.season}</td>
                             <td>{r.games}</td>
                             <td>{r.goals}</td>
                             <td>{r.iceTime}</td>
