@@ -37,7 +37,7 @@ const Landing: React.FC = () => {
                         ['Career Hours', hours],
                     ].map(([label, val]) => (
                         <React.Fragment key={label}>
-                            <dt className="font-semibold text-accent">{label}:</dt>
+                            <dt className="font-semibold text-myflame">{label}:</dt>
                             <dd>{val}</dd>
                         </React.Fragment>
                     ))}

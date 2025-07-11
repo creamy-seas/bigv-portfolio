@@ -86,7 +86,7 @@ function GameGraph() {
 
     return (
         <div className="p-4 max-w-4xl mx-auto">
-            <h2 className="text-2xl font-semibold text-accent mb-4">📈 Game Stats</h2>
+            <h2 className="text-2xl font-semibold text-myflame mb-4">📈 Game Stats</h2>
 
             <div className="h-96">
                 <ResponsiveContainer width="100%" height="100%">
