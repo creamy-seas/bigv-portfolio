@@ -69,72 +69,114 @@ function getFileUrl(item: GalleryItem) {
 }
 
 function Gallery() {
-    const [selected, setSelected] = useState<GalleryItem | null>(null)
+    const [selectedIdx, setSelectedIdx] = useState<null | number>(null)
+    // TODO: change this to switch seasons
+    const items = GALLERIES[0].items;
 
-  return (
+
+    const openModal = (idx: number) => setSelectedIdx(idx)
+    const closeModal = () => setSelectedIdx(null)
+    const showPrev = () =>
+        selectedIdx !== null && setSelectedIdx((selectedIdx + items.length - 1) % items.length)
+    const showNext = () =>
+        selectedIdx !== null && setSelectedIdx((selectedIdx + 1) % items.length)
+
+    return (
         <>
-            {GALLERIES.map(season => (
-                <section key={season.id} className="container mx-auto px-4 mb-12">
-                    <h2 className="text-2xl font-semibold text-accent mb-4">
-                        {season.title}
-                    </h2>
+            <section className="container mx-auto px-4 mb-12">
+                <h2 className="text-2xl font-semibold text-accent mb-4">
+                    {GALLERIES[0].title}
+                </h2>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 gap-4">
-                        {season.items.map(item => {
-                            const preview = getFileUrl(item)
-                            return (
-                                <div
-                                    key={item.src}
-                                    className="cursor-pointer"
-                                    onClick={() => setSelected(item)}
-                                >
-                                    {item.type === 'image' ? (
-                                        <img
-                                            src={preview.thumbnail}
-                                            alt={item.caption}
-                                            className="w-full h-32 object-cover rounded-lg"
-                                        />
-                                    ) : (
-                                        <img
-                                            src={playUrl}
-                                            alt={item.caption}
-                                            className="w-full h-32 object-cover rounded-lg"
-                                        />
-                                    )
-                                    }
-                                    <p className="text-sm text-center mt-2">{item.caption}</p>
-                                    <p className="text-xs text-center text-gray-400">
-                                        {item.date}
-                                    </p>
-                                </div>
-                            )
-                        })}
-                    </div>
-                </section>
-            ))}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 gap-4">
+                    {items.map((item, idx) => {
+                        const preview = getFileUrl(item)
+                        return (
+                            <div
+                                key={item.src}
+                                className="cursor-pointer"
+                                onClick={() => openModal(idx)}
+                            >
+                                {item.type === 'image' ? (
+                                    <img
+                                        src={preview.thumbnail}
+                                        alt={item.caption}
+                                        className="w-full h-32 object-cover rounded-lg"
+                                    />
+                                ) : (
+                                    <img
+                                        src={playUrl}
+                                        alt={item.caption}
+                                        className="w-full h-32 object-cover rounded-lg"
+                                    />
+                                )
+                                }
+                                <p className="text-sm text-center mt-2">{item.caption}</p>
+                                <p className="text-xs text-center text-gray-400">
+                                    {item.date}
+                                </p>
+                            </div>
+                        )
+                    })}
+                </div>
+            </section>
 
-            {/* Modal */}
-            {selected && (
+            {selectedIdx !== null && (
                 <div
                     className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4"
-                    onClick={() => setSelected(null)}
+                    onClick={closeModal}
                 >
                     <div
-                        className="bg-bg p-6 rounded-lg max-w-[90vw] max-h-[90vh] overflow-auto"
+                        className="relative bg-bg p-6 rounded-lg max-w-[90vw] max-h-[90vh] w-full sm:w-[600px] overflow-auto"
                         onClick={e => e.stopPropagation()}
                     >
-                        <iframe
-                            src={getFileUrl(selected).iframe}
-                            width="640"
-                            height="480"
-                            allow="autoplay"
-                            allowFullScreen
-                            title={selected.caption}
-                        />
+                        {/* Prev/Next */}
+                        <button
+                            onClick={showPrev}
+                            className="
+                                     absolute left-4 top-1/2 transform -translate-y-1/2
+    z-10
+    p-3
+    bg-white bg-opacity-90 hover:bg-opacity-100
+    rounded-full shadow-lg
+    focus:outline-none focus:ring-2 focus:ring-accent
+    text-2xl text-gray-800   /* <<< ensure large, dark arrows */
+                                    "
+                        >
+                            ‹
+                        </button>
+                        <button
+                            onClick={showNext}
+                            className="
+                                       absolute right-4 top-1/2 transform -translate-y-1/2
+    z-10
+    p-3
+    bg-white bg-opacity-90 hover:bg-opacity-100
+    rounded-full shadow-lg
+    focus:outline-none focus:ring-2 focus:ring-accent
+    text-2xl text-gray-800   /* <<< ensure large, dark arrows */
+                                    "
+                        >
+                            ›
+                        </button>
+
+                        {/* Responsive iframe */}
+                        <div className="w-full aspect-video">
+                            <iframe
+                                src={getFileUrl(items[selectedIdx]).iframe}
+                                className="w-full h-full"
+                                allow="autoplay"
+                                allowFullScreen
+                                title={items[selectedIdx].caption}
+                            />
+                        </div>
+
                         <h3 className="text-xl font-semibold text-accent mt-4">
-                            {selected.caption}
+                            {items[selectedIdx].caption}
                         </h3>
-                        <p className="text-sm text-gray-400">{selected.date}</p>
+                        <p className="text-sm text-gray-400">
+                            {items[selectedIdx].date}
+                        </p>
                     </div>
                 </div>
             )}
