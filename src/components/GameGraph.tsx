@@ -38,7 +38,7 @@ function GameGraph() {
     const [cumulative, setCumulative] = useState(true)
 
     useEffect(() => {
-        Papa.parse<RawStatsRow>('/data/game_log.csv', {
+        Papa.parse<RawStatsRow>('data/game_log.csv', {
             header: true,
             download: true,
             dynamicTyping: true,
