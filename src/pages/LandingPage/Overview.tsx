@@ -1,11 +1,32 @@
-import React from "react";
-import { AGE, TEAM, CURRENT_SEASON } from "../config";
-import profileUrl from "../assets/profile.jpeg";
+import React, { useEffect, useMemo, useState } from "react";
+import profileUrl from "../../assets/profile.jpeg";
+import { AGE, SEASON, TEAM } from "../../config";
+import { loadGameStats, type GameStats } from "../../utils/loadGameStats";
+import { loadTimeLog, type TimeLog } from "../../utils/loadTimeLog";
+import { accumulate } from "../../utils/accumulate";
 
-const Landing: React.FC = () => {
-  const games = 18;
-  const goals = 4;
-  const hours = 368;
+const Overview: React.FC = () => {
+  const [gameStats, setGameStats] = useState<GameStats[] | null>(null);
+  useEffect(() => {
+    loadGameStats().then(setGameStats);
+  }, []);
+
+  const [timeLog, setTimeLog] = useState<TimeLog[] | null>(null);
+  useEffect(() => {
+    loadTimeLog().then(setTimeLog);
+  }, []);
+
+  // Derived data
+  const games = gameStats?.length || "";
+  const goals = useMemo(() => {
+    if (gameStats === null) return "";
+    return accumulate(gameStats, ["goals"]).at(-1)?.goals;
+  }, [gameStats]);
+  const hours = useMemo(() => {
+    if (timeLog === null) return "";
+    return accumulate(timeLog, ["timeOnIceH"]).at(-1)?.timeOnIceH;
+  }, [timeLog]);
+
   return (
     <section className="flex flex-col md:flex-row items-center bg-bg p-6 rounded-lg shadow-lg">
       <img
@@ -31,7 +52,7 @@ const Landing: React.FC = () => {
           {[
             ["Age", AGE],
             ["Team", TEAM],
-            ["Season", CURRENT_SEASON],
+            ["Season", SEASON],
             ["Career Games", games],
             ["Career Goals", goals],
             ["Career Hours", hours],
@@ -47,4 +68,4 @@ const Landing: React.FC = () => {
   );
 };
 
-export default Landing;
+export default Overview;

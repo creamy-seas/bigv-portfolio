@@ -1,5 +1,5 @@
 import { useState } from "react";
-import playUrl from "../assets/play.svg";
+import playUrl from "../../assets/play.svg";
 
 interface GalleryItem {
   src: string;
