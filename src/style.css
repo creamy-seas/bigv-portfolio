@@ -8,7 +8,7 @@
   --color-fg: #eee;
 
   /** Max size off the page */
-  --size-root: 800px;
+  --size-root: 850px;
 }
 
 @layer base {
