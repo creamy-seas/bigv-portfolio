@@ -1,4 +1,7 @@
-// TODO: change to dynamic: differenceInYears(new Date(), new Date('2019-10-15'))
-export const AGE = 5;
+import { evalDynamicDates } from "./utils/loadDate";
+
+const { age, season } = evalDynamicDates("2019-10-15");
+
+export const AGE = age;
+export const SEASON = season;
 export const TEAM = "Slough Jets U10s";
-export const CURRENT_SEASON = "2024-2025";

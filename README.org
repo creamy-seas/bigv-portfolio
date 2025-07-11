@@ -11,8 +11,11 @@
   - Graph of cumulative stats: Goal, Shots, Passes, Puck carries, Takeaways
 - [X] Highlights page
 - *Read from config files*
-   - [ ] CSV with photos - get old old skating photos. see /home/antonov/Desktop/photos-sotr/phone
+   - [ ] CSV with photos - get old skating photos. see /home/antonov/Desktop/photos-sotr/phone
    - [ ] CSV with game log - get final videos from Maria
+
+*Google Upload*
+- Generate
 
 - *Graph*
   - Dynamic graph of cumulative goals scored, by every match
