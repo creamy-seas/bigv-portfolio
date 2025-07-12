@@ -1,9 +1,10 @@
-export function evalDynamicDates(birth: string): {
+export function evalDynamicDates(
+  birth: string,
+  now: Date = new Date(),
+): {
   age: number;
   season: string;
 } {
-  const now = new Date();
-
   // Birthday
   const b = new Date(birth);
   let age = now.getFullYear() - b.getFullYear();
