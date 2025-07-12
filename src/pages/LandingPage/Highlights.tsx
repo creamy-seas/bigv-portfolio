@@ -1,40 +1,11 @@
-import React from "react";
-
-interface Highlight {
-  age: string;
-  date: string;
-  event: string;
-}
+import React, { useEffect, useState } from "react";
+import { loadHighlights, type Highlight } from "../../utils/loadHighlights";
 
 const Highlights: React.FC = () => {
-  // TODO: read from highlights.csv
-  const highlights: Highlight[] = [
-    {
-      age: "2",
-      date: "September 2021",
-      event: "First time on skates",
-    },
-    {
-      age: "3",
-      date: "September 2022",
-      event: "First independent skating",
-    },
-    {
-      age: "4",
-      date: "September 2024",
-      event: "First game",
-    },
-    {
-      age: "4",
-      date: "September 2024",
-      event: "Spirit of the game award",
-    },
-    {
-      age: "5",
-      date: "April 2025",
-      event: "First goal",
-    },
-  ];
+  const [highlights, setHighlights] = useState<Highlight[]>([]);
+  useEffect(() => {
+    loadHighlights().then(setHighlights);
+  }, []);
 
   return (
     <section className="p-2 rounded-lg overflow-auto">
@@ -42,12 +13,12 @@ const Highlights: React.FC = () => {
         🎉 Highlights
       </h2>
       <ul className="p-4">
-        {highlights.map((step, i) => (
+        {highlights.map((h, i) => (
           <li key={i} className="mb-2">
             <div className="font-semibold">
-              Age {step.age} — <span className="italic">{step.date}</span>
+              Age {h.age} — <span className="italic">{h.date}</span>
             </div>
-            <div className="text-sm">{step.event}</div>
+            <div className="text-sm">{h.highlight}</div>
           </li>
         ))}
       </ul>
