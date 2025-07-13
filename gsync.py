@@ -15,6 +15,7 @@ from google.oauth2.credentials import Credentials
 
 load_dotenv()
 
+IMAGE_EXTS = {".jpeg", ".jpg", ".png", ".webm"}
 FILE_REGEX = re.compile(r"(\d{4}-\d{2}-\d{2})_(.+?)\.[^.]+$", re.I)
 GOOGLE_FOLDER = os.environ["GOOGLE_FOLDER"]
 GOOGLE_SECRETS_FILE = os.environ["GOOGLE_SECRETS_FILE"]
@@ -125,11 +126,17 @@ def sync_and_generate_csv(libraries):
 
                 date_str, description = mg.groups()
                 drive_id = upload_file(f, drive_folder_id)
-                rows.append([season.name, date_str, drive_id, description])
+
+                ext = f.suffix.lower()
+                ftype = "image" if ext in IMAGE_EXTS else "video"
+
+                rows.append([season.name, date_str, drive_id, description, ftype])
 
     rows.sort(key=lambda r: r[1], reverse=True)
     with open("./public/data/gallery.csv", "w") as fh:
-        csv.writer(fh).writerows([["season", "date", "id", "description"], *rows])
+        csv.writer(fh).writerows(
+            [["season", "date", "id", "description", "type"], *rows]
+        )
 
 
 if __name__ == "__main__":

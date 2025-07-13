@@ -9,4 +9,4 @@ dev:
 	npm run dev
 
 lint:
-	npm run lint:fix && black **/*.py
+	npm run lint:fix && black gsync.py
