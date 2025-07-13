@@ -133,4 +133,4 @@ def sync_and_generate_csv(libraries):
 
 
 if __name__ == "__main__":
-    sync_and_generate_csv(["./photos/viktor", "./photos/shared"])
+    sync_and_generate_csv(os.environ["MEDIA_PATHS"].split(":"))

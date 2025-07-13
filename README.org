@@ -14,6 +14,13 @@ make publish
 4. [@4] Push and github will publish
 
 * Setup
+** =.env=
+#+begin_quote
+GOOGLE_SECRETS_FILE=/home/antonov/creamy_seas/db_hockey/media/viktor/portfolio/client_secret_1095555542718-ef13mavg6tqod85o3pvddfq4m65jcin8.apps.googleusercontent.com.json
+GOOGLE_FOLDER=1Cl33qdF212w5i8GC1iNPXEOU1FZj-Vgc
+MEDIA_PATHS=/home/antonov/creamy_seas/db_hockey/media/viktor/highlights:/home/antonov/creamy_seas/db_hockey/media/shared
+#+end_quote
+
 ** CSV files
 | *File*           | *Description*                  |
 |------------------+--------------------------------|
