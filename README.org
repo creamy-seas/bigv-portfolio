@@ -1,5 +1,51 @@
 #+title: BigV Website
 
+* Running
+1. Prepare the [[*CSV files][CSV files]]
+2. Sync the photos
+#+begin_src shell
+make sync
+#+end_src
+3. [@3] Make the changes and publish
+#+begin_shell
+make dev
+make publish
+#+end_shell
+4. [@4] Push and github will publish
+
+* Setup
+** CSV files
+| *File*           | *Description*                  |
+|------------------+--------------------------------|
+| [[file:public/data/highlights.csv][=highlights.csv=]] | Big events, newest at top      |
+| [[file:public/data/game_stats.csv][=game_stats.csv=]] | Game by game stats             |
+| [[file:public/data/time_log.csv][=time_log.csv=]]   | Cumulative ice time per season |
+| [[file:public/data/gallery.csv][=gallery.csv=]]    | All of the photos              |
+
+** Github
+Ensure that pages points to the =gh-pages= branch which is created when installing
+#+begin_shell
+npm install --save-dev gh-pages
+#+end_shell
+
+** Google
+1. Go to [[https://console.cloud.google.com/][Google Cloud]] and create a new project
+2. Go to Go to [[https://console.cloud.google.com/apis/dashboard?authuser=6&inv=1&invt=Ab2i1A&project=hockey-portfolio][APIs & Services > Library]] and enable the *Google Drive API*
+
+This does not work! As the service account cannot upload files!
+3. [@3] In the Google Cloud Console, go to [[https://console.cloud.google.com/iam-admin/serviceaccounts?referrer=search&authuser=6&inv=1&invt=Ab2i1A&project=hockey-portfolio][IAM & Admin > Service Accounts]] and *Create a service account*
+   - Any suitable name
+   - Grant role like *Editor* or *Owner*
+   - The one I setup for =bigv.antonov@gmail.com= is =media-mananger@hockey-portfolio.iam.gserviceaccount.com=
+4. Click on the account and go to the *Keys* tab
+5. *Add key* > *Create new key* > *JSON*
+6. Download and set =GOOGLE_KEY_FILE= path in =.env=
+
+So upload as user!
+7. [@7] [[https://console.cloud.google.com/auth/clients/create?previousPage=%2Fapis%2Fcredentials%3Fauthuser%3D6%26inv%3D1%26invt%3DAb2rWA%26project%3Dhockey-portfolio&authuser=6&inv=1&invt=Ab2rWA&project=hockey-portfolio][Create client OAuth client ID]] for *External User* and *Desktop App*. Add email to test users and don't spam it!
+8. Download json and store locally, setting it in =GOOGLE_SECRETS_FILE=
+
+Create the =GOOGLE_FOLDER= and give it public access
 * Tasks
 - [X] Time on ice
 - [X] CSV with career timeline
@@ -11,11 +57,6 @@
   - Graph of cumulative stats: Goal, Shots, Passes, Puck carries, Takeaways
 - [X] Highlights page
 - *Read from config files*
-   - [ ] CSV with photos - get old skating photos. see /home/antonov/Desktop/photos-sotr/phone
-   - [ ] CSV with game log - get final videos from Maria
+  - [ ] CSV with photos - get old skating photos. see /home/antonov/Desktop/photos-sotr/phone
+  - [ ] CSV with game log - get final videos from Maria
 
-*Google Upload*
-- Generate
-
-- *Graph*
-  - Dynamic graph of cumulative goals scored, by every match
