@@ -61,7 +61,7 @@ const Overview: React.FC = () => {
               <dt className="font-semibold text-myflame">{label}:</dt>
               {label === "Season" ? (
                 <a
-                  href={`/gallery?season=${val}`}
+                  href={`gallery?season=${val}`}
                   className="underline hover:text-myflame"
                 >
                   {val}

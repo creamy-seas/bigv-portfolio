@@ -39,7 +39,7 @@ const SeasonTable: React.FC = () => {
             <tr key={i} className="hover">
               <td className="font-medium text-myflame">
                 <a
-                  href={`/gallery?season=${r.season}`}
+                  href={`gallery?season=${r.season}`}
                   className="underline hover:text-myflame"
                 >
                   {r.season}
