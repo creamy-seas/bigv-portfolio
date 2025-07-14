@@ -29,7 +29,7 @@ const Overview: React.FC = () => {
   return (
     <section className="flex flex-col md:flex-row items-center bg-bg p-6 rounded-lg shadow-lg">
       <img
-        src="profile.jpeg"
+        src="profile.avif"
         alt="Player Photo"
         className="block order-first rounded-[5%]
                     w-full h-auto flex-shrink-0 mb-4
