@@ -4,29 +4,26 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build && cp dist/index.html dist/404.html",
+    "dev": "vike dev",
+    "build": "tsc -b && vike build && cp dist/index.html dist/404.html",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md}\"",
-    "lint:fix": "npm run prettier && npm run lint -- --fix",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "lint:fix": "npm run prettier && npm run lint -- --fix"
   },
   "homepage": "https://creamy-seas.github.io/bigv-portfolio",
   "dependencies": {
     "papaparse": "^5.5.3",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.3",
-    "recharts": "^3.1.0"
+    "recharts": "^3.1.0",
+    "vike-react": "^0.6.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
     "@tailwindcss/vite": "^4.1.11",
     "@types/papaparse": "^5.3.16",
     "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.5.2",
     "daisyui": "^5.0.46",
     "eslint": "^9.29.0",
@@ -38,9 +35,11 @@
     "gh-pages": "^6.3.0",
     "globals": "^16.3.0",
     "prettier": "^3.6.2",
+    "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.11",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.34.1",
+    "vike": "^0.4.235",
     "vite": "^7.0.4"
   }
 }
