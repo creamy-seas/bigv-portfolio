@@ -58,6 +58,18 @@ So upload as user!
 
 Create the =GOOGLE_FOLDER= and give it public access
 
+
+* Info
+** CSS
+I am using tailwind to treeshake only the css I really need. It also has =daisyui= that uses this css for some stylish components.
+
+The themes is defined in [[file:src/style.css][=src/style.css=]] and injected in [[file:renderer/_default.page.client.tsx][=renderer/_default.page.client.tsx=]]
+
+** SSR
+As I want minimal client-side =js= crap for creating the page, while maintaining some =js= functions for data manipulation, I am going with SSR rendering of webpages.
+
+Essentially during build a server renders the =html= which is captured into static files. The paths so made are defined in [[file:pages/][=pages=]].
+
 * Tasks
 - [X] Time on ice
 - [X] CSV with career timeline
