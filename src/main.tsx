@@ -1,14 +1,11 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./style.css";
 
-/**
- * Bootstrapping react into DOM
- */
-const container = document.getElementById("root")!;
-createRoot(container).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+async function bootstrap() {
+  const { createRoot } = await import("react-dom/client");
+  const container = document.getElementById("root")!;
+  const root = createRoot(container);
+  root.render(<App />);
+}
+
+bootstrap();
