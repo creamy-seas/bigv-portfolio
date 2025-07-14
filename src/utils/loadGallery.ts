@@ -1,4 +1,4 @@
-import Papa from "papaparse";
+import { parse } from "papaparse";
 
 export interface GalleryEntry {
   season: string;
@@ -13,7 +13,7 @@ let dataPromise: Promise<GalleryEntry[]> | null = null;
 export function loadGallery(): Promise<GalleryEntry[]> {
   if (!dataPromise) {
     dataPromise = new Promise((resolve) =>
-      Papa.parse<GalleryEntry>("data/gallery.csv", {
+      parse<GalleryEntry>("data/gallery.csv", {
         header: true,
         download: true,
         skipEmptyLines: true,

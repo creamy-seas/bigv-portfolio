@@ -1,4 +1,4 @@
-import Papa from "papaparse";
+import { parse } from "papaparse";
 
 export interface GameStats {
   season: string;
@@ -22,7 +22,7 @@ let dataPromise: Promise<GameStats[]> | null = null;
 export function loadGameStats(): Promise<GameStats[]> {
   if (!dataPromise) {
     dataPromise = new Promise((resolve) =>
-      Papa.parse<Omit<GameStats, "gameNo">>("data/game_stats.csv", {
+      parse<Omit<GameStats, "gameNo">>("data/game_stats.csv", {
         header: true,
         download: true,
         dynamicTyping: true,

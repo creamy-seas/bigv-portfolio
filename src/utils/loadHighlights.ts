@@ -1,4 +1,4 @@
-import Papa from "papaparse";
+import { parse } from "papaparse";
 import { evalDynamicDates } from "./loadDate";
 
 export interface Highlight {
@@ -13,7 +13,7 @@ let dataPromise: Promise<Highlight[]> | null = null;
 export function loadHighlights(): Promise<Highlight[]> {
   if (!dataPromise) {
     dataPromise = new Promise((resolve) =>
-      Papa.parse<Omit<Highlight, "age">>("data/highlights.csv", {
+      parse<Omit<Highlight, "age">>("data/highlights.csv", {
         header: true,
         download: true,
         dynamicTyping: true,

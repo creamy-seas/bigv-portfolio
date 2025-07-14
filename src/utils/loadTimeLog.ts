@@ -1,4 +1,4 @@
-import Papa from "papaparse";
+import { parse } from "papaparse";
 
 export interface TimeLog {
   season: string;
@@ -10,7 +10,7 @@ let dataPromise: Promise<TimeLog[]> | null = null;
 export function loadTimeLog(): Promise<TimeLog[]> {
   if (!dataPromise) {
     dataPromise = new Promise((resolve) =>
-      Papa.parse<TimeLog>("data/time_log.csv", {
+      parse<TimeLog>("data/time_log.csv", {
         header: true,
         download: true,
         dynamicTyping: true,
