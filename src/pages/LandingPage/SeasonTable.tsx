@@ -37,7 +37,14 @@ const SeasonTable: React.FC = () => {
         <tbody>
           {data.map((r, i) => (
             <tr key={i} className="hover">
-              <td className="font-medium text-myflame">{r.season}</td>
+              <td className="font-medium text-myflame">
+                <a
+                  href={`/gallery?season=${r.season}`}
+                  className="underline hover:text-myflame"
+                >
+                  {r.season}
+                </a>
+              </td>
               <td>{r.games}</td>
               <td>{r.goals}</td>
               <td>{r.timeOnIceH}</td>

@@ -16,6 +16,10 @@
     /** Page content is centered and coloured */
     @apply flex justify-center p-8 bg-bg text-fg;
   }
+  a {
+    /** Bold instead of underline the links */
+    @apply font-semibold no-underline hover:underline;
+  }
   #root {
     /** Constrain the page size */
     width: 100%;

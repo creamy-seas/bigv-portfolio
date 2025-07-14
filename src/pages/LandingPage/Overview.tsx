@@ -59,7 +59,16 @@ const Overview: React.FC = () => {
           ].map(([label, val]) => (
             <React.Fragment key={label}>
               <dt className="font-semibold text-myflame">{label}:</dt>
-              <dd>{val}</dd>
+              {label === "Season" ? (
+                <a
+                  href={`/gallery?season=${val}`}
+                  className="underline hover:text-myflame"
+                >
+                  {val}
+                </a>
+              ) : (
+                val
+              )}
             </React.Fragment>
           ))}
         </dl>
