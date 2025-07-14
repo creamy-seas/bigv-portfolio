@@ -14,7 +14,7 @@
 @layer base {
   body {
     /** Page content is centered and coloured */
-    @apply flex justify-center p-8 bg-bg text-fg;
+    @apply min-h-screen flex justify-center p-8 bg-bg text-fg;
   }
   a {
     /** Bold instead of underline the links */
