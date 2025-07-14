@@ -37,21 +37,16 @@ const GalleryPage: React.FC = () => {
   const [params] = useSearchParams();
   const seasonFilter = params.get("season");
 
-  // Tracking of expansion states - open latest season by default
+  // Tracking of expansion states
   const [open, setOpen] = useState<Record<string, boolean>>({});
   useEffect(() => {
     if (seasonFilter) setOpen((o) => ({ ...o, [seasonFilter]: true }));
-    else {
-      const latest = Object.keys(data)[-1];
-      if (latest) setOpen((o) => ({ ...o, [latest]: true }));
-    }
   }, [seasonFilter, data]);
 
   // Tracking of what is in view
   const [modal, setModal] = useState<{ season: string; index: number } | null>(
     null,
   );
-
   const closeModal = () => setModal(null);
   const showPrev = () =>
     setModal((m) =>
