@@ -11,7 +11,7 @@ const App: React.FC = () => (
         className="
           text-myflame text-3xl font-bold
           decoration-myflame underline-offset-4
-          hover:text-myflame/80
+          hover:text-myflame/80 select-none
         "
       >
         🏒 BigV Webpage 🏒
