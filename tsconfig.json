@@ -1,7 +1,34 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    // build‐info files (optional, but handy for incremental builds)
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
+
+    // Target modern JS
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+
+    // You’re not emitting from tsc
+    "noEmit": true,
+    "skipLibCheck": true,
+
+    // React JSX
+    "jsx": "react-jsx",
+    "useDefineForClassFields": true,
+
+    // Strictness & linty checks
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    // Vite “import.meta.env” types
+    "types": ["vite/client"]
+  },
+  "include": ["src", "vite.config.ts"]
 }
