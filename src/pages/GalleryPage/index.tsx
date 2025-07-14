@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-
+import React, { useEffect, useMemo, useState } from "react";
 import { loadGallery, type GalleryEntry } from "../../utils/loadGallery";
 import playUrl from "../../assets/play.svg";
 
@@ -34,14 +32,14 @@ const GalleryPage: React.FC = () => {
     });
   }, []);
 
-  const [params] = useSearchParams();
+  const params = useMemo(() => new URLSearchParams(window.location.search), []);
   const seasonFilter = params.get("season");
 
   // Tracking of expansion states
   const [open, setOpen] = useState<Record<string, boolean>>({});
   useEffect(() => {
     if (seasonFilter) setOpen((o) => ({ ...o, [seasonFilter]: true }));
-  }, [seasonFilter, data]);
+  }, [seasonFilter]);
 
   // Tracking of what is in view
   const [modal, setModal] = useState<{ season: string; index: number } | null>(
