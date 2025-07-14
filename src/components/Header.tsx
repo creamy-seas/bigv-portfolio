@@ -6,7 +6,7 @@ import React from "react";
 const Header: React.FC = () => (
   <header style={{ textAlign: "center", margin: "2rem 0" }}>
     <a
-      href="/"
+      href={import.meta.env.BASE_URL}
       className="
             text-myflame text-3xl font-bold
             decoration-myflame underline-offset-4

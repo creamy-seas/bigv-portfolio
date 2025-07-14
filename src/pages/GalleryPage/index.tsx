@@ -89,7 +89,7 @@ const GalleryPage: React.FC = () => {
                     >
                       <img
                         src={
-                          item.type === "image" ? thumbnail : "/play-icon.svg"
+                          item.type === "image" ? thumbnail : "play-icon.svg"
                         }
                         alt={item.description}
                         className="w-full h-32 object-cover rounded-lg"
