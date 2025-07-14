@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import profileUrl from "../../assets/profile.jpeg";
 import { AGE, SEASON, TEAM } from "../../config";
 import { loadGameStats, type GameStats } from "../../utils/loadGameStats";
 import { loadTimeLog, type TimeLog } from "../../utils/loadTimeLog";
@@ -30,21 +29,12 @@ const Overview: React.FC = () => {
   return (
     <section className="flex flex-col md:flex-row items-center bg-bg p-6 rounded-lg shadow-lg">
       <img
-        src={profileUrl}
+        src="/profile.jpeg"
         alt="Player Photo"
-        className="
-                    block
-                    order-first
-   w-full        /* full width on mobile */
-   h-auto       /* preserve aspect ratio */
-   rounded-[5%]
-   mb-4
-
-   md:order-last
-   md:mb-0
-   md:w-[360px]
-   md:h-auto
-                            flex-shrink-0       /* don’t let flexbox squash or overlap it */"
+        className="block order-first rounded-[5%]
+                    w-full h-auto flex-shrink-0 mb-4
+                    md:order-last md:mb-0 md:w-[360px] md:h-auto
+                    "
       />
       <div className="flex-1 space-y-2 md:space-y-4">
         <h2 className="text-2xl font-bold">Viktor Antonov</h2>

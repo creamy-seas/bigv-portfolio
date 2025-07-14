@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { loadGallery, type GalleryEntry } from "../../utils/loadGallery";
-import playUrl from "../../assets/play.svg";
 
 const navArrow =
   "absolute top-1/2 -translate-y-1/2 p-2 bg-white/90 hover:bg-white focus:ring-2 focus:ring-myflame rounded-full text-2xl text-bg";
@@ -89,7 +88,9 @@ const GalleryPage: React.FC = () => {
                       }}
                     >
                       <img
-                        src={item.type === "image" ? thumbnail : playUrl}
+                        src={
+                          item.type === "image" ? thumbnail : "/play-icon.svg"
+                        }
                         alt={item.description}
                         className="w-full h-32 object-cover rounded-lg"
                       />
