@@ -6,12 +6,16 @@
 #+begin_src shell
 make sync
 #+end_src
-3. [@3] Make the changes and publish
+
+3. [@3] Make the changes
 #+begin_shell
 make dev
-make publish
 #+end_shell
-4. [@4] Push and github will publish
+
+4. [@4] Publish - the dist folder is sent to the gh-pages branch
+#+begin_src shell
+make publish
+#+end_src
 
 * Setup
 ** =.env=
@@ -53,6 +57,7 @@ So upload as user!
 8. Download json and store locally, setting it in =GOOGLE_SECRETS_FILE=
 
 Create the =GOOGLE_FOLDER= and give it public access
+
 * Tasks
 - [X] Time on ice
 - [X] CSV with career timeline
@@ -64,6 +69,6 @@ Create the =GOOGLE_FOLDER= and give it public access
   - Graph of cumulative stats: Goal, Shots, Passes, Puck carries, Takeaways
 - [X] Highlights page
 - *Read from config files*
-  - [ ] CSV with photos - get old skating photos. see /home/antonov/Desktop/photos-sotr/phone
+  - [X] CSV with photos - get old skating photos. see /home/antonov/Desktop/photos-sotr/phone
   - [ ] CSV with game log - get final videos from Maria
 
