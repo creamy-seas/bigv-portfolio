@@ -1,0 +1,17 @@
+{
+  "name": "bigv-portfolio-css",
+  "scripts": {
+    "build:dev": "npx tailwindcss -i src/css/input.css -o resources/public/css/style.css --watch",
+    "build:prod": "npx tailwindcss -i src/css/input.css -o dist/css/style.css --minify",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "@cljs-oss/module-deps": "^1.1.1",
+    "papaparse": "^5.3.2"
+  },
+  "devDependencies": {
+    "daisyui": "^5.0.46",
+    "gh-pages": "^6.3.0",
+    "tailwindcss": "^3.4.17"
+  }
+}

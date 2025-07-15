@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "daisyui";
+
+@layer base {
+  body {
+    @apply min-h-screen flex justify-center p-8 bg-bg text-fg;
+  }
+  a {
+    @apply font-semibold no-underline hover:underline;
+  }
+  #root {
+    @apply w-full max-w-root;
+  }
+}

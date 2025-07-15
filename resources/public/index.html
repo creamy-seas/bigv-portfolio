@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/assets/brother-favicon.svg" />
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/profile.avif"
+      type="image/avif"
+      fetchpriority="high"
+    />
+    <link href="css/style.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BigV Webpage</title>
+  </head>
+  <body>
+    <div id="root" class="container mx-auto px-4 space-y-8">
+      <div id="overview"></div>
+      <div class="text-center">
+        <a href="gallery" class="text-myflame text-3xl font-bold underline decoration-myflame underline-offset-4 hover:text-myflame/80">
+          View Gallery
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div id="highlights"></div>
+        <div id="season-table"></div>
+      </div>
+      <div id="game-graph"></div>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>

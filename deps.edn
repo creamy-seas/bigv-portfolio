@@ -1,0 +1,18 @@
+{
+ ;; sources and resources to inspect
+ :paths ["src/cljs" "resources"]
+
+ :deps
+ {org.clojure/clojurescript       {:mvn/version "1.11.4"}
+  com.bhauman/figwheel-main       {:mvn/version "0.2.20"}
+  macchiato/hiccups                 {:mvn/version "0.4.1"}
+  org.slf4j/slf4j-simple          {:mvn/version "2.0.7"}}
+
+ :aliases
+ {:dev ;; development build with figwheel and repl
+  {:extra-deps {com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}}
+   :main-opts ["-m" "figwheel.main" "-b" "dev" "-r"]}
+
+  :prod ;; full on build
+  {:extra-deps {thheller/shadow-cljs {:mvn/version "2.27.9"}}
+   :main-opts  ["-m" "cljs.main" "-co" "production.cljs.edn"]}}}
