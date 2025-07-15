@@ -16,6 +16,7 @@ pom.xml.asc
 /.prepl-port
 /.cpcache
 /resources/public/js
+/resources/public/css
 /node_modules/
 /dist/
 /.rebel_readline_history
