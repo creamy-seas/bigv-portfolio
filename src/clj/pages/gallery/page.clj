@@ -37,8 +37,8 @@
    [:p.text-xs.text-center.text-gray-400
     (.format (java.time.format.DateTimeFormatter/ofPattern "yyyy-MM-dd") date)]])
 
-(defn gallery-view
-  "Grid of media passed in as argument"
+(defn gallery-view-no-js
+  "Grid of media passed in as argument. Uses daisy-ui hiding"
   [season->entries]
   [:section.container.select-none.space-y-4
    (for [[season items] season->entries]
@@ -50,9 +50,22 @@
              (sort-by :date #(compare %2 %1))
              (map gallery-card))]]])])
 
+(defn gallery-view-js
+  "Grid of media passed in as argument. Uses js editing of parameters"
+  [season->entries]
+  [:section.container.select-none
+   (for [[season items] season->entries]
+     [:div.collapse.collapse-arrow.rounded-none.rounded-t-lg.collapse-open {:gallery-season-key season}
+      [:summary {:class "collapse-title text-xl font-semibold bg-myflame/80 text-bg"} season]
+      [:div.collapse-content.p-2
+       [:div.grid.grid-cols-2.sm:grid-cols-3.md:grid-cols-4.gap-4
+        (->> items
+             (sort-by :date #(compare %2 %1))
+             (map gallery-card))]]])])
+
 (defn -main []
   (let [entries-by-season (read-gallery)
-        content (gallery-view entries-by-season)
+        content (gallery-view-js entries-by-season)
         html (h/html
                [:html
                 (common.metadata/head)

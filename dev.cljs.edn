@@ -1,6 +1,0 @@
-{:main          core
- :output-dir    "resources/public/js"
- :output-to     "resources/public/js/main.js"
- :asset-path    "js"
- :npm-deps      {"papaparse" "5.3.2"}
- :install-deps  true}

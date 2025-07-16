@@ -1,0 +1,10 @@
+{:output-to   "resources/public/js/collapse.js"
+ :output-dir  "resources/public/js/out"
+ :optimizations :simple
+ :parallel-build true
+ ;;:infer-externs  false
+ ;;:optimizations :advanced
+ ;;:infer-externs true
+ :target      :esm
+ :main        gallery.collapse
+ }

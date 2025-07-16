@@ -3,16 +3,28 @@
  :paths ["src/clj" "resources"]
 
  :deps
- {org.clojure/clojurescript       {:mvn/version "1.11.4"}
-  com.bhauman/figwheel-main       {:mvn/version "0.2.20"}
+ {org.clojure/clojure             {:mvn/version "1.11.1"}
+  ;;com.bhauman/figwheel-main       {:mvn/version "0.2.20"}
   hiccup/hiccup                   {:mvn/version "2.0.0"}
   org.clojure/data.csv            {:mvn/version "1.0.1"}
-  macchiato/hiccups               {:mvn/version "0.4.1"} ;; For cljs
+  ;;macchiato/hiccups               {:mvn/version "0.4.1"}
   org.slf4j/slf4j-simple          {:mvn/version "2.0.7"}}
 
  :aliases
  {:build
   {:main-opts ["-m" "pages.gallery.page"]}
+
+  :cljs
+  {:extra-deps {org.clojure/clojurescript       {:mvn/version "1.11.132"}
+                ;; thheller/shadow-cljs {:mvn/version "2.27.4"}
+                }
+   :extra-paths ["src/cljs"]
+   ;;:main-opts ["-m" "shadow.cljs.devtools.cli" "compile" "main"]
+   :main-opts ["-m" "cljs.main"
+               "-co" "build.cljs.edn"
+               "-w" "src/cljs"
+               "-c" "gallery.collapse"]
+   }
 
   :preview
   {:extra-deps {ring/ring-core             {:mvn/version "1.10.0"}
