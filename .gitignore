@@ -20,3 +20,5 @@ pom.xml.asc
 /node_modules/
 /dist/
 /.rebel_readline_history
+/.lsp/
+/.clj-kondo/

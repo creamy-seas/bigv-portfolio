@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
 @theme {
   /** Define the colours that can be used text-COLOURNAME across the app */
