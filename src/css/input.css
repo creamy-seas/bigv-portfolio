@@ -12,6 +12,14 @@
 }
 
 @layer base {
+
+  html {
+    /* Keep scrollbar stable so that gallery does not change width */
+    scrollbar-gutter: stable;
+    /* Paint everything black that is not coloured */
+    background-color: var(--color-bg) !important;
+  }
+
   body {
     /** Page content is centered and coloured */
     @apply min-h-screen flex justify-center p-8 bg-bg text-fg;
