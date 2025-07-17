@@ -87,9 +87,9 @@
                 w-full lg:max-w-[70vw]
                 overflow-auto"
      :onclick "event.stopPropagation()"}
-    [:button#gallery-modal-prev.left-4  {:class (str nav-arrow-class " left-2 rounded-tl-xl rounded-bl-xl rounded-tr-sm rounded-br-sm")}
+    [:button#gallery-modal-future.left-4  {:class (str nav-arrow-class " left-2 rounded-tl-xl rounded-bl-xl rounded-tr-sm rounded-br-sm")}
      [:span.text-3xl "‹"]]
-    [:button#gallery-modal-next.right-4 {:class (str nav-arrow-class " right-2 rounded-tl-xl rounded-bl-xl rounded-tr-sm rounded-br-sm")}
+    [:button#gallery-modal-past.right-4 {:class (str nav-arrow-class " right-2 rounded-tl-xl rounded-bl-xl rounded-tr-sm rounded-br-sm")}
      [:span.text-3xl "›"]]
     [:div.w-full.aspect-video
      [:iframe#gallery-modal-iframe.w-full.h-full
