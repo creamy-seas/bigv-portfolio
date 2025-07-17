@@ -25,7 +25,7 @@
   [:header.text-center.my-8
    [:a.text-myflame.text-3xl.font-bold
     {:class "decoration-myflame underline-offset-4 hover:text-myflame/80 select-none"
-     :href "/"}
+     :href "./"}
     "🏒 BigV Webpage 🏒"]])
 
 (defn layout
