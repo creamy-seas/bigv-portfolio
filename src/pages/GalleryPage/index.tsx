@@ -115,7 +115,7 @@ const GalleryPage: React.FC = () => {
           onClick={closeModal}
         >
           <div
-            className="relative bg-bg p-6 rounded-lg max-w-[90vw] max-h-[90vh] w-full sm:w-[600px] overflow-auto"
+            className="relative bg-bg p-6 rounded-lg w-full lg:max-w-[70vw] overflow-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <button onClick={showPrev} className={`${navArrow} left-4`}>
