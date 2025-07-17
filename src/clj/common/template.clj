@@ -2,8 +2,6 @@
   (:require
    [hiccup.page :refer [html5 include-css]]))
 
-;; [:link {:rel "preload" :as "image" :href "/assets/profile.avif" :type "image/avif" :fetchpriority "high"}]
-
 (defn head
   "Head of the page, with title, descriptions and optional preloads"
   [{:keys [title description preloads]

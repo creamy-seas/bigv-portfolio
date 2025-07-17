@@ -4,8 +4,7 @@
             [clojure.data.csv :as csv]
             [clojure.java.io :as io]
             [clojure.data.json :as json]
-            [hiccup.page :refer [html5 include-js]]
-            ))
+            [hiccup.page :refer [include-js]]))
 
 (defn read-gallery
   "Direct reading of csv with media - sorted by descending dates"
@@ -120,7 +119,3 @@
      (gallery-modal)
      (export-data gallery-data)
      (include-js "/js/gallery.js"))))
-
-(defn -main []
-  (spit "resources/public/gallery/index.html" (page))
-  (println "✔ gallery.html generated"))

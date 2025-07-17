@@ -13,7 +13,7 @@
 
  :aliases
  {:build
-  {:main-opts ["-m" "pages.gallery.page"]}
+  {:main-opts ["-m" "dev.build"]}
 
   :cljs
   {:extra-deps {org.clojure/clojurescript       {:mvn/version "1.11.132"}
