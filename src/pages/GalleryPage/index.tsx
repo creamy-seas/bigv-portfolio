@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { loadGallery, type GalleryEntry } from "../../utils/loadGallery";
 
 const navArrow =
-  "absolute top-1/2 -translate-y-1/2 p-2 bg-white/90 hover:bg-white focus:ring-2 focus:ring-myflame rounded-full text-2xl text-bg";
+  "absolute top-1/2 -translate-y-1/2 w-12 h-40 flex items-center justify-center bg-fg/20 text-bg/40 ring-myflame/20 ring-2 hover:bg-myflame hover:text-bg active:bg-myflame active:text-bg transition-colors duration-200";
 
 function driveUrls(id: string) {
   return {
@@ -118,11 +118,17 @@ const GalleryPage: React.FC = () => {
             className="relative bg-bg p-6 rounded-lg w-full lg:max-w-[70vw] overflow-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <button onClick={showPrev} className={`${navArrow} left-4`}>
-              ‹
+            <button
+              onClick={showPrev}
+              className={`${navArrow} left-2 rounded-tl-xl rounded-bl-xl rounded-tr-sm rounded-br-sm`}
+            >
+              <span className="text-3xl">‹</span>
             </button>
-            <button onClick={showNext} className={`${navArrow} right-4`}>
-              ›
+            <button
+              onClick={showNext}
+              className={`${navArrow} right-2 rounded-tr-xl rounded-br-xl rounded-tl-sm rounded-bl-sm`}
+            >
+              <span className="text-3xl">›</span>
             </button>
 
             <div className="w-full aspect-video">
