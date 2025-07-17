@@ -6,10 +6,9 @@
   [sel]
   (array-seq (.querySelectorAll js/document sel)))
 
-(defn cls [el] (.-classList el))
-(defn open!   [el] (.add    (cls el) "collapse-open"))
-(defn close!  [el] (.remove (cls el) "collapse-open"))
-(defn toggle!  [el] (.toggle (cls el) "collapse-open"))
+(defn open!   [el] (.add    (.-classList el) "collapse-open"))
+(defn close!  [el] (.remove (.-classList el) "collapse-open"))
+(defn toggle!  [el] (.toggle (.-classList el) "collapse-open"))
 
 (defn click-handler [e]
   (let [box
@@ -24,7 +23,7 @@
 
 (defn mount!
   []
-  (doseq [t ($$ ".collapse-title")] (events/listen t "click" click-handler))
+  (doseq [el ($$ ".collapse-title")] (events/listen el "click" click-handler))
 
   ;; If ?season=2023-2024 is present, open that collapse
   (when-let [season (.get (js/URLSearchParams. (.-search js/location)) "season")]

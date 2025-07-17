@@ -13,18 +13,23 @@
   (with-open [r (io/reader "data/gallery.csv")]
     (let [[headers & rows] (csv/read-csv r)
           ks (map keyword headers)
-          entries (->> rows
-           ;; Associate the keys from headers with the row values
-           (map (fn [row] (zipmap ks row)))
-           (map (fn [{:keys [id type] :as entry}]
-                  (assoc entry
-                         :thumbnail (if (= type "image")
-                                      (str "https://drive.google.com/thumbnail?id=" id)
-                                      "/assets/play-icon.svg")
-                         :iframe (str "https://drive.google.com/file/d/" id "/preview")
-                         ))))]
-      ;; Return sorted list
-      (sort-by :date #(compare (utils.date/parse %2) (utils.date/parse %1)) entries))))
+          raw-entries (map (fn [row] (zipmap ks row)) rows)
+          sorted-entries (sort-by
+                          :date
+                          #(compare (utils.date/parse %2) (utils.date/parse %1))
+                          raw-entries)
+          entries-with-meta (map-indexed
+                             (fn [idx {:keys [id type] :as entry}]
+                               (assoc entry
+                                      :idx idx
+                                      :thumbnail (if (= type "image")
+                                                   (str "https://drive.google.com/thumbnail?id=" id)
+                                                   "/assets/play-icon.svg")
+                                      :iframe    (str "https://drive.google.com/file/d/"
+                                                      id
+                                                      "/preview?autoplay=1")))
+                             sorted-entries)]
+      entries-with-meta)))
 
 (defn group-gallery
   "Return the gallery entires grouped by season descending"
@@ -33,8 +38,8 @@
 
 (defn gallery-card
   "Single media element in grid view"
-  [{:keys [thumbnail description date]}]
-  [:div.cursor-pointer
+  [{:keys [thumbnail description date idx]}]
+  [:div.gallery-card.cursor-pointer {:key idx}
    [:img.w-full.h-32.object-cover.rounded-lg {:src thumbnail :alt description}]
    [:p.text-sm.text-center.mt-2 description]
    [:p.text-xs.text-center.text-gray-400 date]])
@@ -55,7 +60,7 @@
 (defn gallery-grid-js
   "Grid of media passed in as argument. Uses js editing of parameters"
   [gallery-data]
-  [:section.container.select-none
+  [:section#gallery-grid.container.select-none
    (for [[season items] (group-gallery gallery-data)]
      [:div.collapse.collapse-arrow.rounded-none.rounded-t-lg {:gallery-season-key season}
       [:summary {:class "collapse-title text-xl font-semibold bg-myflame/80 text-bg"} season]
@@ -63,35 +68,48 @@
        [:div.grid.grid-cols-2.sm:grid-cols-3.md:grid-cols-4.gap-4
         (map gallery-card items)]]])])
 
-;; (defn gallery-modal
-;;   "A popup with large display of google content in iframe"
-;;   [:div#modal
-;;    {:class "hidden fixed flex
-;;             items-center justify-center p-4
-;;             bg-black/75  inset-0 z-50"
-;;     :onclick "closeModal(event)"}
-;;    [:div.modal-content
-;;     {:class   "relative bg-bg p-6 rounded-lg max-w-[90vw] max-h-[90vh]
-;;                w-full sm:w-[600px] overflow-auto"
-;;      :onclick "event.stopPropagation()"}
-;;     [:button.nav-arrow.left-4  {:onclick "showPrev(event)"}  "‹"]
-;;     [:button.nav-arrow.right-4 {:onclick "showNext(event)"} "›"]
-;;     [:div.w-full.aspect-video
-;;      [:iframe#modal-iframe
-;;       {:src             ""
-;;        :allow           "autoplay"
-;;        :allowfullscreen ""
-;;        :title           ""}]]
-;;     [:h3#modal-description.text-xl.font-semibold.text-myflame.mt-4 ""]
-;;     [:p#modal-date.text-sm.text-gray-400 ""]]]
-;;   )
+(def nav-arrow-class "absolute top-1/2 -translate-y-1/2 w-12 h-40
+                    flex items-center justify-center
+                    bg-fg/20 text-bg/40 ring-myflame/20 ring-2
+                    hover:bg-myflame hover:text-bg active:bg-myflame active:text-bg
+                    transition-colors duration-200")
+
+(defn gallery-modal
+  "A popup with large display of google content in iframe"
+  []
+  [:div#gallery-modal
+   {:class "fixed flex hidden
+            items-center justify-center p-4
+            bg-black/75  inset-0 z-50"}
+   [:div.modal-content
+    {:class    "relative bg-bg
+                p-6 rounded-lg
+                w-full lg:max-w-[70vw]
+                overflow-auto"
+     :onclick "event.stopPropagation()"}
+    [:button#gallery-modal-prev.left-4  {:class (str nav-arrow-class " left-2 rounded-tl-xl rounded-bl-xl rounded-tr-sm rounded-br-sm")}
+     [:span.text-3xl "‹"]]
+    [:button#gallery-modal-next.right-4 {:class (str nav-arrow-class " right-2 rounded-tl-xl rounded-bl-xl rounded-tr-sm rounded-br-sm")}
+     [:span.text-3xl "›"]]
+    [:div.w-full.aspect-video
+     [:iframe#gallery-modal-iframe.w-full.h-full
+      {:src             ""
+       :allow           "autoplay"
+       :allowfullscreen ""
+       :title           ""}]]
+    [:h3#gallery-modal-description.text-xl.font-semibold.text-myflame.mt-4 ""]
+    [:p#gallery-modal-date.text-sm.text-gray-400 ""]]]
+  )
 
 (defn export-data
   "TODO: move"
-  [season->entries]
+  [gallery-data]
   [:script
    (str "window.GALLERY_DATA = "
-        (json/write-str season->entries)
+        (json/write-str gallery-data)
+        ";")
+   (str "window.GALLERY_DATA_MAX_IDX = "
+        (- (count gallery-data) 1)
         ";")])
 
 (defn html []
@@ -101,7 +119,7 @@
    (let [gallery-data (read-gallery)]
      [:body
       (gallery-grid-js gallery-data)
-      ;;(gallery-modal)
+      (gallery-modal)
       (export-data gallery-data)
       (include-js "/js/gallery.js")])))
 
