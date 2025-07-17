@@ -1,5 +1,8 @@
 #+title: BigV Website
 
+- [[https://bigv-portfolio.goatcounter.com/counter//.svg?no_branding=true][Home page views]]
+- [[https://bigv-portfolio.goatcounter.com/counter//gallery/.svg?no_branding=true][Gallery page views]]
+
 * Running
 1. Prepare the [[*CSV files][CSV files]]
 2. Sync the photos
