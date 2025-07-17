@@ -1,6 +1,6 @@
 (ns pages.gallery.page
   (:require [utils.date]
-            [common.metadata]
+            [common.template :refer [layout]]
             [clojure.data.csv :as csv]
             [clojure.java.io :as io]
             [clojure.data.json :as json]
@@ -19,15 +19,15 @@
                           #(compare (utils.date/parse %2) (utils.date/parse %1))
                           raw-entries)
           entries-with-meta (map-indexed
-                             (fn [idx {:keys [id type] :as entry}]
+                             (fn [gallery-idx {:keys [id type] :as entry}]
                                (assoc entry
-                                      :idx idx
+                                      :gallery-idx gallery-idx
                                       :thumbnail (if (= type "image")
                                                    (str "https://drive.google.com/thumbnail?id=" id)
                                                    "/assets/play-icon.svg")
-                                      :iframe    (str "https://drive.google.com/file/d/"
+                                      :src    (str "https://drive.google.com/file/d/"
                                                       id
-                                                      "/preview?autoplay=1")))
+                                                      "/preview")))
                              sorted-entries)]
       entries-with-meta)))
 
@@ -38,8 +38,8 @@
 
 (defn gallery-card
   "Single media element in grid view"
-  [{:keys [thumbnail description date idx]}]
-  [:div.gallery-card.cursor-pointer {:key idx}
+  [{:keys [thumbnail description date gallery-idx]}]
+  [:div.gallery-card.cursor-pointer {:gallery-idx gallery-idx}
    [:img.w-full.h-32.object-cover.rounded-lg {:src thumbnail :alt description}]
    [:p.text-sm.text-center.mt-2 description]
    [:p.text-xs.text-center.text-gray-400 date]])
@@ -77,7 +77,7 @@
 (defn gallery-modal
   "A popup with large display of google content in iframe"
   []
-  [:div#gallery-modal
+  [:div#gallery-modal.select-none
    {:class "fixed flex hidden
             items-center justify-center p-4
             bg-black/75  inset-0 z-50"}
@@ -94,7 +94,6 @@
     [:div.w-full.aspect-video
      [:iframe#gallery-modal-iframe.w-full.h-full
       {:src             ""
-       :allow           "autoplay"
        :allowfullscreen ""
        :title           ""}]]
     [:h3#gallery-modal-description.text-xl.font-semibold.text-myflame.mt-4 ""]
@@ -112,17 +111,16 @@
         (- (count gallery-data) 1)
         ";")])
 
-(defn html []
-  "Main html of page"
-  (html5
-   (common.metadata/head)
-   (let [gallery-data (read-gallery)]
-     [:body
-      (gallery-grid-js gallery-data)
-      (gallery-modal)
-      (export-data gallery-data)
-      (include-js "/js/gallery.js")])))
+(defn page []
+  (let [gallery-data (read-gallery)]
+    (layout
+     {:title       "BigV Gallery"
+      :description "A showcase of fun and action moments"}
+     (gallery-grid-js gallery-data)
+     (gallery-modal)
+     (export-data gallery-data)
+     (include-js "/js/gallery.js"))))
 
 (defn -main []
-  (spit "resources/public/gallery.html" (html))
+  (spit "resources/public/gallery.html" (page))
   (println "✔ gallery.html generated"))

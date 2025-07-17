@@ -1,30 +1,25 @@
 (ns gallery.modal
-  (:require
-   ;; [goog.dom :as gdom]
-            [goog.events :as events]
-            ))
+  (:require [goog.events :as events]))
 
-(defonce ^:private modal-state (atom 2))
+(defonce ^:private modal-state (atom nil))
 
 (defn display-modal
-  "Populate modal with information for item idx in gallery"
-  [idx]
-  (let [data (.-GALLERY_DATA js/window)
-        iframe (.getElementById js/document "gallery-modal-iframe")
-        item (aget data idx)]
-    (js/console.log iframe)
-    (reset! modal-state idx)
-    ;; Remember, .-src is objects accessing
-    ;; And .remove is function
-    (set! (.-src iframe) (.-iframe item))
-    (set! (.-title iframe) (.-description item))
-    (set! (.-textContent (.getElementById js/document "gallery-modal-description"))
-           (.-description item))
-    (set! (.-textContent (.getElementById js/document "gallery-modal-date"))
-           (.toLocaleDateString (js/Date. (.-date item))))
-    (.remove (.-classList (.getElementById js/document "gallery-modal")) "hidden")
-    (js/console.log (.getElementById js/document "gallery-modal-iframe"))
-    ))
+  "Populate modal with information for item gallery-idx in gallery"
+  [gallery-idx]
+  (when-not (= gallery-idx @modal-state)
+    (let [data (.-GALLERY_DATA js/window)
+          iframe (.getElementById js/document "gallery-modal-iframe")
+          item (aget data gallery-idx)]
+      (reset! modal-state gallery-idx)
+      ;; Remember, .-src is objects accessing
+      ;; And .remove is function
+      (set! (.-src iframe) (.-iframe item))
+      (set! (.-title iframe) (.-description item))
+      (set! (.-textContent (.getElementById js/document "gallery-modal-description"))
+            (.-description item))
+      (set! (.-textContent (.getElementById js/document "gallery-modal-date"))
+            (.toLocaleDateString (js/Date. (.-date item))))
+      (.remove (.-classList (.getElementById js/document "gallery-modal")) "hidden"))))
 
 (defn close-modal [event]
   (.stopPropagation event)
@@ -34,21 +29,19 @@
 
 (defn open-modal [event]
   (.stopPropagation event)
-  (display-modal 3
-                 ;;(.-idx (.-currentTarget event))
-                 ))
+  (display-modal (.getAttribute (.-currentTarget event) "gallery-idx")))
 
 (defn show-prev [event]
   (.stopPropagation event)
-  (when-let [idx @modal-state]
-    (display-modal (max 0 (- idx 1)))))
+  (when-let [gallery-idx @modal-state]
+    (display-modal (max 0 (- gallery-idx 1)))))
 
 (defn show-next [event]
   (.stopPropagation event)
-  (when-let [idx @modal-state]
+  (when-let [gallery-idx @modal-state]
     (display-modal (min
                     (.-GALLERY_DATA_MAX_IDX js/window)
-                    (+ idx 1)))))
+                    (+ gallery-idx 1)))))
 
 (defn mount! []
   (when-let [el (.getElementById js/document "gallery-modal")]
