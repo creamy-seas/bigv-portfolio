@@ -122,5 +122,5 @@
      (include-js "/js/gallery.js"))))
 
 (defn -main []
-  (spit "resources/public/gallery.html" (page))
+  (spit "resources/public/gallery/index.html" (page))
   (println "✔ gallery.html generated"))
