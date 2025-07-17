@@ -3,6 +3,6 @@ module.exports = {
     "./resources/public/index.html",
     "./resources/public/gallery.html",
     "./src/clj/**/*.clj",
-    "./src/cljs/**/*.{cljs,cljc,html}"
+    "./src/cljs/**/*.{cljs,cljc}"
   ],
 };
