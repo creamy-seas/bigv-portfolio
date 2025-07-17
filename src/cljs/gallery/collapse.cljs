@@ -1,8 +1,6 @@
 (ns gallery.collapse
   (:require [goog.events :as events]))
 
-(js/console.log "🟢 collapse.cljs loaded")
-
 (defn $$
   "Return a Clojure seq of all nodes that match `sel`."
   [sel]
@@ -26,20 +24,15 @@
 
 (defn mount!
   []
-  (js/console.log "🔧 mount! running…")
-  ;; Attach the click handler to each title
   (doseq [t ($$ ".collapse-title")] (events/listen t "click" click-handler))
 
-  ;; If ?season=x is present, open that season once
-  (let [p (js/URLSearchParams. (.-search js/location))
-        s (.get p "season")]
-    (when-let [target (when s
-                        (.querySelector js/document
-                                        (str ".collapse[data-season=\"" s "\"]")))]
-      (open! target))))
+  ;; If ?season=2023-2024 is present, open that collapse
+  (when-let [season (.get (js/URLSearchParams. (.-search js/location)) "season")]
+    (when-let [el (.querySelector js/document
+                                (str ".collapse[gallery-season-key=\"" season "\"]"))]
+    (open! el))))
 
 (defn ^:export init []
-  (js/console.log "🚀 init called")
   (mount!))
 
 (init)
