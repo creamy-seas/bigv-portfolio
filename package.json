@@ -9,10 +9,11 @@
     "clj:build": "clj -M:clj-build",
     "cljs:dev": "clj -M:cljs-dev",
     "cljs:build": "clj -M:cljs-build",
-    "postcljs:build":  "rollup -c",
+    "postcljs:build": "rollup -c",
+    "open": "chromium --incognito --disable-application-cache http://localhost:5173",
     "preview": "clj -M:preview",
-    "dev": "concurrently \"npm run clj:build\" \"npm run css:dev\" \"npm run cljs:dev\" \"npm run preview\"",
-    "build": "npm run clj:build && npm run css:build && npm run cljs:build && npm run preview",
+    "dev": "concurrently \"npm run clj:build\" \"npm run css:dev\" \"npm run cljs:dev\" \"npm run preview\" & wait-on http://localhost:5173 && npm run open",
+    "build": "concurrently \"npm run clj:build\" \"npm run css:build\" \"npm run cljs:build\" \"npm run preview\" & wait-on http://localhost:5173 && npm run open",
     "publish": "gh-pages -d resources/public"
   },
   "devDependencies": {
@@ -23,6 +24,7 @@
     "daisyui": "^5.0.46",
     "gh-pages": "^6.3.0",
     "rollup": "^4.45.1",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "wait-on": "^8.0.3"
   }
 }
