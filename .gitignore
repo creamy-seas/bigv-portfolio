@@ -15,11 +15,14 @@ pom.xml.asc
 /.nrepl-port
 /.prepl-port
 /.cpcache
-/resources/public/js
-/resources/public/css
 /node_modules/
 /dist/
 /.rebel_readline_history
 /.lsp/
 /.clj-kondo/
-/resources/public/**.html
+
+
+/resources/public/*
+!/resources/public/
+/resources/public/**
+!/resources/public/assets/

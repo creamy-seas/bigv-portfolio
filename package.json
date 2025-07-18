@@ -1,17 +1,28 @@
 {
-  "name": "bigv-portfolio-css",
+  "name": "bigv-portfolio-support",
+  "version": "1.0.0",
+  "description": "Viktor's portfolio site built with Clojure & Tailwind CSS",
+  "homepage": "https://creamy-seas.github.io/bigv-portfolio",
   "scripts": {
-    "build:dev": "npx tailwindcss -i src/css/input.css -o resources/public/css/style.css --watch",
-    "build:prod": "npx tailwindcss -c tailwind.config.js -i src/css/input.css -o dist/css/style.css --minify",
-    "deploy": "gh-pages -d dist"
-  },
-  "dependencies": {
-    "papaparse": "^5.3.2"
+    "css:dev": "npx tailwindcss -i src/css/input.css -o resources/public/css/style.css --watch",
+    "css:build": "npx tailwindcss -i src/css/input.css -o resources/public/css/style.css --minify",
+    "clj:build": "clj -M:clj-build",
+    "cljs:dev": "clj -M:cljs-dev",
+    "cljs:build": "clj -M:cljs-build",
+    "postcljs:build":  "rollup -c",
+    "preview": "clj -M:preview",
+    "dev": "concurrently \"npm run clj:build\" \"npm run css:dev\" \"npm run cljs:dev\" \"npm run preview\"",
+    "build": "npm run clj:build && npm run css:build && npm run cljs:build && npm run preview",
+    "publish": "gh-pages -d resources/public"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
     "@tailwindcss/cli": "^4.1.11",
+    "concurrently": "^7.6.0",
     "daisyui": "^5.0.46",
     "gh-pages": "^6.3.0",
+    "rollup": "^4.45.1",
     "tailwindcss": "^4.1.11"
   }
 }

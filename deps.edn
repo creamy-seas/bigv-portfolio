@@ -1,39 +1,38 @@
-{
- ;; sources and resources to inspect
- :paths ["src/clj" "resources"]
+{:paths ["resources"]
 
  :deps
  {org.clojure/clojure             {:mvn/version "1.11.1"}
-  ;;com.bhauman/figwheel-main       {:mvn/version "0.2.20"}
+  org.clojure/clojurescript       {:mvn/version "1.11.132"}
   hiccup/hiccup                   {:mvn/version "2.0.0"}
   org.clojure/data.csv            {:mvn/version "1.0.1"}
   org.clojure/data.json           {:mvn/version "2.5.1"}
-  ;;macchiato/hiccups               {:mvn/version "0.4.1"}
   org.slf4j/slf4j-simple          {:mvn/version "2.0.7"}}
 
  :aliases
- {:build
-  {:main-opts ["-m" "dev.build"]}
+ {
+  :clj-build    {:extra-paths ["src/clj"]
+                 :main-opts ["-m" "dev.build"]}
 
-  :cljs
-  {:extra-deps {org.clojure/clojurescript       {:mvn/version "1.11.132"}
-                }
-   :extra-paths ["src/cljs"]
-   :main-opts ["-m" "cljs.main"
-               "-co" "build.cljs.edn"
-               "-w" "src/cljs"
-               "-c"]
-   }
+  :cljs-dev     {:extra-paths ["src/cljs"]
+                 :main-opts ["-m" "cljs.main"
+                             "--output-to" "resources/public/js/gallery.js"
+                             "--output-dir"  "target/cljs/out"
+                             "--compile-opts" "{:parallel-build true}"
+                             "--optimizations" "simple"
+                             "--watch" "src/cljs"
+                             "--target" "none"
+                             "--compile" "dev.build"]}
 
-  :preview
-  {:extra-deps {ring/ring-core             {:mvn/version "1.10.0"}
-                ring/ring-jetty-adapter    {:mvn/version "1.10.0"}}
-   :main-opts ["-m" "dev.server"]}
+  :cljs-build   {:extra-paths ["src/cljs"]
+                 :main-opts ["-m" "cljs.main"
+                             "--output-to" "target/cljs/gallery_to-bundle.js"
+                             "--output-dir"  "target/cljs/out"
+                             "--compile-opts" "{:parallel-build true}"
+                             "--optimizations" "advanced"
+                             "--target" "none"
+                             "--compile" "dev.build"]}
 
-  ;;:dev ;; development build with figwheel and repl
-  ;;{:extra-deps {com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}}
-  ;; :main-opts ["-m" "figwheel.main" "-b" "dev" "-r"]}
-
-  :prod ;; full on build
-  {:extra-deps {thheller/shadow-cljs {:mvn/version "2.27.9"}}
-   :main-opts  ["-m" "cljs.main" "-co" "production.cljs.edn"]}}}
+  :preview      {:extra-paths ["src/clj"]
+                 :extra-deps    {ring/ring-core             {:mvn/version "1.10.0"}
+                                 ring/ring-jetty-adapter    {:mvn/version "1.10.0"}}
+                 :main-opts ["-m" "dev.server"]}}}

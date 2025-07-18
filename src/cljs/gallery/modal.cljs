@@ -39,7 +39,7 @@
 
 (defn show-future [event]
   (.stopPropagation event)
-  (display-gallery-modal (max 0 (- gallery-idx 1))))
+  (display-gallery-modal (max 0 (- @modal-state 1))))
 
 (defn show-past [event]
   (.stopPropagation event)
