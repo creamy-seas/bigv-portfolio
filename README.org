@@ -1,0 +1,23 @@
+#+title: Clojure Project
+
+I want the minimal stuff
+
+- Certain pages with fixed structure (like =index.html=) will be pre-rendered
+- Metadata: That will be defined in the <head> section a single time
+- HTML: I will use pure clojure to generate the static stuff, backing in the numbers from csvs
+- JS: For stuff like gallery interactivity, I will manipulate the dom and generate js for this
+- CSS: This will scan the files - as long as I use full css class names, it will generate a shaken config
+- Assets: Some will be generated as above, others will be pre-defined
+
+Figwheel: great for development and refreshing the page. As I will be doing a static build, I will probably not be using it that much
+Clojure: most of the stuff is going to be written and evaled in closure
+Serving: I would like a way of viewing the effects of the builds. I don't really have any complex states, so it should be pain-free
+
+
+* Running
+#+begin_src shell
+npm i # initiall install
+npm run dev # for development build with watching
+npm run build # for production build
+npm run publish # to push to github pages
+#+end_src
