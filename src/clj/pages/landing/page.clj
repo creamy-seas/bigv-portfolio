@@ -17,7 +17,7 @@
                (apply + (map :timeOnIceH time-log))]]]
     [:section { :class "flex flex-col md:flex-row items-center bg-bg p-6 rounded-lg shadow-lg"}
      [:img
-      {:src    "assets/profile.avif"
+      {:src    "/assets/profile.avif"
        :alt    "Player Photo"
        :class  "block order-first rounded-[5%]
               w-full h-auto flex-shrink-0 mb-4
