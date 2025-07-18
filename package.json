@@ -12,8 +12,8 @@
     "postcljs:build": "rollup -c",
     "open": "chromium --incognito --disable-application-cache http://localhost:5173",
     "preview": "clj -M:preview",
-    "dev": "concurrently \"npm run clj:build\" \"npm run css:dev\" \"npm run cljs:dev\" \"npm run preview\" & wait-on http://localhost:5173 && npm run open",
-    "build": "concurrently \"npm run clj:build\" \"npm run css:build\" \"npm run cljs:build\" \"npm run preview\" & wait-on http://localhost:5173 && npm run open",
+    "dev": "exec concurrently --kill-others-on-fail \"npm run clj:build\" \"npm run css:dev\" \"npm run cljs:dev\" \"npm run preview\" \"wait-on http://localhost:5173 && npm run open\"",
+    "build": "exec concurrently --kill-others-on-fail \"npm run clj:build\" \"npm run css:build\" \"npm run cljs:build\" \"npm run preview\" \"wait-on http://localhost:5173 && npm run open\"",
     "publish": "gh-pages -d resources/public"
   },
   "devDependencies": {
