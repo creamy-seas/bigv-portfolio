@@ -25,11 +25,11 @@
     [:span.italic (utils.date/cast-date date "MMMM yyyy")]]
    [:div.text-sm highlight]])
 
-(defn highlights-timeline
+(defn render
   "Timeline of big events!"
   []
   (let [highlights (read-highlights)]
-    [:section.p-2.rounded-lg.overflow-y-scroll {:class "max-h-[500px]"}
+    [:section.p-2.rounded-lg.overflow-auto
      (common.elements/fat-title "🎉 Highlights")
      (into [:ul.p-4]
            (map-indexed highlight-entry highlights))]))

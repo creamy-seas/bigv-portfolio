@@ -2,7 +2,9 @@
   (:require [utils.date]
             [utils.config :refer [config]]
             [common.template :refer [layout]]
-            [pages.landing.highlights :refer [highlights-timeline]]
+            [pages.landing.highlights]
+            [pages.landing.season-table]
+            [pages.landing.gallery-link]
             [clojure.java.io :as io]
             [clojure.data.csv :as csv]))
 
@@ -66,12 +68,15 @@
        sorted-entries))))
 
 (defn page []
-  (let [time-log (read-time-log)
-        game-stats (read-game-stats)]
+  (let [game-stats (read-game-stats)
+        time-log (read-time-log)]
     (layout
      {:title       "BigV Webpage"
       :description "Tracking progress and achievements"
       :preloads [[:link {:rel "preload" :as "image" :href "/assets/profile.avif" :type "image/avif" :fetchpriority "high"}]]}
-     (overview time-log game-stats)
-     [:div.grid-cols-1.md:grid-cols-2-gap-2
-      (highlights-timeline)])))
+     [:container.mx-auto.px-4.space-y-8
+      (overview time-log game-stats)
+      (pages.landing.gallery-link/render)
+      [:div.grid.grid-cols-1.md:grid-cols-2.gap-2
+       (pages.landing.highlights/render)
+       (pages.landing.season-table/render game-stats time-log)]])))
