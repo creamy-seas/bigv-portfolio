@@ -1,7 +1,8 @@
 (ns pages.landing.page
   (:require [utils.date]
-            [common.template :refer [layout]]
             [utils.config :refer [config]]
+            [common.template :refer [layout]]
+            [pages.landing.highlights :refer [highlights-timeline]]
             [clojure.java.io :as io]
             [clojure.data.csv :as csv]))
 
@@ -72,4 +73,6 @@
      {:title       "BigV Webpage"
       :description "Tracking progress and achievements"
       :preloads [[:link {:rel "preload" :as "image" :href "/assets/profile.avif" :type "image/avif" :fetchpriority "high"}]]}
-     (overview time-log game-stats))))
+     (overview time-log game-stats)
+     [:div.grid-cols-1.md:grid-cols-2-gap-2
+      (highlights-timeline)])))

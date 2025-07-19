@@ -2,16 +2,26 @@
   (:import [java.time LocalDate Period]))
 
 (defn parse [^String s]
-  (java.time.LocalDate/parse s))
+  (LocalDate/parse s))
+
+(defn cast-date
+  "Convert ISO string into supplier format"
+  [^String date-str ^String format]
+  (let [formatter (java.time.format.DateTimeFormatter/ofPattern format)]
+    (.format (LocalDate/parse date-str) formatter)))
 
 (defn calculate-age
-  "Given a birth-date string in ISO-8601 (\"yyyy-MM-dd\"), returns age in years"
-  [^String bday-str]
-  (let [bday (LocalDate/parse bday-str)
-        today (LocalDate/now)
-        years (-> (Period/between bday today)
-                  .getYears)]
-    years))
+  "Given a birth-date string in ISO-8601 (\"yyyy-MM-dd\"), returns age in years relative to
+  pass in date, or today (default)"
+  ([^String bday-str]
+   (calculate-age bday-str (.toString (LocalDate/now))))
+  ([^String bday-str
+    ^String date-str]
+   (let [bday (LocalDate/parse bday-str)
+         today (LocalDate/parse date-str)
+         years (-> (Period/between bday today)
+                   .getYears)]
+     years)))
 
 (defn current-season
   "Returns a map with the current hockey season as two years.

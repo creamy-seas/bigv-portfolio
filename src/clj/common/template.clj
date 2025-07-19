@@ -18,8 +18,9 @@
    (include-css "/css/style.css")
    (for [p preloads] p)])
 
-(defn header []
+(defn header
   "Website name with link to root page"
+  []
   [:header.text-center.my-8
    [:a.text-myflame.text-3xl.font-bold
     {:class "decoration-myflame underline-offset-4 hover:text-myflame/80 select-none"
