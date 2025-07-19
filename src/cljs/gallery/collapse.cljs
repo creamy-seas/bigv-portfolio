@@ -18,8 +18,7 @@
     (doseq [c ($$ ".collapse[gallery-season-key]")
             :when (not= c box)]
       (close! c))
-    (toggle! box)
-    ))
+    (toggle! box)))
 
 (defn mount!
   []
@@ -28,8 +27,8 @@
   ;; If ?season=2023-2024 is present, open that collapse
   (when-let [season (.get (js/URLSearchParams. (.-search js/location)) "season")]
     (when-let [el (.querySelector js/document
-                                (str ".collapse[gallery-season-key=\"" season "\"]"))]
-    (open! el))))
+                                  (str ".collapse[gallery-season-key=\"" season "\"]"))]
+      (open! el))))
 
 (defn ^:export init []
   (mount!))

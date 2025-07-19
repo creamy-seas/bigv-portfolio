@@ -31,10 +31,10 @@
   "Main layout of the app - evyerything should inherit from here"
   [{:keys [title description preloads]} & content]
   (html5
-    (head {:title       title
-           :description description
-           :preloads    preloads})
-    [:body
-     [:div#root
-      (header)
-      content]]))
+   (head {:title       title
+          :description description
+          :preloads    preloads})
+   [:body
+    [:div#root
+     (header)
+     content]]))

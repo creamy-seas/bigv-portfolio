@@ -6,7 +6,6 @@
             [clojure.java.io :as io]
             [clojure.data.csv :as csv]))
 
-
 (defn overview [time-log game-stats]
   (let [info [["Age"   (:age config)]
               ["Team"  (:team config)]
@@ -16,7 +15,7 @@
                (apply + (map :goals game-stats))]
               ["Career Hours"
                (apply + (map :timeOnIceH time-log))]]]
-    [:section { :class "flex flex-col md:flex-row items-center bg-bg p-6 rounded-lg shadow-lg"}
+    [:section {:class "flex flex-col md:flex-row items-center bg-bg p-6 rounded-lg shadow-lg"}
      [:img
       {:src    "/assets/profile.avif"
        :alt    "Player Photo"
@@ -47,7 +46,7 @@
        (fn [{:keys [timeOnIceH] :as entry}]
          (assoc entry
                 :timeOnIceH (Integer/parseInt timeOnIceH)))
-                             sorted-entries))))
+       sorted-entries))))
 
 (defn read-game-stats []
   (with-open [r (io/reader "data/game_stats.csv")]

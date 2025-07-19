@@ -25,8 +25,8 @@
                                                    (str "https://drive.google.com/thumbnail?id=" id)
                                                    "/assets/play-icon.svg")
                                       :src    (str "https://drive.google.com/file/d/"
-                                                      id
-                                                      "/preview")))
+                                                   id
+                                                   "/preview")))
                              sorted-entries)]
       entries-with-meta)))
 
@@ -96,8 +96,7 @@
        :allowfullscreen ""
        :title           ""}]]
     [:h3#gallery-modal-description.text-xl.font-semibold.text-myflame.mt-4 ""]
-    [:p#gallery-modal-date.text-sm.text-gray-400 ""]]]
-  )
+    [:p#gallery-modal-date.text-sm.text-gray-400 ""]]])
 
 (defn export-data
   "TODO: move"

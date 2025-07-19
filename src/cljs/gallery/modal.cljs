@@ -13,9 +13,8 @@
           description)
     (when date
       (set! (.-textContent (.getElementById js/document "gallery-modal-date"))
-            (.toLocaleDateString (js/Date. date)))))
+            (.toLocaleDateString (js/Date. date))))))
 
-  )
 (defn display-gallery-modal
   "Populate modal with information for item gallery-idx in gallery"
   [gallery-idx]
@@ -44,8 +43,8 @@
 (defn show-past [event]
   (.stopPropagation event)
   (display-gallery-modal (min
-                    (.-GALLERY_DATA_MAX_IDX js/window)
-                    (+ @modal-state 1))))
+                          (.-GALLERY_DATA_MAX_IDX js/window)
+                          (+ @modal-state 1))))
 
 (defn mount! []
   (when-let [el (.getElementById js/document "gallery-modal")]
@@ -61,8 +60,7 @@
   ;;                      (when (.matches el ".gallery-card")
   ;;                        (open-gallery-modal e))))))
   (doseq [el (array-seq (.querySelectorAll js/document ".gallery-card"))]
-    (events/listen el "click" open-gallery-modal))
-  )
+    (events/listen el "click" open-gallery-modal)))
 
 (defn ^:export init []
   (mount!))

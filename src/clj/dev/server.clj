@@ -1,10 +1,9 @@
 (ns dev.server
   (:require
-    [ring.adapter.jetty        :refer [run-jetty]]
-    [ring.middleware.file      :refer [wrap-file]]
-    [ring.middleware.file-info :refer [wrap-file-info]]
-    [ring.middleware.not-modified :refer [wrap-not-modified]]))
-
+   [ring.adapter.jetty        :refer [run-jetty]]
+   [ring.middleware.file      :refer [wrap-file]]
+   [ring.middleware.file-info :refer [wrap-file-info]]
+   [ring.middleware.not-modified :refer [wrap-not-modified]]))
 
 (defn not-found [request] ;
   {:status   404

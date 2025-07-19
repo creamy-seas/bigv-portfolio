@@ -32,4 +32,4 @@
     [:section.p-2.rounded-lg.overflow-y-scroll {:class "max-h-[500px]"}
      (common.elements/fat-title "🎉 Highlights")
      (into [:ul.p-4]
-      (map-indexed highlight-entry highlights))]))
+           (map-indexed highlight-entry highlights))]))
