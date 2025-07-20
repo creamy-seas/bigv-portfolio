@@ -15,6 +15,8 @@
    [:link {:rel  "icon"
            :type "image/svg+xml"
            :href "/assets/brother-favicon.svg"}]
+   ;; TODO: remove with normal ref
+   [:script {:src "https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"}]
    (include-css "/css/style.css")
    (for [p preloads] p)])
 

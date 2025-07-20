@@ -21,3 +21,8 @@ npm run dev # for development build with watching
 npm run build # for production build
 npm run publish # to push to github pages
 #+end_src
+
+* TODO
+- [ ] Need to embed the graph - no toggling to begin with
+- [ ] Build for landing an gallery pages, preferable through a slim config file
+- [ ] Separating out common element (data) into cljc files that can be consumed by both sources
