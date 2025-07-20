@@ -1,4 +1,5 @@
-(ns pages.landing.season-table)
+(ns pages.landing.season-table
+  (:require [common.elements]))
 
 (defn build-season-table
   "Aggregates time logs and game data for a season summary"

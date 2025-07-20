@@ -35,8 +35,8 @@
                                  ring/ring-jetty-adapter    {:mvn/version "1.10.0"}}
                  :main-opts ["-m" "dev.server"]}
 
-  :lint-passive {:extra-deps    {clj-kondo/clj-kondo {:mvn/version "2025.06.05"}}
-                :main-opts ["-m" "clj-kondo.main" "--lint" "src"]}
+  :lint         {:extra-deps    {clj-kondo/clj-kondo {:mvn/version "2025.06.05"}}
+                 :main-opts ["-m" "clj-kondo.main" "--lint" "src"]}
 
-  :lint         {:extra-deps {dev.weavejester/cljfmt {:mvn/version "0.13.1"}}
+  :fix          {:extra-deps {dev.weavejester/cljfmt {:mvn/version "0.13.1"}}
                  :main-opts ["-m" "cljfmt.main" "fix" "src"]}}}

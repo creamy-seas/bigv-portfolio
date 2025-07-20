@@ -13,7 +13,7 @@
     "browser": "chromium --incognito --disable-application-cache http://localhost:5173",
     "serve": "clj -M:serve",
     "preview": "exec concurrently --kill-others-on-fail \"npm run serve\" \"wait-on http://localhost:5173 && npm run browser\"",
-    "lint": "clj -M:lint",
+    "lint": "clj -M:lint && clj -M:fix",
     "dev": "exec concurrently --kill-others-on-fail \"npm run clj:build\" \"npm run css:dev\" \"npm run cljs:dev\" \"npm run serve\" \"wait-on http://localhost:5173 && npm run browser\"",
     "build": "exec concurrently --kill-others-on-fail \"npm run clj:build\" \"npm run css:build\" \"npm run cljs:build\" \"npm run serve\" \"wait-on http://localhost:5173 && npm run browser\"",
     "publish": "gh-pages -d resources/public"
