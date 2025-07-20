@@ -6,6 +6,7 @@
             [pages.landing.season-table]
             [pages.landing.gallery-link]
             [pages.landing.game-graph]
+            [hiccup.page :refer [include-js]]
             [clojure.java.io :as io]
             [clojure.data.csv :as csv]))
 
@@ -82,4 +83,5 @@
       [:div.grid.grid-cols-1.md:grid-cols-2.gap-2
        (pages.landing.highlights/render)
        (pages.landing.season-table/render game-stats time-log)]
-      (pages.landing.game-graph/render)])))
+      (pages.landing.game-graph/render)]
+     (include-js "/js/landing.js"))))
