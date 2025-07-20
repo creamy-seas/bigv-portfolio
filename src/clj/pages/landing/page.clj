@@ -5,6 +5,7 @@
             [pages.landing.highlights]
             [pages.landing.season-table]
             [pages.landing.gallery-link]
+            [pages.landing.game-graph]
             [clojure.java.io :as io]
             [clojure.data.csv :as csv]))
 
@@ -55,10 +56,11 @@
     (let [[headers & rows] (csv/read-csv r)
           ks (map keyword headers)
           raw-entries (map (fn [row] (zipmap ks row)) rows)
-          sorted-entries (sort-by :season #(compare %1 %2) raw-entries)]
-      (map
-       (fn [{:keys [timeOnIceM goals passes shots carries takeaways] :as entry}]
+          sorted-entries (sort-by :date #(compare %1 %2) raw-entries)]
+      (map-indexed
+       (fn [index {:keys [timeOnIceM goals passes shots carries takeaways] :as entry}]
          (assoc entry
+                :gameNumber (+ index 1)
                 :timeOnIceH (Integer/parseInt timeOnIceM)
                 :goals (Integer/parseInt goals)
                 :passes (Integer/parseInt passes)
@@ -79,4 +81,5 @@
       (pages.landing.gallery-link/render)
       [:div.grid.grid-cols-1.md:grid-cols-2.gap-2
        (pages.landing.highlights/render)
-       (pages.landing.season-table/render game-stats time-log)]])))
+       (pages.landing.season-table/render game-stats time-log)]
+      (pages.landing.game-graph/render)])))
