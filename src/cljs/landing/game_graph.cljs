@@ -19,30 +19,15 @@
    {:gameNumber 15 :goals 2 :passes 18 :shots 26  :carries 46  :takeaways 69}
    {:gameNumber 16 :goals 3 :passes 20 :shots 30  :carries 53  :takeaways 70}])
 
-
 (defn dataset
   [label k color]
   {:label label
    :data  (mapv k games)
-
-   ;; line
-   :borderColor          color
-   :tension              0.3      ;; keep your existing settings
-   :fill                 false
-
-   ;; hover
-
+   ;; line -------------
+   :borderColor color
    ;; points -------------
-   :pointBackgroundColor "#ffffff"
    :pointBorderColor     color
-   :pointBorderWidth     2
-   :pointRadius          3
-
-   :pointHoverBackgroundColor color
-   :pointHoverBorderColor     "#ffffff"
-   :pointHoverBorderWidth     3
-   :pointHoverRadius     4
-   })
+   :pointHoverBackgroundColor color})
 
 (defn make-datasets []
   [(dataset "Goals"     :goals     "#eec900")
@@ -52,16 +37,25 @@
    (dataset "Takeaways" :takeaways "#ff1493")])
 
 (def chart-opts
-  ;; Clojure map ­→ later fed to `clj->js`
   {:responsive true
+   :maintainAspectRatio false
+   ;;:aspectRatio 1
+   :interaction {:mode "index" :axis "x" :intersect true}
 
-   :interaction {:mode "index" :axis "x" :intersect false}
+   ;; Common point params - line spefic ones passed in with datased
+   :elements
+   {:line {:tension              0.2
+           :fill                 false}
+    :point {:pointBackgroundColor "#ffffff"
+            :pointBorderWidth     2
+            :pointRadius          3
 
-
+            :pointHoverBorderColor     "#ffffff"
+            :pointHoverBorderWidth     3
+            :pointHoverRadius     8}}
 
    :plugins
-   {
-    :legend {:position "top"
+   {:legend {:position "top"
              :labels {:font {:size 20}
                       :boxHeight 1
                       :boxWidth 20}}
@@ -85,7 +79,6 @@
         :border {:display true :width 2 :color "#696969"}
         :title {:display true :text "Count"  :font {:size 24}}}}})
 
-
 (defonce chart* (atom nil))
 
 (defn init-graph! []
@@ -94,9 +87,7 @@
                       :data {:labels   (mapv :gameNumber games)
                              :datasets (make-datasets)}
                       :options chart-opts})]
-    (reset! chart* (js/Chart. ctx cfg))
-    ))
-
+    (reset! chart* (js/Chart. ctx cfg))))
 
 (defn mount!
   "Populate graph and hook up listeners"
@@ -110,7 +101,6 @@
   (mount!))
 
 (init)
-
 
 ;; (defonce state (atom {:mode :per-game
 ;;                       :graph nil}))
