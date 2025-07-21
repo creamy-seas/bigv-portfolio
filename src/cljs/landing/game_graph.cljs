@@ -18,6 +18,21 @@
    (dataset game-stats "Carries"   :carries   "#82ca9d")
    (dataset game-stats "Takeaways" :takeaways "#ff1493")])
 
+(defonce view-mode* (atom :cumulative))
+
+(defonce per-game-stats*
+  (js->clj (.-GAME_STATS_DATA js/window) :keywordize-keys true))
+
+(defonce cumulative-game-stats*
+  (js->clj (.-CUMULATIVE_GAME_STATS_DATA js/window) :keywordize-keys true))
+
+(defn current-stats
+  "Get the stats depending on the view mode"
+  []
+  (if (= @view-mode* :cumulative)
+    cumulative-game-stats*
+    per-game-stats*))
+
 (def chart-opts
   {:responsive true
    :maintainAspectRatio false
@@ -44,12 +59,17 @@
     :tooltip {:boxHeight 1
               :boxWidth 15
               :boxPadding 10
-              :bodyFont  {:size 20}
+              :bodyFont  {:size 18}
               :callbacks
               {:title
-               (fn [ctx] ;; ctx is an array of TooltipItem; take the first one
-                 (when-let [item (aget ctx 0)]
-                   (str "Game #" (.-label item))))}}}
+               (fn [items]
+                 (when-let [item (aget items 0)]
+                   (let [idx   (js/parseInt (.-dataIndex item))
+                         game  (nth (current-stats) idx)
+                         date  (:date       game)
+                         loc   (:location   game)
+                         name  (:name       game)]
+                     (str date ": @" loc "\n" name))))}}}
 
    :scales
    {:x {:grid {:color "rgba(128,128,128,0.20)" :lineWidth 0.5}
@@ -61,27 +81,11 @@
         :border {:display true :width 2 :color "#696969"}
         :title {:display true :text "Count"  :font {:size 20}}}}})
 
-(defonce view-mode* (atom :cumulative))
-
-(defonce per-game-stats*
-  (js->clj (.-GAME_STATS_DATA js/window) :keywordize-keys true))
-
-(defonce cumulative-game-stats*
-  (js->clj (.-CUMULATIVE_GAME_STATS_DATA js/window) :keywordize-keys true))
-
-(defn current-stats
-  "Get the stats depending on the view mode"
-  []
-  (if (= @view-mode* :cumulative)
-    cumulative-game-stats*
-    per-game-stats*))
-
 (defn toggle-view!
   "Flip the view-mode and update the chart"
   [^js chart]
   (swap! view-mode* (fn [m] (if (= m :cumulative) :per-game :cumulative)))
   (let [stats (current-stats)]
-    (js/console.log stats)
     (set! (.-data.labels   chart) (clj->js (mapv :gameNumber stats)))
     (set! (.-data.datasets chart) (clj->js (make-datasets stats)))
     (.update chart))

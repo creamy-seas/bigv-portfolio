@@ -9,9 +9,12 @@
           raw-entries (map (fn [row] (zipmap ks row)) rows)
           sorted-entries (sort-by :date #(compare %1 %2) raw-entries)]
       (map-indexed
-       (fn [index {:keys [timeOnIceM goals passes shots carries takeaways] :as entry}]
+       (fn [index {:keys [timeOnIceM goals passes shots carries takeaways location name date] :as entry}]
          (assoc entry
                 :gameNumber (+ index 1)
+                :location location
+                :name name
+                :date date
                 :timeOnIceH (Integer/parseInt timeOnIceM)
                 :goals (Integer/parseInt goals)
                 :passes (Integer/parseInt passes)
@@ -26,6 +29,9 @@
               result
               (let [current-stats (first remaining)
                     new {:gameNumber (:gameNumber current-stats)
+                         :location (:location current-stats)
+                         :name (:name current-stats)
+                         :date (:date current-stats)
                          :goals (+ (:goals running) (:goals current-stats))
                          :passes (+ (:passes running) (:passes current-stats))
                          :shots (+ (:shots running) (:shots current-stats))
