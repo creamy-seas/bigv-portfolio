@@ -1,5 +1,6 @@
 (ns landing.game-graph
-  (:require [goog.events :as events]))
+  ;;(:require [goog.events :as events])
+  )
 
 (def games
   [{:gameNumber 1  :goals 0 :passes 0  :shots  1  :carries  3  :takeaways  0}
@@ -72,12 +73,12 @@
    :scales
    {:x {:grid {:color "rgba(128,128,128,0.20)" :lineWidth 0.5}
         :border {:display true :width 2 :color "#696969"}
-        :ticks  {:font {:size 20}}
-        :title {:display true :text "Game #" :font {:size 24}}}
-    :y {:ticks  {:font {:size 20}}
+        :ticks  {:font {:size 18}}
+        :title {:display true :text "Game #" :font {:size 20}}}
+    :y {:ticks  {:font {:size 18}}
         :grid {:color "rgba(128,128,128,0.20)" :lineWidth 0.5}
         :border {:display true :width 2 :color "#696969"}
-        :title {:display true :text "Count"  :font {:size 24}}}}})
+        :title {:display true :text "Count"  :font {:size 20}}}}})
 
 (defonce chart* (atom nil))
 
