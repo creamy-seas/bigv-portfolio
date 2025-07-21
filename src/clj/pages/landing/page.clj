@@ -1,5 +1,7 @@
 (ns pages.landing.page
   (:require [utils.date]
+            [utils.data.game-stats :as game-stats]
+            [utils.data.core :as data-core]
             [utils.config :refer [config]]
             [common.template :refer [layout]]
             [pages.landing.highlights]
@@ -52,26 +54,9 @@
                 :timeOnIceH (Integer/parseInt timeOnIceH)))
        sorted-entries))))
 
-(defn read-game-stats []
-  (with-open [r (io/reader "data/game_stats.csv")]
-    (let [[headers & rows] (csv/read-csv r)
-          ks (map keyword headers)
-          raw-entries (map (fn [row] (zipmap ks row)) rows)
-          sorted-entries (sort-by :date #(compare %1 %2) raw-entries)]
-      (map-indexed
-       (fn [index {:keys [timeOnIceM goals passes shots carries takeaways] :as entry}]
-         (assoc entry
-                :gameNumber (+ index 1)
-                :timeOnIceH (Integer/parseInt timeOnIceM)
-                :goals (Integer/parseInt goals)
-                :passes (Integer/parseInt passes)
-                :shots (Integer/parseInt shots)
-                :carries (Integer/parseInt carries)
-                :takeaways (Integer/parseInt takeaways)))
-       sorted-entries))))
-
 (defn page []
-  (let [game-stats (read-game-stats)
+  (let [game-stats (game-stats/read-game-stats)
+        cumulative-game-stats (game-stats/eval-cumulative-game-stats game-stats)
         time-log (read-time-log)]
     (layout
      {:title       "BigV Webpage"
@@ -84,4 +69,7 @@
        (pages.landing.highlights/render)
        (pages.landing.season-table/render game-stats time-log)]
       (pages.landing.game-graph/render)]
+     ;; TODO: move to head
+     (data-core/export-data game-stats "GAME_STATS_DATA")
+     (data-core/export-data cumulative-game-stats "CUMULATIVE_GAME_STATS_DATA")
      (include-js "/js/landing.js"))))

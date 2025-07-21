@@ -1,41 +1,22 @@
 (ns landing.game-graph
   ;;(:require [goog.events :as events])
   )
-
-(def games
-  [{:gameNumber 1  :goals 0 :passes 0  :shots  1  :carries  3  :takeaways  0}
-   {:gameNumber 2  :goals 0 :passes 0  :shots  2  :carries  5  :takeaways  1}
-   {:gameNumber 3  :goals 0 :passes 0  :shots  5  :carries  5  :takeaways  5}
-   {:gameNumber 4  :goals 0 :passes 0  :shots 11  :carries 11  :takeaways 10}
-   {:gameNumber 5  :goals 0 :passes 0  :shots 12  :carries 13  :takeaways 12}
-   {:gameNumber 6  :goals 0 :passes 1  :shots 12  :carries 16  :takeaways 16}
-   {:gameNumber 7  :goals 0 :passes 5  :shots 15  :carries 16  :takeaways 27}
-   {:gameNumber 8  :goals 0 :passes 6  :shots 16  :carries 18  :takeaways 33}
-   {:gameNumber 9  :goals 0 :passes 6  :shots 16  :carries 18  :takeaways 39}
-   {:gameNumber 10 :goals 0 :passes 9  :shots 18  :carries 21  :takeaways 44}
-   {:gameNumber 11 :goals 0 :passes 11 :shots 20  :carries 22  :takeaways 48}
-   {:gameNumber 12 :goals 1 :passes 11 :shots 22  :carries 26  :takeaways 50}
-   {:gameNumber 13 :goals 1 :passes 13 :shots 24  :carries 31  :takeaways 55}
-   {:gameNumber 14 :goals 1 :passes 15 :shots 24  :carries 35  :takeaways 64}
-   {:gameNumber 15 :goals 2 :passes 18 :shots 26  :carries 46  :takeaways 69}
-   {:gameNumber 16 :goals 3 :passes 20 :shots 30  :carries 53  :takeaways 70}])
-
 (defn dataset
-  [label k color]
+  [game-stats label k color]
   {:label label
-   :data  (mapv k games)
+   :data  (mapv k game-stats)
    ;; line -------------
    :borderColor color
    ;; points -------------
    :pointBorderColor     color
    :pointHoverBackgroundColor color})
 
-(defn make-datasets []
-  [(dataset "Goals"     :goals     "#eec900")
-   (dataset "Shots"     :shots     "#ff7300")
-   (dataset "Passes"    :passes    "#00bfff")
-   (dataset "Carries"   :carries   "#82ca9d")
-   (dataset "Takeaways" :takeaways "#ff1493")])
+(defn make-datasets [game-stats]
+  [(dataset game-stats "Goals"     :goals     "#eec900")
+   (dataset game-stats "Shots"     :shots     "#ff7300")
+   (dataset game-stats "Passes"    :passes    "#00bfff")
+   (dataset game-stats "Carries"   :carries   "#82ca9d")
+   (dataset game-stats "Takeaways" :takeaways "#ff1493")])
 
 (def chart-opts
   {:responsive true
@@ -80,41 +61,49 @@
         :border {:display true :width 2 :color "#696969"}
         :title {:display true :text "Count"  :font {:size 20}}}}})
 
-(defonce chart* (atom nil))
+(defonce view-mode* (atom :cumulative))
+
+(defonce per-game-stats*
+  (js->clj (.-GAME_STATS_DATA js/window) :keywordize-keys true))
+
+(defonce cumulative-game-stats*
+  (js->clj (.-CUMULATIVE_GAME_STATS_DATA js/window) :keywordize-keys true))
+
+(defn current-stats
+  "Get the stats depending on the view mode"
+  []
+  (if (= @view-mode* :cumulative)
+    cumulative-game-stats*
+    per-game-stats*))
+
+(defn toggle-view!
+  "Flip the view-mode and update the chart"
+  [^js chart]
+  (swap! view-mode* (fn [m] (if (= m :cumulative) :per-game :cumulative)))
+  (let [stats (current-stats)]
+    (js/console.log stats)
+    (set! (.-data.labels   chart) (clj->js (mapv :gameNumber stats)))
+    (set! (.-data.datasets chart) (clj->js (make-datasets stats)))
+    (.update chart))
+  (let [btn (.getElementById js/document "toggle-game-graph")
+        new-label (if (= @view-mode* :cumulative)
+                    "Show per-game"
+                    "Show cumulative")]
+    (set! (.-textContent btn) new-label)))
 
 (defn init-graph! []
   (let [ctx (.getContext (.getElementById js/document "game-graph") "2d")
         cfg (clj->js {:type "line"
-                      :data {:labels   (mapv :gameNumber games)
-                             :datasets (make-datasets)}
+                      :data {:labels   (mapv :gameNumber cumulative-game-stats*)
+                             :datasets (make-datasets cumulative-game-stats*)}
                       :options chart-opts})]
-    (reset! chart* (js/Chart. ctx cfg))))
+    (js/Chart. ctx cfg)))
 
-(defn mount!
+(defn ^:export init
   "Populate graph and hook up listeners"
   []
-  (init-graph!)
-  ;; (when-let [el (.getElementById js/document "toggle-game-graph")]
-  ;;   (events/listen  "click" toggle-view))
-  )
-
-(defn ^:export init []
-  (mount!))
+  (let [chart   (init-graph!)]
+    (when-let [btn (.getElementById js/document "toggle-game-graph")]
+      (.addEventListener btn "click" #(toggle-view! chart)))))
 
 (init)
-
-;; (defonce state (atom {:mode :per-game
-;;                       :graph nil}))
-
-;;(defn toggle-view! []
-  ;; (swap! state update :mode
-  ;;        (fn [m] (if (= m :per-game) :cumulative :per-game)))
-  ;; (let [{:keys [mode graph]} @state
-  ;;       new-data (make-datasets mode)]
-  ;;   (aset graph "data" "datasets" (clj->js new-data))
-  ;;   (aset graph "data" "labels"  (clj->js (mapv :gameNumber games)))
-  ;;   (.update graph)
-  ;;   ;; update button text
-  ;;   (set! (.-innerText (gdom/getElement "toggle-view"))
-  ;;         (if (= mode :per-game) "Show Cumulative" "Show Per-Game")))
-;;  )
