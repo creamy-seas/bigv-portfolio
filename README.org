@@ -13,6 +13,9 @@ Figwheel: great for development and refreshing the page. As I will be doing a st
 Clojure: most of the stuff is going to be written and evaled in closure
 Serving: I would like a way of viewing the effects of the builds. I don't really have any complex states, so it should be pain-free
 
+* Config
+** =.clj=
+** =.cljs=
 
 * Running
 #+begin_src shell
@@ -23,6 +26,9 @@ npm run publish # to push to github pages
 #+end_src
 
 * TODO
-- [ ] Need to embed the graph - no toggling to begin with
-- [ ] Build for landing an gallery pages, preferable through a slim config file
-- [ ] Separating out common element (data) into cljc files that can be consumed by both sources
+- [X] Need to embed the graph - no toggling to begin with
+- [X] Build for landing an gallery pages, preferable through a slim config file
+- [X] Separating out common element (data) into cljc files that can be consumed by both sources
+- [ ] Rework the build pipeline for =cljs= so that it builds the relevant files into relevant =js= files
+- [ ] Tree shake =charts.js= and make a simple build script
+- [ ] Clean up the code into modules

@@ -33,14 +33,15 @@
   ;;                            "--target" "none"
   ;;                            "--compile" "dev.build"]}
 
-  ;; :cljs-dev     {:main-opts ["-m" "cljs.main"
-  ;;                            "--output-to" "resources/public/js/landing.js"
-  ;;                            "--output-dir"  "target/cljs/out"
-  ;;                            "--compile-opts" "{:parallel-build true}"
-  ;;                            "--optimizations" "simple"
-  ;;                            "--watch" "src/cljs"
-  ;;                            "--target" "none"
-  ;;                            "--compile" "landing.build"]}
+  :cljs-dev-old     {:extra-paths ["src/cljs"]
+                 :main-opts ["-m" "cljs.main"
+                             "--output-to" "resources/public/js/landing.js"
+                             "--output-dir"  "target/cljs/out"
+                             "--compile-opts" "{:parallel-build true}"
+                             "--optimizations" "simple"
+                             "--watch" "src/cljs"
+                             "--target" "none"
+                             "--compile" "landing.build"]}
 
   ;; :cljs-build   {:extra-paths ["src/cljs"]
   ;;                :main-opts ["-m" "cljs.main"
