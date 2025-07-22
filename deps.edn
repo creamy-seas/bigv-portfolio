@@ -1,4 +1,4 @@
-{:paths ["resources" "src/clj" "src/cljs"]
+{:paths ["resources"]
 
  :deps
  {org.clojure/clojure             {:mvn/version "1.11.1"}
@@ -10,25 +10,46 @@
 
  :aliases
  {
-  :clj-build    {:main-opts ["-m" "dev.build"]}
+  :clj-build    {:extra-paths ["src/clj"]
+                 :main-opts ["-m" "dev.build"]}
+  :cljs-dev     {:extra-paths ["src/cljs"]
+                 :main-opts ["-m" "dev.build" "dev"]}
 
-  :cljs-dev     {:main-opts ["-m" "cljs.main"
-                             "--output-to" "resources/public/js/gallery.js"
-                             "--output-dir"  "target/cljs/out"
-                             "--compile-opts" "{:parallel-build true}"
-                             "--optimizations" "simple"
-                             "--watch" "src/cljs"
-                             "--target" "none"
-                             "--compile" "dev.build"]}
+  ;; :cljs-dev     {:main-opts ["-m" "cljs.main"
+  ;;                            "--output-to" "resources/public/js/gallery.js"
+  ;;                            "--output-dir"  "target/cljs/out"
+  ;;                            "--compile-opts" "{:parallel-build true}"
+  ;;                            "--optimizations" "simple"
+  ;;                            "--watch" "src/cljs"
+  ;;                            "--target" "none"
+  ;;                            "--compile" "dev.build"]}
 
-  :cljs-build   {:extra-paths ["src/cljs"]
-                 :main-opts ["-m" "cljs.main"
-                             "--output-to" "target/cljs/gallery_to-bundle.js"
-                             "--output-dir"  "target/cljs/out"
-                             "--compile-opts" "{:parallel-build true}"
-                             "--optimizations" "advanced"
-                             "--target" "none"
-                             "--compile" "dev.build"]}
+  ;; :cljs-build   {:extra-paths ["src/cljs"]
+  ;;                :main-opts ["-m" "cljs.main"
+  ;;                            "--output-to" "target/cljs/gallery_to-bundle.js"
+  ;;                            "--output-dir"  "target/cljs/out"
+  ;;                            "--compile-opts" "{:parallel-build true}"
+  ;;                            "--optimizations" "advanced"
+  ;;                            "--target" "none"
+  ;;                            "--compile" "dev.build"]}
+
+  ;; :cljs-dev     {:main-opts ["-m" "cljs.main"
+  ;;                            "--output-to" "resources/public/js/landing.js"
+  ;;                            "--output-dir"  "target/cljs/out"
+  ;;                            "--compile-opts" "{:parallel-build true}"
+  ;;                            "--optimizations" "simple"
+  ;;                            "--watch" "src/cljs"
+  ;;                            "--target" "none"
+  ;;                            "--compile" "landing.build"]}
+
+  ;; :cljs-build   {:extra-paths ["src/cljs"]
+  ;;                :main-opts ["-m" "cljs.main"
+  ;;                            "--output-to" "target/cljs/landing_to-bundle.js"
+  ;;                            "--output-dir"  "target/cljs/out"
+  ;;                            "--compile-opts" "{:parallel-build true}"
+  ;;                            "--optimizations" "advanced"
+  ;;                            "--target" "none"
+  ;;                            "--compile" "landing.build"]}
 
   :serve        {:extra-paths ["src/clj"]
                  :extra-deps    {ring/ring-core             {:mvn/version "1.10.0"}
