@@ -8,21 +8,21 @@
   "Head of the page, with title, descriptions and optional extra-elements"
   [{:keys [title description extra-elements]
     :or   {extra-elements []}}]
-    [:head
-     [:meta {:charset "UTF-8"}]
-     [:base {:href (:base config)}]
-     [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
-     [:title title]
-     (when description
-       [:meta {:name "description" :content description}])
-     [:link {:rel  "icon"
-             :type "image/svg+xml"
-             :href (put-on-base "/assets/brother-favicon.svg")}]
-     (include-css (put-on-base "css/style.css"))
-     [:script {:src "//gc.zgo.at/count.js"
-               :data-goatcounter (:goat-counter-url config)
-               :async true}]
-     (for [p extra-elements] p)])
+  [:head
+   [:meta {:charset "UTF-8"}]
+   [:base {:href (:base config)}]
+   [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
+   [:title title]
+   (when description
+     [:meta {:name "description" :content description}])
+   [:link {:rel  "icon"
+           :type "image/svg+xml"
+           :href (put-on-base "/assets/brother-favicon.svg")}]
+   (include-css (put-on-base "css/style.css"))
+   [:script {:src "//gc.zgo.at/count.js"
+             :data-goatcounter (:goat-counter-url config)
+             :async true}]
+   (for [p extra-elements] p)])
 
 (defn header
   "Website name with link to root page"

@@ -1,6 +1,5 @@
 (ns pages.landing.page
-  (:require [utils.date]
-            [utils.url    :refer [put-on-base]]
+  (:require [utils.url    :refer [put-on-base]]
             [utils.data.game-stats :as game-stats]
             [utils.data.core :as data-core]
             [utils.config :refer [config]]
@@ -55,7 +54,7 @@
                 :timeOnIceH (Integer/parseInt timeOnIceH)))
        sorted-entries))))
 
-(defn page []
+(defn render []
   (let [game-stats (game-stats/read-game-stats)
         cumulative-game-stats (game-stats/eval-cumulative-game-stats game-stats)
         time-log (read-time-log)]

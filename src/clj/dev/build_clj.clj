@@ -1,7 +1,8 @@
 (ns dev.build-clj
-  (:require [pages.gallery.page :as gallery]
-            [pages.landing.page :as landing]
-            [clojure.java.io   :as io]))
+  (:require [pages.gallery.page]
+            [pages.landing.page]
+            [pages.error.page]
+            [clojure.java.io :as io]))
 
 (defn- ensure-parent!
   "Make sure the parent directory of file-path exists."
@@ -11,8 +12,9 @@
       (.mkdirs parent))))
 
 (def pages
-  {"resources/public/index.html"         landing/page
-   "resources/public/gallery/index.html" gallery/page})
+  {"resources/public/index.html"         pages.landing.page/render
+   "resources/public/404.html"           pages.error.page/render
+   "resources/public/gallery/index.html" pages.gallery.page/render})
 
 (defn build-all!
   []

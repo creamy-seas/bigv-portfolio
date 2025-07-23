@@ -110,7 +110,7 @@
         (- (count gallery-data) 1)
         ";")])
 
-(defn page []
+(defn render []
   (let [gallery-data (read-gallery)]
     (layout
      {:title       "BigV Gallery"
