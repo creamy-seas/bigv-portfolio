@@ -24,7 +24,10 @@
     (let [data (aget js/window "GALLERY_DATA")
           item (aget data gallery-idx)]
       (reset! modal-state gallery-idx)
-      (set-gallery-iframe (aget item "source") (aget item "description") (aget item "date"))
+      (set-gallery-iframe
+       ;; Do not touch these - I tried to do aget and they failed, but for data the .-PROP does not work
+       ;; Mysterious
+       (.-src item) (.-description item) (aget item "date"))
       (.remove (.-classList (.getElementById js/document "gallery-modal")) "hidden"))))
 
 (defn close-gallery-modal [event]
