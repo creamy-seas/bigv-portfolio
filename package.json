@@ -9,7 +9,7 @@
     "clj:build": "clj -M:clj-build",
     "cljs:dev": "clj -M:cljs-dev",
     "cljs:build": "clj -M:cljs-build",
-    "postcljs:build": "rollup -c",
+    "precljs:build": "rm -rf target && rm -rf resources/public/js",
     "browser": "chromium --incognito --disable-application-cache http://localhost:5173",
     "serve": "clj -M:serve",
     "preview": "exec concurrently --kill-others-on-fail \"npm run serve\" \"wait-on http://localhost:5173 && npm run browser\"",

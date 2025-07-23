@@ -39,7 +39,7 @@
   (.stopPropagation event)
   (display-gallery-modal (max 0 (- @modal-state 1))))
 
-(defonce max-gallery-dx*
+(defonce max-gallery-idx*
   (aget js/window "GALLERY_DATA_MAX_IDX"))
 
 (defn show-past [event]
