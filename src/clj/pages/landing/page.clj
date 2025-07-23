@@ -23,7 +23,7 @@
                (apply + (map :timeOnIceH time-log))]]]
     [:section {:class "flex flex-col md:flex-row items-center p-6"}
      [:img
-      {:src    "./assets/profile.avif"
+      {:src    "assets/profile.avif"
        :alt    "Player Photo"
        :class  "block order-first rounded-[5%]
               w-full h-auto flex-shrink-0 mb-4
@@ -61,7 +61,7 @@
     (layout
      {:title "BigV Webpage"
       :description "Tracking progress and achievements"
-      :extra-elements [[:link {:rel "preload" :as "image" :href "./assets/profile.avif" :type "image/avif" :fetchpriority "high"}]
+      :extra-elements [[:link {:rel "preload" :as "image" :href "assets/profile.avif" :type "image/avif" :fetchpriority "high"}]
                        [:script {:src "https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"
                                  :crossorigin "anonymous"
                                  :integrity (:chartjs-hash config)}]]}
@@ -75,4 +75,4 @@
      ;; TODO: move to head
      (data-core/export-data game-stats "GAME_STATS_DATA")
      (data-core/export-data cumulative-game-stats "CUMULATIVE_GAME_STATS_DATA")
-     (include-js "./js/cljs_base.js" "./js/landing.js"))))
+     (include-js "js/cljs_base.js" "js/landing.js"))))

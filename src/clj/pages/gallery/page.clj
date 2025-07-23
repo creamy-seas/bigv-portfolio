@@ -23,7 +23,7 @@
                                       :gallery-idx gallery-idx
                                       :thumbnail (if (= type "image")
                                                    (str "https://drive.google.com/thumbnail?id=" id)
-                                                   "./assets/play-icon.svg")
+                                                   "assets/play-icon.svg")
                                       :src    (str "https://drive.google.com/file/d/"
                                                    id
                                                    "/preview")))
@@ -117,4 +117,4 @@
      (gallery-grid-js gallery-data)
      (gallery-modal)
      (export-data gallery-data)
-     (include-js "./js/cljs_base.js" "./js/gallery.js"))))
+     (include-js "js/cljs_base.js" "js/gallery.js"))))
