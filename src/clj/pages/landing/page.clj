@@ -1,5 +1,6 @@
 (ns pages.landing.page
   (:require [utils.date]
+            [utils.url    :refer [put-on-base]]
             [utils.data.game-stats :as game-stats]
             [utils.data.core :as data-core]
             [utils.config :refer [config]]
@@ -23,7 +24,7 @@
                (apply + (map :timeOnIceH time-log))]]]
     [:section {:class "flex flex-col md:flex-row items-center p-6"}
      [:img
-      {:src    "assets/profile.avif"
+      {:src    (put-on-base "/assets/profile.avif")
        :alt    "Player Photo"
        :class  "block order-first rounded-[5%]
               w-full h-auto flex-shrink-0 mb-4
@@ -37,7 +38,7 @@
           (let [dt [:dt.font-semibold.text-myflame (str label ":")]
                 val-node (if (= label "Season")
                            [:a.underline.hover:text-myflame
-                            {:href (str "gallery?season=" v)} v]
+                            {:href (put-on-base (str "gallery?season=" v))} v]
                            (str v))]
             [dt val-node]))
         info)]]]))
@@ -61,7 +62,7 @@
     (layout
      {:title "BigV Webpage"
       :description "Tracking progress and achievements"
-      :extra-elements [[:link {:rel "preload" :as "image" :href "assets/profile.avif" :type "image/avif" :fetchpriority "high"}]
+      :extra-elements [[:link {:rel "preload" :as "image" :href (put-on-base "/assets/profile.avif") :type "image/avif" :fetchpriority "high"}]
                        [:script {:src "https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"
                                  :crossorigin "anonymous"
                                  :integrity (:chartjs-hash config)}]]}
@@ -75,4 +76,4 @@
      ;; TODO: move to head
      (data-core/export-data game-stats "GAME_STATS_DATA")
      (data-core/export-data cumulative-game-stats "CUMULATIVE_GAME_STATS_DATA")
-     (include-js "js/cljs_base.js" "js/landing.js"))))
+     (include-js (put-on-base "/js/cljs_base.js") (put-on-base "/js/landing.js")))))

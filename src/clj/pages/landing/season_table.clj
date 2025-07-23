@@ -1,5 +1,6 @@
 (ns pages.landing.season-table
-  (:require [common.elements]))
+  (:require [common.elements]
+            [utils.url :refer [put-on-base]]))
 
 (defn build-season-table
   "Aggregates time logs and game data for a season summary"
@@ -48,7 +49,7 @@
             (map-indexed (fn [idx {:keys [season games goals timeOnIceH]}]
                            [:tr {:key idx}
                             [:td.font-medium.text-my-flame
-                             [:a.underline.hover:text-myflame {:href (str "gallery?season=" season)}
+                             [:a.underline.hover:text-myflame {:href (put-on-base (str "gallery?season=" season))}
                               season]]
                             [:td games]
                             [:td goals]

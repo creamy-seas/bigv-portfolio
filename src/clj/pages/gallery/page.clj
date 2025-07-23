@@ -1,5 +1,6 @@
 (ns pages.gallery.page
   (:require [utils.date]
+            [utils.url    :refer [put-on-base]]
             [common.template :refer [layout]]
             [clojure.data.csv :as csv]
             [clojure.java.io :as io]
@@ -23,7 +24,7 @@
                                       :gallery-idx gallery-idx
                                       :thumbnail (if (= type "image")
                                                    (str "https://drive.google.com/thumbnail?id=" id)
-                                                   "assets/play-icon.svg")
+                                                   (put-on-base "/assets/play-icon.svg"))
                                       :src    (str "https://drive.google.com/file/d/"
                                                    id
                                                    "/preview")))
@@ -117,4 +118,4 @@
      (gallery-grid-js gallery-data)
      (gallery-modal)
      (export-data gallery-data)
-     (include-js "js/cljs_base.js" "js/gallery.js"))))
+     (include-js (put-on-base "/js/cljs_base.js") (put-on-base "/js/gallery.js")))))

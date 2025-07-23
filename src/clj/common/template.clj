@@ -1,6 +1,7 @@
 (ns common.template
   (:require
-   [hiccup.page :refer [html5 include-css]]
+   [hiccup.page  :refer [html5 include-css]]
+   [utils.url    :refer [put-on-base]]
    [utils.config :refer [config]]))
 
 (defn head
@@ -16,8 +17,8 @@
        [:meta {:name "description" :content description}])
      [:link {:rel  "icon"
              :type "image/svg+xml"
-             :href "assets/brother-favicon.svg"}]
-     (include-css "css/style.css")
+             :href (put-on-base "/assets/brother-favicon.svg")}]
+     (include-css (put-on-base "css/style.css"))
      [:script {:src "//gc.zgo.at/count.js"
                :data-goatcounter (:goat-counter-url config)
                :async true}]
@@ -29,7 +30,7 @@
   [:header.text-center.my-8
    [:a.text-myflame.text-3xl.font-bold
     {:class "decoration-myflame underline-offset-4 hover:text-myflame/80 select-none"
-     :href "./"}
+     :href (put-on-base "/")}
     "🏒 BigV Webpage 🏒"]])
 
 (defn layout
