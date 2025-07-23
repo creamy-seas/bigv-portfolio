@@ -13,7 +13,7 @@
           description)
     (when date
       (set! (.-textContent (.getElementById js/document "gallery-modal-date"))
-            (.toLocaleDateString (js/Date. date))))))
+            (.toLocaleDateString (js/Date. date) "en" #js {:day "numeric" :month "long" :year "numeric"})))))
 
 (defn display-gallery-modal
   "Populate modal with information for item gallery-idx in gallery"
