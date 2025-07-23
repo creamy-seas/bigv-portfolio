@@ -52,7 +52,7 @@
   "Hook up a listenter to the DOM element found by id with the provided function"
   [element-id callback]
   (when-let [el (.getElementById js/document element-id)]
-      (.addEventListener el "click" callback)))
+    (.addEventListener el "click" callback)))
 
 (defn mount! []
   (click-listener "gallery-modal" close-gallery-modal)
