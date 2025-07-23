@@ -24,6 +24,18 @@ To prevent this, ensure that you use =aget= instead of =-.PROP= to access fields
 -                   (let [idx   (js/parseInt (.-dataIndex item))
 +                   (let [idx   (js/parseInt (aget item "dataIndex"))
 #+end_src
+
+*** How to build
+The =cljs= compiler does a good job at slimming the build and can be used as is.
+
+I looked at using it to create a temp output and then using =rollup= to bundle and trim further. It seemed to have not effect
+| =cljs=          | =gallery.js=   | 2.55k |
+|                 | =landing.js=   | 7.46k |
+|                 | =cljs_base.js= | 98.7k |
+|-----------------+----------------+-------|
+| =cljs + rollup= | =gallery.js=   | 92.9k |
+|                 | =landing.js=   | 103k  |
+
 * Running
 #+begin_src shell
 npm i # initiall install
