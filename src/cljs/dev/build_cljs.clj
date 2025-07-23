@@ -1,17 +1,15 @@
-(ns dev.build
-  (:require [cljs.build.api :as cljs]
-            [clojure.java.io  :as io]))
+(ns dev.build-cljs
+  (:require [cljs.build.api :as cljs]))
 
 (def bundles
   ;; Define all the namespaces to builds into js files here
   ;; e.g. :example 'gallery-build tells to evaluate the gallery.build and put it into example.js
   {:gallery 'gallery.build
-   :landing 'landing.game-graph
-   })
+   :landing 'landing.build})
 
 (def base-opts
   {:src-dirs        "src/cljs"
-   :output-dir      "target/cljs/out"
+   :output-dir      "resources/public/js"
    :parallel-build  true
    :target          :none
    :verbose         true})
@@ -49,6 +47,7 @@
 (defn -main
   "Pass in `prod` or `dev` build as argument"
   [& [mode]]
+  ;; (cljs/watch (:src-dirs base-opts) cfg)
   (let [cfg (build-config mode)
         action (if (:watch cfg) cljs/watch cljs/build)]
     (println "▶ cljs compiling" (:optimizations cfg)

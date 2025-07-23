@@ -1,4 +1,4 @@
-{:paths ["resources"]
+{:paths ["resources" "src/clj" "src/cljs"]
 
  :deps
  {org.clojure/clojure             {:mvn/version "1.11.1"}
@@ -10,10 +10,8 @@
 
  :aliases
  {
-  :clj-build    {:extra-paths ["src/clj"]
-                 :main-opts ["-m" "dev.build"]}
-  :cljs-dev     {:extra-paths ["src/cljs"]
-                 :main-opts ["-m" "dev.build" "dev"]}
+  :clj-build    {:main-opts ["-m" "dev.build-clj"]}
+  :cljs-dev     {:main-opts ["-m" "dev.build-cljs" "dev"]}
 
   ;; :cljs-dev     {:main-opts ["-m" "cljs.main"
   ;;                            "--output-to" "resources/public/js/gallery.js"
@@ -52,8 +50,7 @@
   ;;                            "--target" "none"
   ;;                            "--compile" "landing.build"]}
 
-  :serve        {:extra-paths ["src/clj"]
-                 :extra-deps    {ring/ring-core             {:mvn/version "1.10.0"}
+  :serve        {:extra-deps    {ring/ring-core             {:mvn/version "1.10.0"}
                                  ring/ring-jetty-adapter    {:mvn/version "1.10.0"}}
                  :main-opts ["-m" "dev.server"]}
 

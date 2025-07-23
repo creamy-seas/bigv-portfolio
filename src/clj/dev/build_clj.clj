@@ -1,4 +1,4 @@
-(ns dev.build
+(ns dev.build-clj
   (:require [pages.gallery.page :as gallery]
             [pages.landing.page :as landing]
             [clojure.java.io   :as io]))
@@ -24,4 +24,5 @@
 (defn -main
   "Build all static pages."
   [& _]
+  (println "▶ clj compiling")
   (build-all!))
