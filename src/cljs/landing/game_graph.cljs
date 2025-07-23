@@ -1,6 +1,5 @@
-(ns landing.game-graph
-  ;;(:require [goog.events :as events])
-  )
+(ns landing.game-graph)
+
 (defn dataset
   [game-stats label k color]
   {:label label
@@ -9,7 +8,8 @@
    :borderColor color
    ;; points -------------
    :pointBorderColor     color
-   :pointHoverBackgroundColor color})
+   :pointHoverBackgroundColor color
+   :pointHitRadius      20})
 
 (defn make-datasets [game-stats]
   [(dataset game-stats "Goals"     :goals     "#eec900")

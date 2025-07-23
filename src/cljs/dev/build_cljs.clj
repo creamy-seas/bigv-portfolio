@@ -37,6 +37,8 @@
    :output-dir      (out-dir optimizations)
    :parallel-build  true
    :closure-defines {"goog.DEBUG" false}
+   :static-fns      true
+   :optimize-constants true
    :verbose         true})
 
 (defn -main
