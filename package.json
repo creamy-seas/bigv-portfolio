@@ -4,6 +4,7 @@
   "description": "Viktor's portfolio site built with Clojure & Tailwind CSS",
   "homepage": "https://creamy-seas.github.io/bigv-portfolio",
   "scripts": {
+    "postinstall": "babel node_modules/chart.js --extensions .js,.mjs --ignore \"**/*.d.ts\" --out-dir node_modules/chart.js --quiet",
     "css:dev": "npx tailwindcss -i src/css/input.css -o resources/public/css/style.css --watch",
     "css:build": "npx tailwindcss -i src/css/input.css -o resources/public/css/style.css --minify",
     "clj:build": "clj -M:clj-build",
@@ -20,6 +21,11 @@
     "publish": "gh-pages -d resources/public"
   },
   "devDependencies": {
+    "@babel/cli": "^7.28.0",
+    "@babel/core": "^7.28.0",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-class-static-block": "^7.21.0",
+    "@babel/preset-env": "^7.28.0",
     "@cljs-oss/module-deps": "^1.1.0",
     "@tailwindcss/cli": "4.1.11",
     "chart.js": "^4.5.0",

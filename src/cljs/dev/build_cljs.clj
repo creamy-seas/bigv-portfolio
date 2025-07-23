@@ -32,13 +32,18 @@
 
 (defn build-config
   [optimizations]
-  {:optimizations   optimizations
-   :modules         modules-map
-   :output-dir      (out-dir optimizations)
-   :parallel-build  true
-   :closure-defines {"goog.DEBUG" false}
-   :static-fns      true
-   :optimize-constants true
+  {;; optimizations
+   :optimizations       optimizations
+   :static-fns          true
+   :optimize-constants  true
+   :closure-defines     {"goog.DEBUG" false}
+   ;; what to build and where
+   :modules             modules-map
+   :output-dir          (out-dir optimizations)
+   ;; runtime
+   :parallel-build      true
+   :npm-deps        true ; scan the package.json file
+   :install-deps    false ; babel transpiles charts.js to an older version, so prevent rewriting it
    :verbose         true})
 
 (defn -main
