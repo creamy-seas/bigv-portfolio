@@ -2,7 +2,7 @@
 
  :deps
  {org.clojure/clojure             {:mvn/version "1.11.1"}
-  org.clojure/clojurescript       {:mvn/version "1.11.132"}
+  org.clojure/clojurescript       {:mvn/version "1.12.42"}
   hiccup/hiccup                   {:mvn/version "2.0.0"}
   org.clojure/data.csv            {:mvn/version "1.0.1"}
   org.clojure/data.json           {:mvn/version "2.5.1"}
@@ -11,26 +11,9 @@
  :aliases
  {
   :clj-build    {:main-opts ["-m" "dev.build-clj"]}
+
   :cljs-dev     {:main-opts ["-m" "dev.build-cljs" "dev"]}
   :cljs-build   {:main-opts ["-m" "dev.build-cljs" "prod"]}
-
-  :cljs-gallery {:main-opts ["-m" "cljs.main"
-                             "--output-to" "target/cljs/gallery/gallery.js"
-                             "--output-dir" "target/cljs/gallery/out"
-                             "--compile-opts" "{:parallel-build true}"
-                             "--optimizations" "advanced"
-                             "--target" "none"
-                             "--verbose"
-                             "--compile" "gallery.build"]}
-
-  :cljs-landing {:main-opts ["-m" "cljs.main"
-                             "--output-to" "target/cljs/landing/landing.js"
-                             "--output-dir"  "target/cljs/landing/out"
-                             "--compile-opts" "{:parallel-build true}"
-                             "--optimizations" "advanced"
-                             "--target" "none"
-                             "--verbose"
-                             "--compile" "landing.build"]}
 
   :serve        {:extra-deps    {ring/ring-core             {:mvn/version "1.10.0"}
                                  ring/ring-jetty-adapter    {:mvn/version "1.10.0"}}

@@ -20,13 +20,13 @@
     "publish": "gh-pages -d resources/public"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^16.0.1",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@tailwindcss/cli": "^4.1.11",
-    "concurrently": "^7.6.0",
-    "daisyui": "^5.0.46",
-    "gh-pages": "^6.3.0",
-    "tailwindcss": "^4.1.11",
-    "wait-on": "^8.0.3"
+    "@cljs-oss/module-deps": "^1.1.0",
+    "@tailwindcss/cli": "4.1.11",
+    "chart.js": "^4.5.0",
+    "concurrently": "7.6.0",
+    "daisyui": "5.0.46",
+    "gh-pages": "6.3.0",
+    "tailwindcss": "4.1.11",
+    "wait-on": "8.0.3"
   }
 }
