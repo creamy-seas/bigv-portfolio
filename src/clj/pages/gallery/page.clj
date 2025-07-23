@@ -117,4 +117,4 @@
      (gallery-grid-js gallery-data)
      (gallery-modal)
      (export-data gallery-data)
-     (include-js "/js/gallery.js"))))
+     (include-js "/js/cljs_base.js" "/js/gallery.js"))))

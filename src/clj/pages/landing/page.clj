@@ -72,4 +72,4 @@
      ;; TODO: move to head
      (data-core/export-data game-stats "GAME_STATS_DATA")
      (data-core/export-data cumulative-game-stats "CUMULATIVE_GAME_STATS_DATA")
-     (include-js "/js/landing.js"))))
+     (include-js "/js/cljs_base.js" "/js/landing.js"))))
