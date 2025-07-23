@@ -17,9 +17,9 @@
            :type "image/svg+xml"
            :href "/assets/brother-favicon.svg"}]
    (include-css "/css/style.css")
-   [:script {:src "https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"
-             :crossorigin "anonymous"
-             :integrity (:chartjs-hash config)}]
+   [:script {:src "//gc.zgo.at/count.js"
+             :data-goatcounter (:goat-counter-url config)
+             :async true}]
    (for [p extra-elements] p)])
 
 (defn header

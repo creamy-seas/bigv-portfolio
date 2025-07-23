@@ -61,7 +61,10 @@
     (layout
      {:title "BigV Webpage"
       :description "Tracking progress and achievements"
-      :extra-elemnets [[:link {:rel "preload" :as "image" :href "/assets/profile.avif" :type "image/avif" :fetchpriority "high"}]]}
+      :extra-elements [[:link {:rel "preload" :as "image" :href "/assets/profile.avif" :type "image/avif" :fetchpriority "high"}]
+                       [:script {:src "https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"
+                                 :crossorigin "anonymous"
+                                 :integrity (:chartjs-hash config)}]]}
      [:container.mx-auto.px-4.space-y-8
       (overview time-log game-stats)
       (pages.landing.gallery-link/render)

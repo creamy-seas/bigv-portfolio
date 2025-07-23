@@ -13,6 +13,16 @@ Figwheel: great for development and refreshing the page. As I will be doing a st
 Clojure: most of the stuff is going to be written and evaled in closure
 Serving: I would like a way of viewing the effects of the builds. I don't really have any complex states, so it should be pain-free
 
+- [[https://bigv-portfolio.goatcounter.com/counter//.svg?no_branding=true][Home page views]]
+- [[https://bigv-portfolio.goatcounter.com/counter//gallery/.svg?no_branding=true][Gallery page views]]
+
+* Generating hashes for external js
+#+begin_src shell
+curl -sSL https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js \
+  | openssl dgst -sha384 -binary \
+  | openssl base64 -A \
+  | awk '{print "sha384-" $0}'
+#+end_src
 * Config
 ** =.clj=
 ** =.cljs=
