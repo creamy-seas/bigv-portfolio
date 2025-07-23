@@ -10,6 +10,7 @@
 (def paths
   {:src-dirs "src/cljs"
    :out-dirs {:advanced "target/cljs"
+              ;; :advanced "resources/public/js"
               :simple  "resources/public/js"}})
 
 (defn out-dir [optimizations]
@@ -18,18 +19,21 @@
 (defn output-to
   "Output files based off the bundle name"
   [bundle optimizations]
-  (str (out-dir optimizations) "/" (name bundle) ".js"))
+  ;;(str (out-dir optimizations) "/" (name bundle) ".js")
+  (str "resources/public/js/" (name bundle) ".js"))
 
 (defn modules-map
   "Make a module for each of the bundles, specifing namespace to evaluate
   and where to write the output"
   [optimizations]
-  (into {}
+  (merge (into {}
         (map (fn [[bundle entry-ns]]
                [(keyword (name bundle))
-                {:entries [entry-ns]
+                {:entries #{entry-ns}
                  :output-to (output-to bundle optimizations)}])
-             bundles)))
+             bundles))
+         {:cljs-base {:output-to "resources/public/js/cljs_base.js"}}
+         ))
 
 (defn build-config
   [optimizations]
@@ -37,9 +41,11 @@
    :modules         (modules-map optimizations)
    :output-dir      (out-dir optimizations)
    :parallel-build  true
-   :target          :none
-   :verbose         true
-   :source-map      (not= optimizations :advanced)})
+   :closure-defines {"goog.DEBUG" false}
+   ;;:target          :bundle
+   ;; :bundle-cmd      {:none ["node" "esmbuild.config.mjs" "--dev"]
+   ;;                   :default ["node" "esbuild.config.mjs"]}
+   :verbose         true})
 
 (defn -main
   "Pass in `prod` or `dev` build as argument"
@@ -47,5 +53,5 @@
   (let [optimization  (if (= mode "prod") :advanced :simple)
         cfg    (build-config optimization)
         action (if (= optimization :advanced) cljs/build cljs/watch)]
-    (println "▶ cljs compiling" optimization)
+    (println "▶ cljs compiling" optimization cfg)
     (action (:src-dirs paths) cfg)))
