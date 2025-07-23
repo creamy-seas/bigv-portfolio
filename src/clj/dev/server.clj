@@ -2,6 +2,7 @@
   (:require
    [ring.adapter.jetty        :refer [run-jetty]]
    [ring.middleware.file      :refer [wrap-file]]
+   [ring.middleware.file-info :refer [wrap-file-info]]
    [ring.middleware.not-modified :refer [wrap-not-modified]]))
 
 (defn not-found [request] ;
@@ -12,6 +13,7 @@
 (def app
   (-> not-found
       (wrap-file "resources/public")
+      ^{:clj-kondo/ignore [:deprecated-var]} wrap-file-info
       wrap-not-modified))
 
 (defn -main [& _]
