@@ -4,6 +4,7 @@
   "description": "Viktor's portfolio site built with Clojure & Tailwind CSS",
   "homepage": "https://creamy-seas.github.io/bigv-portfolio",
   "scripts": {
+    "get-chartjs-hash": "node -e \"const https=require('https'),crypto=require('crypto'),url='https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js';https.get(url,res=>{const h=crypto.createHash('sha384');res.on('data',d=>h.update(d));res.on('end',()=>console.log('sha384-'+h.digest('base64')));});\"",
     "css:dev": "npx tailwindcss -i src/css/input.css -o resources/public/css/style.css --watch",
     "css:build": "npx tailwindcss -i src/css/input.css -o resources/public/css/style.css --minify",
     "clj:build": "clj -M:clj-build",

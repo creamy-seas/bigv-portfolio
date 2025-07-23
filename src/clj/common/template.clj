@@ -1,11 +1,12 @@
 (ns common.template
   (:require
-   [hiccup.page :refer [html5 include-css]]))
+   [hiccup.page :refer [html5 include-css]]
+   [utils.config :refer [config]]))
 
 (defn head
-  "Head of the page, with title, descriptions and optional preloads"
-  [{:keys [title description preloads]
-    :or   {preloads []}}]
+  "Head of the page, with title, descriptions and optional extra-elements"
+  [{:keys [title description extra-elements]
+    :or   {extra-elements []}}]
   [:head
    [:meta {:charset "UTF-8"}]
    [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
@@ -15,10 +16,11 @@
    [:link {:rel  "icon"
            :type "image/svg+xml"
            :href "/assets/brother-favicon.svg"}]
-   ;; TODO: remove with normal ref
-   [:script {:src "https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"}]
    (include-css "/css/style.css")
-   (for [p preloads] p)])
+   [:script {:src "https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"
+             :crossorigin "anonymous"
+             :integrity (:chartjs-hash config)}]
+   (for [p extra-elements] p)])
 
 (defn header
   "Website name with link to root page"
@@ -31,11 +33,11 @@
 
 (defn layout
   "Main layout of the app - evyerything should inherit from here"
-  [{:keys [title description preloads]} & content]
+  [{:keys [title description extra-elements]} & content]
   (html5
    (head {:title       title
           :description description
-          :preloads    preloads})
+          :extra-elements    extra-elements})
    [:body
     [:div#root
      (header)

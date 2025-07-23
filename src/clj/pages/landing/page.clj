@@ -59,9 +59,9 @@
         cumulative-game-stats (game-stats/eval-cumulative-game-stats game-stats)
         time-log (read-time-log)]
     (layout
-     {:title       "BigV Webpage"
+     {:title "BigV Webpage"
       :description "Tracking progress and achievements"
-      :preloads [[:link {:rel "preload" :as "image" :href "/assets/profile.avif" :type "image/avif" :fetchpriority "high"}]]}
+      :extra-elemnets [[:link {:rel "preload" :as "image" :href "/assets/profile.avif" :type "image/avif" :fetchpriority "high"}]]}
      [:container.mx-auto.px-4.space-y-8
       (overview time-log game-stats)
       (pages.landing.gallery-link/render)
