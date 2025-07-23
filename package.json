@@ -10,7 +10,6 @@
     "cljs:dev": "clj -M:cljs-dev",
     "cljs:build": "clj -M:cljs-build",
     "precljs:build": "rm -rf target && rm -rf resources/public/js",
-    "cljs:build-old": "npm run precljs:build && clj -M:cljs-gallery && clj -M:clj-landing && rollup -c",
     "browser": "chromium --incognito --disable-application-cache http://localhost:5173",
     "serve": "clj -M:serve",
     "preview": "exec concurrently --kill-others-on-fail \"npm run serve\" \"wait-on http://localhost:5173 && npm run browser\"",
@@ -27,7 +26,6 @@
     "concurrently": "^7.6.0",
     "daisyui": "^5.0.46",
     "gh-pages": "^6.3.0",
-    "rollup": "^4.45.1",
     "tailwindcss": "^4.1.11",
     "wait-on": "^8.0.3"
   }
