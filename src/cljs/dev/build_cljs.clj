@@ -22,15 +22,15 @@
 (def ^:private modules-map
   "Make a module for each of the bundles, specifing namespace to evaluate
   and where to write the output"
-  (let [eval-path (fn [bundle] (str (:output-to paths) "/" (name bundle) ".js"))]
+  (let [eval-path (fn [bundle-name] (str (:output-to paths) "/" bundle-name ".js"))]
     (-> (into {}
               (map (fn [[bundle entry-ns]]
                      [bundle {:entries #{entry-ns}
-                              :output-to (eval-path bundle)}])
+                              :output-to (eval-path (name bundle))}])
                    bundles))
-        (assoc :cljs-base {:output-to (eval-path :cljs-base)}))))
+        (assoc :cljs-base {:output-to (eval-path "cljs_base")}))))
 
-(defn ^:private build-config
+(defn build-config
   [optimizations]
   {:optimizations   optimizations
    :modules         modules-map
