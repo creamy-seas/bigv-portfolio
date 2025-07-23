@@ -21,7 +21,7 @@
                (apply + (map :goals game-stats))]
               ["Career Hours"
                (apply + (map :timeOnIceH time-log))]]]
-    [:section {:class "flex flex-col md:flex-row items-center bg-bg p-6 rounded-lg shadow-lg"}
+    [:section {:class "flex flex-col md:flex-row items-center p-6"}
      [:img
       {:src    "/assets/profile.avif"
        :alt    "Player Photo"
@@ -65,7 +65,7 @@
      [:container.mx-auto.px-4.space-y-8
       (overview time-log game-stats)
       (pages.landing.gallery-link/render)
-      [:div.grid.grid-cols-1.md:grid-cols-2.gap-2
+      [:section.grid.grid-cols-1.md:grid-cols-2
        (pages.landing.highlights/render)
        (pages.landing.season-table/render game-stats time-log)]
       (pages.landing.game-graph/render)]

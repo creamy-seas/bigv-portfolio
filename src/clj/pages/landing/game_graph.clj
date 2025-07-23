@@ -2,7 +2,7 @@
   (:require [common.elements]))
 
 (defn render []
-  [:div.p-2.max-w-4xl.mx-auto
+  [:section.max-w-4xl.mx-auto
    (common.elements/fat-title "📈 Game Stats")
    [:div {:class "max-h-[1000px] min-h-[500px] relative"}
     [:canvas#game-graph.w-full]]
