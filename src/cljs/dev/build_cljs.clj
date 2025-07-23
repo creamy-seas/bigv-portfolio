@@ -7,20 +7,18 @@
   {:gallery 'gallery.build
    :landing 'landing.build})
 
-(def base-opts
-  {:src-dirs        "src/cljs"
-   :output-dir      "resources/public/js"
-   :parallel-build  true
-   :target          :none
-   :verbose         true})
+(def paths
+  {:src-dirs "src/cljs"
+   :out-dirs {:advanced "target/cljs"
+              :simple  "resources/public/js"}})
+
+(defn out-dir [optimizations]
+  (get-in paths [:out-dirs optimizations]))
 
 (defn output-to
   "Output files based off the bundle name"
   [bundle optimizations]
-  (let [bundle-name (name bundle)]
-    (if (= optimizations :advanced)
-      (str "target/cljs/" bundle-name "_to-bundle.js")
-      (str "resources/public/js/" bundle-name ".js"))))
+  (str (out-dir optimizations) "/" (name bundle) ".js"))
 
 (defn modules-map
   "Make a module for each of the bundles, specifing namespace to evaluate
@@ -29,27 +27,25 @@
   (into {}
         (map (fn [[bundle entry-ns]]
                [(keyword (name bundle))
-                {:entries #{entry-ns}
-                 :output-to (output-to bundle optimizations)}]) bundles)))
+                {:entries [entry-ns]
+                 :output-to (output-to bundle optimizations)}])
+             bundles)))
 
 (defn build-config
-  "Return the full cljs compiler map"
-  [mode]
-  (let [opts (if (= mode "prod")
-               {:optimizations   :advanced
-                :source-map      false
-                :watch           false}
-               {:optimizations   :simple
-                :source-map      true
-                :watch           true})]
-    (merge base-opts opts {:modules (modules-map (:optimizations opts))})))
+  [optimizations]
+  {:optimizations   optimizations
+   :modules         (modules-map optimizations)
+   :output-dir      (out-dir optimizations)
+   :parallel-build  true
+   :target          :none
+   :verbose         true
+   :source-map      (not= optimizations :advanced)})
 
 (defn -main
   "Pass in `prod` or `dev` build as argument"
   [& [mode]]
-  ;; (cljs/watch (:src-dirs base-opts) cfg)
-  (let [cfg (build-config mode)
-        action (if (:watch cfg) cljs/watch cljs/build)]
-    (println "▶ cljs compiling" (:optimizations cfg)
-             (if (:watch cfg) "(watching)" "(building)"))
-    (action (:src-dirs base-opts) cfg)))
+  (let [optimization  (if (= mode "prod") :advanced :simple)
+        cfg    (build-config optimization)
+        action (if (= optimization :advanced) cljs/build cljs/watch)]
+    (println "▶ cljs compiling" optimization)
+    (action (:src-dirs paths) cfg)))
