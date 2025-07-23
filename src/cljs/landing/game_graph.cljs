@@ -86,8 +86,9 @@
   [^js chart]
   (swap! view-mode* (fn [m] (if (= m :cumulative) :per-game :cumulative)))
   (let [stats (current-stats)]
-    (set! (.-data.labels   chart) (clj->js (mapv :gameNumber stats)))
-    (set! (.-data.datasets chart) (clj->js (make-datasets stats)))
+    (aset (aget chart "data") "labels" (clj->js (mapv :gameNumber stats)))
+    (aset (aget chart "data") "datasets" (clj->js (make-datasets stats)))
+    (.call (aget chart "update") chart)
     (.update chart))
   (let [btn (.getElementById js/document "toggle-game-graph")
         new-label (if (= @view-mode* :cumulative)
