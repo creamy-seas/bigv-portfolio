@@ -10,9 +10,12 @@
     (set! (.-title iframe) description)
     (set! (.-textContent (.getElementById js/document "gallery-modal-description"))
           description)
-    (when date
-      (set! (.-textContent (.getElementById js/document "gallery-modal-date"))
-            (.toLocaleDateString (js/Date. date) "en" #js {:day "numeric" :month "long" :year "numeric"})))))
+    (let [opts   #js {"day"   "numeric"
+                      "month" "long"
+                      "year"  "numeric"}
+          locale (aget js/navigator "language")
+          date-str (.toLocaleDateString (js/Date. date) locale opts)]
+      (set! (.-textContent (.getElementById js/document "gallery-modal-date")) date-str))))
 
 (defn display-gallery-modal
   "Populate modal with information for item gallery-idx in gallery"
@@ -21,7 +24,7 @@
     (let [data (aget js/window "GALLERY_DATA")
           item (aget data gallery-idx)]
       (reset! modal-state gallery-idx)
-      (set-gallery-iframe (.-src item) (.-description item) (.-date item))
+      (set-gallery-iframe (aget item "source") (aget item "description") (aget item "date"))
       (.remove (.-classList (.getElementById js/document "gallery-modal")) "hidden"))))
 
 (defn close-gallery-modal [event]

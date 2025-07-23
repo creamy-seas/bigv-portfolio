@@ -64,6 +64,8 @@ npm run publish # to push to github pages
 - [X] Need to embed the graph - no toggling to begin with
 - [X] Build for landing an gallery pages, preferable through a slim config file
 - [X] Separating out common element (data) into cljc files that can be consumed by both sources
-- [ ] Rework the build pipeline for =cljs= so that it builds the relevant files into relevant =js= files
-- [ ] Tree shake =charts.js= and make a simple build script
+- [X] Rework the build pipeline for =cljs= so that it builds the relevant files into relevant =js= files
+- [X] Tree shake =charts.js= and make a simple build script
+- [X] Common elements that share static config
+- [X] Correctly setting the base path or urls
 - [ ] Clean up the code into modules
