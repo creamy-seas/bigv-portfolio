@@ -21,10 +21,10 @@
 (defonce view-mode* (atom :cumulative))
 
 (defonce per-game-stats*
-  (js->clj (.-GAME_STATS_DATA js/window) :keywordize-keys true))
+  (js->clj (aget js/window "GAME_STATS_DATA")  :keywordize-keys true))
 
 (defonce cumulative-game-stats*
-  (js->clj (.-CUMULATIVE_GAME_STATS_DATA js/window) :keywordize-keys true))
+  (js->clj (aget js/window "CUMULATIVE_GAME_STATS_DATA") :keywordize-keys true))
 
 (defn current-stats
   "Get the stats depending on the view mode"

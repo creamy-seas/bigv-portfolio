@@ -18,7 +18,7 @@
   "Populate modal with information for item gallery-idx in gallery"
   [gallery-idx]
   (when-not (= gallery-idx @modal-state)
-    (let [data (.-GALLERY_DATA js/window)
+    (let [data (aget js/window "GALLERY_DATA")
           item (aget data gallery-idx)]
       (reset! modal-state gallery-idx)
       (set-gallery-iframe (.-src item) (.-description item) (.-date item))
@@ -39,10 +39,13 @@
   (.stopPropagation event)
   (display-gallery-modal (max 0 (- @modal-state 1))))
 
+(defonce max-gallery-dx*
+  (aget js/window "GALLERY_DATA_MAX_IDX"))
+
 (defn show-past [event]
   (.stopPropagation event)
   (display-gallery-modal (min
-                          (.-GALLERY_DATA_MAX_IDX js/window)
+                          max-gallery-idx*
                           (+ @modal-state 1))))
 
 (defn click-listener
