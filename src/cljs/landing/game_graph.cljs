@@ -1,12 +1,4 @@
-(ns landing.game-graph
-  (:require ["chart.js" :refer
-             [Chart
-              LineController LineElement PointElement
-              CategoryScale LinearScale Tooltip Legend]]))
-
-(.register Chart
-           LineController LineElement PointElement
-           CategoryScale  LinearScale Tooltip Legend)
+(ns landing.game-graph)
 
 (defn dataset
   [game-stats label k color]

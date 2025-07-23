@@ -37,13 +37,16 @@
    :static-fns          true
    :optimize-constants  true
    :closure-defines     {"goog.DEBUG" false}
+   :pprint              false
+   :elide-asserts       true
+   :pseudo-names        false
    ;; what to build and where
    :modules             modules-map
    :output-dir          (out-dir optimizations)
    ;; runtime
-   :parallel-build      true
    :npm-deps        true ; scan the package.json file
    :install-deps    false ; babel transpiles charts.js to an older version, so prevent rewriting it
+   :parallel-build      true
    :verbose         true})
 
 (defn -main
