@@ -1,5 +1,5 @@
 (ns landing.game-graph
-   (:require ["chart.js" :refer
+  (:require ["chart.js" :refer
              [Chart
               LineController LineElement PointElement
               CategoryScale LinearScale Tooltip Legend]]))

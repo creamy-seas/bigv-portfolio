@@ -29,12 +29,18 @@ To prevent this, ensure that you use =aget= instead of =-.PROP= to access fields
 - The =cljs= compiler does a good job at slimming the build and can be used as is.
 - I looked at using it to create a temp output and then using =rollup= to bundle and trim further: commit 2917629
 - It seemed to be worse as per table below as it did not group common things
-| =cljs=          | =gallery.js=   | 2.55k |
-|                 | =landing.js=   | 7.46k |
-|                 | =cljs_base.js= | 98.7k |
-|-----------------+----------------+-------|
-| =cljs + rollup= | =gallery.js=   | 92.9k |
-|                 | =landing.js=   | 103k  |
+| =cljs= + tree-shakeng =chart.js= | =gallery.js=       | 2.56k |
+|                                  | =landing.js=       | 167k  |
+|                                  | =cljs_base.js=     | 99.5k |
+|----------------------------------+--------------------+-------|
+| =cljs=                           | =gallery.js=       | 2.55k |
+|                                  | =landing.js=       | 7.46k |
+|                                  | =cljs_base.js=     | 98.7k |
+|                                  | =chart.umd.min.js= | 203k  |
+|----------------------------------+--------------------+-------|
+| =cljs + rollup=                  | =gallery.js=       | 92.9k |
+|                                  | =landing.js=       | 103k  |
+|                                  | =chart.umd.min.js= | 203k  |
 
 * Running
 #+begin_src shell
