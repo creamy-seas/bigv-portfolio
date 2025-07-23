@@ -64,7 +64,7 @@
               {:title
                (fn [items]
                  (when-let [item (aget items 0)]
-                   (let [idx   (js/parseInt (.-dataIndex item))
+                   (let [idx   (js/parseInt (aget item "dataIndex"))
                          game  (nth (current-stats) idx)
                          date  (:date       game)
                          loc   (:location   game)

@@ -16,7 +16,14 @@ Serving: I would like a way of viewing the effects of the builds. I don't really
 * Config
 ** =.clj=
 ** =.cljs=
+As the cljs files are compiled and minified with the =cljs= compiler, variable names can be mangled.
 
+To prevent this, ensure that you use =aget= instead of =-.PROP= to access fields
+
+#+begin_src clojure
+-                   (let [idx   (js/parseInt (.-dataIndex item))
++                   (let [idx   (js/parseInt (aget item "dataIndex"))
+#+end_src
 * Running
 #+begin_src shell
 npm i # initiall install
