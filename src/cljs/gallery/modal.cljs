@@ -1,5 +1,4 @@
-(ns gallery.modal
-  (:require [goog.events :as events]))
+(ns gallery.modal)
 
 (defonce ^:private modal-state (atom nil))
 
@@ -46,21 +45,18 @@
                           (.-GALLERY_DATA_MAX_IDX js/window)
                           (+ @modal-state 1))))
 
+(defn click-listener
+  "Hook up a listenter to the DOM element found by id with the provided function"
+  [element-id callback]
+  (when-let [el (.getElementById js/document element-id)]
+      (.addEventListener el "click" callback)))
+
 (defn mount! []
-  (when-let [el (.getElementById js/document "gallery-modal")]
-    (events/listen el "click" close-gallery-modal))
-  (when-let [el (.getElementById js/document "gallery-modal-future")]
-    (events/listen el "click" show-future))
-  (when-let [el (.getElementById js/document "gallery-modal-past")]
-    (events/listen el "click" show-past))
-  ;; (when-let [outer-el (.getElementById js/document "gallery-grid")]
-  ;;   (events/listen outer-el "click"
-  ;;                  (fn [e]
-  ;;                    (let [el (.-target e)]
-  ;;                      (when (.matches el ".gallery-card")
-  ;;                        (open-gallery-modal e))))))
+  (click-listener "gallery-modal" close-gallery-modal)
+  (click-listener "gallery-modal-future" show-future)
+  (click-listener "gallery-modal-past" show-past)
   (doseq [el (array-seq (.querySelectorAll js/document ".gallery-card"))]
-    (events/listen el "click" open-gallery-modal)))
+    (.addEventListener el "click" open-gallery-modal)))
 
 (defn ^:export init []
   (mount!))
