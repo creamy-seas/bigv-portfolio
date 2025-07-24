@@ -58,14 +58,23 @@
   "Hook up a listenter to the DOM element found by id with the provided function"
   [element-id callback]
   (when-let [el (.getElementById js/document element-id)]
-    (.addEventListener el "click" callback)))
+    (.addEventListener el "click" callback)))bu
+
+(defn handle-keydown [event]
+  (when (some? @modal-state)
+    (case (.-key event)
+      "ArrowLeft"  (show-future event)
+      "ArrowRight" (show-past event)
+      "Escape" (close-gallery-modal event)
+      nil)))
 
 (defn mount! []
   (click-listener "gallery-modal" close-gallery-modal)
   (click-listener "gallery-modal-future" show-future)
   (click-listener "gallery-modal-past" show-past)
   (doseq [el (array-seq (.querySelectorAll js/document ".gallery-card"))]
-    (.addEventListener el "click" open-gallery-modal)))
+    (.addEventListener el "click" open-gallery-modal))
+  (.addEventListener js/document "keydown" handle-keydown))
 
 (defn ^:export init []
   (mount!))
