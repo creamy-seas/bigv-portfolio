@@ -93,7 +93,8 @@
      [:span.text-3xl "›"]]
     [:div.w-full.aspect-video
      [:iframe#gallery-modal-iframe.w-full.h-full
-      {:src             ""
+      {:style           (str "background: url(" (put-on-base "/assets/favicon.svg") ") center center no-repeat;")
+       :src             ""
        :allowfullscreen ""
        :title           ""}]]
     [:h3#gallery-modal-description.text-xl.font-semibold.text-myflame.mt-4 ""]

@@ -22,7 +22,7 @@
                bg-gradient-to-br from-myflame via-orange-300/60 to-transparent
                filter blur-2xl"}]
      [:img
-      {:src   (put-on-base "/assets/brother-favicon.svg")
+      {:src   (put-on-base "/assets/favicon.svg")
        :alt   "Let's go!"
        :class "relative z-10
                w-[40%] w-min-[200px] h-auto mb-4"}]]

@@ -17,7 +17,7 @@
      [:meta {:name "description" :content description}])
    [:link {:rel  "icon"
            :type "image/svg+xml"
-           :href (put-on-base "/assets/brother-favicon.svg")}]
+           :href (put-on-base "/assets/favicon.svg")}]
    (include-css (put-on-base "css/style.css"))
    [:script {:src "//gc.zgo.at/count.js"
              :data-goatcounter (:goat-counter-url config)
