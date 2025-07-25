@@ -44,10 +44,8 @@
    :modules             modules-map
    :output-dir          (out-dir optimizations)
    ;; runtime
-   :npm-deps        true ; scan the package.json file
-   :install-deps    false ; babel transpiles charts.js to an older version, so prevent rewriting it
    :parallel-build      true
-   :verbose         true})
+   :verbose             true})
 
 (defn -main
   "Pass in `prod` or `dev` build as argument"
