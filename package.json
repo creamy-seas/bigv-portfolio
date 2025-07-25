@@ -4,7 +4,7 @@
   "description": "Viktor's portfolio site built with Clojure & Tailwind CSS",
   "homepage": "https://creamy-seas.github.io/bigv-portfolio",
   "scripts": {
-    "get-chartjs-hash": "node -e \"const https=require('https'),crypto=require('crypto'),url='https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js';https.get(url,res=>{const h=crypto.createHash('sha384');res.on('data',d=>h.update(d));res.on('end',()=>console.log('sha384-'+h.digest('base64')));});\"",
+    "postinstall": "mkdir -p resources/public/extern && cp node_modules/chart.js/dist/chart.umd.min.js resources/public/extern/chart.js",
     "css:dev": "npx tailwindcss -i src/css/input.css -o resources/public/css/style.css --watch",
     "css:build": "npx tailwindcss -i src/css/input.css -o resources/public/css/style.css --minify",
     "clj:dev": "fswatch -0 -r --event Updated --latency 1 src/clj resources/config.edn | xargs -0 -n 1 clj -M:clj-build",
@@ -17,13 +17,15 @@
     "preview": "exec concurrently --kill-others-on-fail \"npm run serve\" \"wait-on http://localhost:5173 && npm run browser\"",
     "lint": "clj -M:lint && clj -M:fix",
     "sync": "python src/python/gsync.py",
-    "nuke": "echo Nuking everything 💣 && mv resources/public/assets resources/assets && rm -rf resources/public && mkdir resources/public && mv resources/assets resources/public/assets && echo Done 💣 && tree resources/public",
+    "nuke": "echo Nuking everything 💣 &&  mv resources/public/assets resources/assets && rm -rf resources/public",
+    "postnuke": "mkdir resources/public && mv resources/assets resources/public/assets && npm run postinstall && echo Done 💣 && tree resources/public",
     "dev": "npm run nuke && exec concurrently --kill-others-on-fail \"npm run clj:build && npm run clj:dev\" \"npm run css:dev\" \"npm run cljs:dev\" \"npm run serve\" \"wait-on http://localhost:5173 && npm run browser\"",
     "build": "npm run nuke && exec concurrently --kill-others-on-fail \"npm run clj:build\" \"npm run css:build\" \"npm run cljs:build\" \"npm run serve\" \"wait-on http://localhost:5173 && npm run browser\"",
     "publish": "tree --du -h resources/public && gh-pages -d resources/public"
   },
   "devDependencies": {
     "@tailwindcss/cli": "4.1.11",
+    "chart.js": "4.5.0",
     "concurrently": "7.6.0",
     "daisyui": "5.0.46",
     "gh-pages": "6.3.0",

@@ -61,10 +61,7 @@
     (layout
      {:title "BigV Webpage"
       :description "Tracking progress and achievements"
-      :extra-elements [[:link {:rel "preload" :as "image" :href (put-on-base "/assets/profile.avif") :type "image/avif" :fetchpriority "high"}]
-                       [:script {:src "https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"
-                                 :crossorigin "anonymous"
-                                 :integrity (:chartjs-hash config)}]]}
+      :extra-elements [[:link {:rel "preload" :as "image" :href (put-on-base "/assets/profile.avif") :type "image/avif" :fetchpriority "high"}]]}
      [:container.mx-auto.px-4.space-y-8
       (overview time-log game-stats)
       (pages.landing.gallery-link/render)
@@ -75,4 +72,6 @@
      ;; TODO: move to head
      (data-core/export-data game-stats "GAME_STATS_DATA")
      (data-core/export-data cumulative-game-stats "CUMULATIVE_GAME_STATS_DATA")
-     (include-js (put-on-base "/js/cljs_base.js") (put-on-base "/js/landing.js")))))
+     (include-js (put-on-base "/extern/chart.js")
+                 (put-on-base "/js/cljs_base.js")
+                 (put-on-base "/js/landing.js")))))
