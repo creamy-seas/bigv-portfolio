@@ -2,7 +2,7 @@
   (:require
    [utils.url    :refer [put-on-base]]
    [common.template :refer [layout]]
-   [common.elements]))
+   [common.elements :refer [fat-title]]))
 
 (defn render
   "404 with a funny dude and redirect"
@@ -26,4 +26,4 @@
        :alt   "Let's go!"
        :class "relative z-10
                w-[40%] w-min-[200px] h-auto mb-4"}]]
-    (common.elements/fat-title "404: Sorry, nothing here")]))
+    (fat-title "404: Sorry, nothing here")]))
