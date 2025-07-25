@@ -13,7 +13,7 @@
     (let [opts   #js {"day"   "numeric"
                       "month" "long"
                       "year"  "numeric"}
-          locale (aget js/navigator "language")
+          locale (.-language js/navigator)
           date-str (.toLocaleDateString (js/Date. date) locale opts)]
       (set! (.-textContent (.getElementById js/document "gallery-modal-date")) date-str))))
 
@@ -58,7 +58,7 @@
   "Hook up a listenter to the DOM element found by id with the provided function"
   [element-id callback]
   (when-let [el (.getElementById js/document element-id)]
-    (.addEventListener el "click" callback)))bu
+    (.addEventListener el "click" callback)))
 
 (defn handle-keydown [event]
   (when (some? @modal-state)
@@ -68,13 +68,38 @@
       "Escape" (close-gallery-modal event)
       nil)))
 
+(defonce touch-x-start (atom 0))
+(defonce touch-x-end (atom 0))
+(defonce swipe-distance 50)
+
+(defn handle-touch-start [event]
+  (reset! touch-x-start
+          (-> event
+              -.changedTouches
+              (aget 0)
+              -.screenX)))
+
+(defn handle-touch-end [event]
+  (reset! touch-x-end
+          (-> event
+              -.changedTouches
+              (aget 0)
+              -.screenX))
+  (when (some? @modal-state)
+    (let [dx (- @touch-x-end @touch-x-start)]
+      (cond
+        (> dx swipe-distance) (show-future event)
+        (< dx (- swipe-distance)) (show-past event)))))
+
 (defn mount! []
   (click-listener "gallery-modal" close-gallery-modal)
   (click-listener "gallery-modal-future" show-future)
   (click-listener "gallery-modal-past" show-past)
   (doseq [el (array-seq (.querySelectorAll js/document ".gallery-card"))]
     (.addEventListener el "click" open-gallery-modal))
-  (.addEventListener js/document "keydown" handle-keydown))
+  (.addEventListener js/document "keydown" handle-keydown)
+  (.addEventListener js/document "touchstart" handle-touch-start)
+  (.addEventListener js/document "touchstart" handle-touch-end))
 
 (defn ^:export init []
   (mount!))
