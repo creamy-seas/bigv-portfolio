@@ -1,35 +1,31 @@
-(ns gallery.collapse)
-
-(defn $$
-  "Return a Clojure seq of all nodes that match `sel`."
-  [sel]
-  (array-seq (.querySelectorAll js/document sel)))
+(ns gallery.collapse
+  (:require [utils.dom-operations :refer [get-all add-listener]]))
 
 (defn open!   [el] (.add    (.-classList el) "collapse-open"))
 (defn close!  [el] (.remove (.-classList el) "collapse-open"))
-(defn toggle!  [el] (.toggle (.-classList el) "collapse-open"))
+(defn toggle! [el] (.toggle (.-classList el) "collapse-open"))
 
-(defn click-handler [e]
-  (let [box
-        (.closest
-         (.-currentTarget e)
-         ".collapse[gallery-season-key]")]
-    (doseq [c ($$ ".collapse[gallery-season-key]")
-            :when (not= c box)]
-      (close! c))
-    (toggle! box)))
+(defn click-handler
+  "Closes all the collapses **except** for the one that was clicked the closest"
+  [event]
+  (let [clicked-box (.closest
+                     (.-currentTarget event) ".collapse[gallery-season-key]")]
+    (doseq [box (get-all ".collapse[gallery-season-key]")
+            :when (not= box clicked-box)]
+      (close! box))
+    (toggle! clicked-box)))
 
-(defn mount!
+(defn on-load
+  "If ?season=2023-2024 is present in url args, open that collapse"
   []
-  (doseq [el ($$ ".collapse-title")] (.addEventListener el "click" click-handler))
-
-  ;; If ?season=2023-2024 is present, open that collapse
   (when-let [season (.get (js/URLSearchParams. (.-search js/location)) "season")]
     (when-let [el (.querySelector js/document
                                   (str ".collapse[gallery-season-key=\"" season "\"]"))]
       (open! el))))
 
 (defn ^:export init []
-  (mount!))
+  (doseq [el (get-all ".collapse-title")]
+    (add-listener el "click" click-handler))
+  (on-load))
 
 (init)
