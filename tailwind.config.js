@@ -1,8 +1,6 @@
 module.exports = {
   content: [
-    "./resources/public/index.html",
-    "./resources/public/gallery.html",
+    "./resources/public/**/*.html",
     "./src/clj/**/*.clj",
-    "./src/cljs/**/*.{cljs,cljc}"
   ],
 };
