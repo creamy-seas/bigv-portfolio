@@ -5,16 +5,15 @@
    [utils.config :refer [config]]))
 
 (defn head
-  "Head of the page, with title, descriptions and optional extra-elements"
+  "Head of the page, with `title`, `descriptions` and optional `extra-elements`"
   [{:keys [title description extra-elements]
     :or   {extra-elements []}}]
   [:head
    [:meta {:charset "UTF-8"}]
    [:base {:href (:base config)}]
-   [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
    [:title title]
-   (when description
-     [:meta {:name "description" :content description}])
+   [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
+   [:meta {:name "description" :content description}]
    [:link {:rel  "icon"
            :type "image/svg+xml"
            :href (put-on-base "/assets/favicon.svg")}]
@@ -31,15 +30,15 @@
    [:a.text-myflame.text-3xl.font-bold
     {:class "decoration-myflame underline-offset-4 hover:text-myflame/80 select-none"
      :href (put-on-base "/")}
-    "🏒 BigV Webpage 🏒"]])
+    (:title config)]])
 
 (defn layout
-  "Main layout of the app - evyerything should inherit from here"
+  "Main layout of the app - everything should inherit from here"
   [{:keys [title description extra-elements]} & content]
   (html5
-   (head {:title       title
-          :description description
-          :extra-elements    extra-elements})
+   (head {:title            title
+          :description      description
+          :extra-elements   extra-elements})
    [:body
     [:div#root
      (header)
