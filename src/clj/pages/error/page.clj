@@ -9,11 +9,7 @@
   []
   (layout
    {:title       "BigV - 404 Page not found"
-    :description "Nothing here!"
-    ;; :extra-elements [[:meta {:http-equiv "refresh"
-    ;;                          :content (str "10; url=" (:base config))
-    ;;                          :charset "UTF-8"}]]
-    }
+    :description "Nothing here!"}
    [:container.space-y-8.text-center.flex.flex-col.justify-center
     [:div.relative.flex.items-center.justify-center
      [:div
