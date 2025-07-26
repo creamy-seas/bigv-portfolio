@@ -64,7 +64,28 @@ curl -sSL https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js \
   | awk '{print "sha384-" $0}'
 #+end_src
 * Tips and tricks
+** =.clj=
+- Any page should be defined in the [[file:src/clj/pages/][src/clj/pages]] folder with a single =render= function defined in the =page.clj= file of that folder.
+- Then call this =render= function in [[file:src/clj/dev/build_clj.clj][src/clj/dev/build_clj.clj]]
+#+begin_src clojure
+(def pages
+  {"resources/public/index.html"         pages.landing.page/render
+   "resources/public/404.html"           pages.error.page/render
+   "resources/public/gallery/index.html" pages.gallery.page/render})
+#+end_src
+
+** =.css=
+With tailwind, the [[file:tailwind.config.js][config]] file defines which files to search for tailwind classes e.g. =text-center=. It does a full text search
+
 ** =.cljs=
+- All functions for a single page should be collected in a dedicated folder with a =build.cljs= file in [[file:src/cljs/][src/cljs]]
+- Then define the bundle in [[file:src/cljs/dev/build_cljs.clj][src/cljs/dev/build_cljs.clj]], with the key being the name of the =js= file to be created and the value the build file that imports all your invividual files
+#+begin_src clojure
+(def ^:private bundles
+  {:gallery 'gallery.build
+   :landing 'landing.build})
+#+end_src
+
 *** Name mangling
 As the =cljs= files are compiled and minified with the =cljs= compiler, variable names can be mangled. For most common =js= DOM operations e.g. =document.language= etc there are export names that prevent mangling.
 

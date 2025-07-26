@@ -4,17 +4,17 @@
             [pages.error.page]
             [clojure.java.io :as io]))
 
+(def pages
+  {"resources/public/index.html"         pages.landing.page/render
+   "resources/public/404.html"           pages.error.page/render
+   "resources/public/gallery/index.html" pages.gallery.page/render})
+
 (defn- ensure-parent!
   "Make sure the parent directory of file-path exists."
   [^String file-path]
   (let [parent (.getParentFile (io/file file-path))]
     (when-not (.exists parent)
       (.mkdirs parent))))
-
-(def pages
-  {"resources/public/index.html"         pages.landing.page/render
-   "resources/public/404.html"           pages.error.page/render
-   "resources/public/gallery/index.html" pages.gallery.page/render})
 
 (defn build-all!
   []
