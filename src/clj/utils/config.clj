@@ -5,6 +5,7 @@
    [utils.date :refer [calculate-age current-season]]))
 
 (defonce config
+  ; Reading and exposing of config from resources/config.edn
   (let [base (-> "config.edn"
                  io/resource
                  slurp

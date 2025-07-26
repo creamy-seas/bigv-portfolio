@@ -1,11 +1,12 @@
 (ns utils.date
   (:import [java.time LocalDate Period]))
 
+; TODO: remove once everything put into data
 (defn parse [^String s]
   (LocalDate/parse s))
 
 (defn cast-date
-  "Convert ISO string into supplier format"
+  "Convert ISO string into supplied format"
   [^String date-str ^String format]
   (let [formatter (java.time.format.DateTimeFormatter/ofPattern format)]
     (.format (LocalDate/parse date-str) formatter)))

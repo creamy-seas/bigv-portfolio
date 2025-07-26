@@ -1,29 +1,27 @@
 (ns utils.data.game-stats
-  (:require [clojure.java.io :as io]
-            [clojure.data.csv :as csv]))
+  (:require [utils.data.core :refer [read-csv]]))
 
 (defn read-game-stats []
-  (with-open [r (io/reader "data/game_stats.csv")]
-    (let [[headers & rows] (csv/read-csv r)
-          ks (map keyword headers)
-          raw-entries (map (fn [row] (zipmap ks row)) rows)
-          sorted-entries (sort-by :date #(compare %1 %2) raw-entries)]
-      (map-indexed
-       (fn [index {:keys [timeOnIceM goals passes shots carries takeaways location name date] :as entry}]
-         (assoc entry
-                :gameNumber (+ index 1)
-                :location location
-                :name name
-                :date date
-                :timeOnIceH (Integer/parseInt timeOnIceM)
-                :goals (Integer/parseInt goals)
-                :passes (Integer/parseInt passes)
-                :shots (Integer/parseInt shots)
-                :carries (Integer/parseInt carries)
-                :takeaways (Integer/parseInt takeaways)))
-       sorted-entries))))
+  (->> (read-csv "data/game_stats.csv")
+       (sort-by :date compare)
+       (map-indexed
+        (fn [index {:keys [timeOnIceM goals passes shots carries
+                           takeaways location name date] :as entry}]
+          (assoc entry
+                 :gameNumber (+ index 1)
+                 :location location
+                 :name name
+                 :date date
+                 :timeOnIceH (Integer/parseInt timeOnIceM)
+                 :goals (Integer/parseInt goals)
+                 :passes (Integer/parseInt passes)
+                 :shots (Integer/parseInt shots)
+                 :carries (Integer/parseInt carries)
+                 :takeaways (Integer/parseInt takeaways))))))
 
-(defn eval-cumulative-game-stats [game-stats]
+(defn eval-cumulative-game-stats
+  "Provided `game-stats` are totalled up into a cumulative by-game summary"
+  [game-stats]
   (letfn [(accumulate [remaining result running]
             (if (empty? remaining)
               result
