@@ -41,7 +41,7 @@ MEDIA_PATHS=/folder-1:/folder-path/folder-2
 ** Building
 1. Install node and python dependencies
 #+begin_src shell
-npm i && python install -r
+npm i && python -m pip install -r requirements.txt
 #+end_src
 
 2. [@2] Run a dev (with live reload) or build scripts
@@ -56,13 +56,6 @@ npm run preview
 npm run publish # to push to github pages
 #+end_src
 
-* Generating hashes for external js
-#+begin_src shell
-curl -sSL https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js \
-  | openssl dgst -sha384 -binary \
-  | openssl base64 -A \
-  | awk '{print "sha384-" $0}'
-#+end_src
 * Tips and tricks
 ** =.clj=
 *** New pages
@@ -77,14 +70,13 @@ curl -sSL https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js \
 *** Config
 Any config fields should be defined in [[file:resources/config.edn][resources/config.edn]] and imported using
 
-#+begin_clojure
+#+begin_src clojure
 (:require [utils.config :refer [config]])
-#+end_clojure
+#+end_src
 ** =.css=
-With tailwind, the [[file:tailwind.config.js][config]] file defines which files to search for tailwind classes e.g. =text-center=. It does a full text search
+With tailwind, the [[file:tailwind.config.js][config]] file defines which files to search for tailwind classes e.g. =text-center=. It does a full text search and only includes those in a minified css file.
 
 ** =.cljs=
-
 *** New page
 - All functions for a single page should be collected in a dedicated folder with a =build.cljs= file in [[file:src/cljs/][src/cljs]]
 - Then define the bundle in [[file:src/cljs/dev/build_cljs.clj][src/cljs/dev/build_cljs.clj]], with the key being the name of the =js= file to be created and the value the build file that imports all your invividual files

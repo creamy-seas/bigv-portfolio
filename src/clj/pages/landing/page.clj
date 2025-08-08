@@ -1,8 +1,9 @@
 (ns pages.landing.page
   (:require [utils.url :refer [put-on-base]]
-            [utils.data.game-stats :refer [read-cumulative-game-stats read-game-stats]]
+            [utils.data.game-stats :refer [eval-cumulative-game-stats read-game-stats]]
             [utils.data.core :refer [export-data]]
             [utils.data.time-log :refer [read-time-log]]
+            [utils.config :refer [config]]
             [common.template :refer [layout]]
             [pages.landing.highlights]
             [pages.landing.overview]
@@ -20,13 +21,15 @@
     :fetchpriority "high"}])
 
 (defn render []
-  (let [cumulative-game-stats (read-cumulative-game-stats)
-        time-log (read-time-log)
-        game-stats (read-game-stats)]
+  (let [time-log (read-time-log)
+        game-stats (read-game-stats)
+        cumulative-game-stats (eval-cumulative-game-stats game-stats)]
     (layout
-     {:title "BigV Webpage"
+     {:title (:title-tag-landing config)
       :description "Tracking progress and achievements"
-      :extra-elements [profile-image-preload]}
+      :extra-elements [profile-image-preload
+                       (export-data game-stats "GAME_STATS_DATA")
+                       (export-data cumulative-game-stats "CUMULATIVE_GAME_STATS_DATA")]}
      [:container.mx-auto.px-4.space-y-8
       (pages.landing.overview/render)
       (pages.landing.gallery-link/render)
@@ -34,9 +37,7 @@
        (pages.landing.highlights/render)
        (pages.landing.season-table/render game-stats time-log)]
       (pages.landing.game-graph/render)]
-     ;; TODO: move to head
-     (export-data game-stats "GAME_STATS_DATA")
-     (export-data cumulative-game-stats "CUMULATIVE_GAME_STATS_DATA")
+     ;; Load these after html is parsed to avoid using defer etc
      (include-js (put-on-base "/extern/chart.js")
                  (put-on-base "/js/cljs_base.js")
                  (put-on-base "/js/landing.js")))))

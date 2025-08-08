@@ -19,9 +19,9 @@
                  :carries (Integer/parseInt carries)
                  :takeaways (Integer/parseInt takeaways))))))
 
-(defn read-cumulative-game-stats
+(defn eval-cumulative-game-stats
   "Provided `game-stats` are totalled up into a cumulative by-game summary"
-  []
+  [game-stats]
   (letfn [(accumulate [remaining result running]
             (if (empty? remaining)
               result
@@ -37,4 +37,4 @@
                          :takeaways (+ (:takeaways running) (:takeaways current-stats))}
                     new-cum-list (conj result new)]
                 (recur (rest remaining) new-cum-list new))))]
-    (accumulate (read-game-stats) [] {:goals 0 :passes 0 :shots 0 :carries 0 :takeaways 0})))
+    (accumulate game-stats [] {:goals 0 :passes 0 :shots 0 :carries 0 :takeaways 0})))
