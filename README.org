@@ -39,7 +39,7 @@ MEDIA_PATHS=/folder-1:/folder-path/folder-2
 #+end_src
 
 ** Building
-1. Install node and python dependencies
+1. Install node and python dependencies - it will also pull in the graphjs blob
 #+begin_src shell
 npm i && python -m pip install -r requirements.txt
 #+end_src
@@ -50,7 +50,12 @@ npm run dev # for development build with watching
 npm run build # for production build
 #+end_src
 
-3. [@3] Preview (if not already running) and publish
+3. [@3] Test the code
+#+begin_src shell
+npm run lint
+#+end_src
+
+4. [@4] Preview (if not already running) and publish
 #+begin_src shell
 npm run preview
 npm run publish # to push to github pages
