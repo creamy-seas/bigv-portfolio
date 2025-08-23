@@ -1,13 +1,13 @@
 (ns pages.error.page
   (:require
    [utils.url       :as url]
-   [common.template :as template]
+   [common.layout   :as layout]
    [common.elements :as common]))
 
 (defn render
   "404 with a funny dude and redirect"
   []
-  (template/layout
+  (layout/main
    {:title       "BigV - 404 Page not found"
     :description "Nothing here!"}
    [:container.space-y-8.text-center.flex.flex-col.justify-center

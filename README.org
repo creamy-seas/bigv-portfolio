@@ -72,6 +72,11 @@ npm run publish # to push to github pages
    "resources/public/404.html"           pages.error.page/render
    "resources/public/gallery/index.html" pages.gallery.page/render})
 #+end_src
+*** no-js
+If =javascript= is disabled, we will want to skip or replace the js-dependent components.
+
+Do this by giving them the =js-only= and =no-js-only= class tags - the script in the head will show/hide the relevant elements
+
 *** Config
 Any config fields should be defined in [[file:resources/config.edn][resources/config.edn]] and imported using
 

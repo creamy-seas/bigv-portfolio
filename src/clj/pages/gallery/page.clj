@@ -1,7 +1,7 @@
 (ns pages.gallery.page
   (:require
    [hiccup.page                    :refer [include-js]]
-   [common.template                :as common]
+   [common.layout                  :as layout]
    [utils.data.gallery             :as gallery]
    [utils.data.core                :as data]
    [utils.url                      :as url]
@@ -10,7 +10,7 @@
 
 (defn render []
   (let [gallery-data (gallery/read-gallery)]
-    (common/layout
+    (layout/main
      {:title "BigV Gallery"
       :description "A showcase of fun and action moments"
       :extra-elements [(data/export-data gallery-data "GALLERY_DATA")

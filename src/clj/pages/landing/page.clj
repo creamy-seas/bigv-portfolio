@@ -6,7 +6,7 @@
    [utils.data.core                :as data]
    [utils.data.time-log            :as tlog]
    [utils.config                   :as cfg]
-   [common.template                :as common]
+   [common.layout                  :as layout]
    [pages.landing.highlights       :as highlights]
    [pages.landing.overview         :as overview]
    [pages.landing.season-table     :as season-table]
@@ -24,7 +24,7 @@
   (let [time-log (tlog/read-time-log)
         game-stats (stats/read-game-stats)
         cumulative-game-stats (stats/eval-cumulative-game-stats game-stats)]
-    (common/layout
+    (layout/main
      {:title (:title-tag-landing cfg/config)
       :description "Tracking progress and achievements"
       :extra-elements [profile-image-preload
