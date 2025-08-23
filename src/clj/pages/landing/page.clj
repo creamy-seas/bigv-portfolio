@@ -1,43 +1,45 @@
 (ns pages.landing.page
-  (:require [utils.url :refer [put-on-base]]
-            [utils.data.game-stats :refer [eval-cumulative-game-stats read-game-stats]]
-            [utils.data.core :refer [export-data]]
-            [utils.data.time-log :refer [read-time-log]]
-            [utils.config :refer [config]]
-            [common.template :refer [layout]]
-            [pages.landing.highlights]
-            [pages.landing.overview]
-            [pages.landing.season-table]
-            [pages.landing.gallery-link]
-            [pages.landing.game-graph]
-            [hiccup.page :refer [include-js]]))
+  (:require
+   [hiccup.page                    :refer [include-js]]
+   [utils.url                      :as url]
+   [utils.data.game-stats          :as stats]
+   [utils.data.core                :as data]
+   [utils.data.time-log            :as tlog]
+   [utils.config                   :as cfg]
+   [common.template                :as common]
+   [pages.landing.highlights       :as highlights]
+   [pages.landing.overview         :as overview]
+   [pages.landing.season-table     :as season-table]
+   [pages.landing.gallery-link     :as gallery-link]
+   [pages.landing.game-graph       :as game-graph]))
 
 (def profile-image-preload
-  [:link
-   {:rel "preload"
-    :as "image"
-    :href (put-on-base "/assets/profile.avif")
-    :type "image/avif"
-    :fetchpriority "high"}])
+  [:link {:rel "preload"
+          :as "image"
+          :href (url/put-on-base "/assets/profile.avif")
+          :type "image/avif"
+          :fetchpriority "high"}])
 
 (defn render []
-  (let [time-log (read-time-log)
-        game-stats (read-game-stats)
-        cumulative-game-stats (eval-cumulative-game-stats game-stats)]
-    (layout
-     {:title (:title-tag-landing config)
+  (let [time-log (tlog/read-time-log)
+        game-stats (stats/read-game-stats)
+        cumulative-game-stats (stats/eval-cumulative-game-stats game-stats)]
+    (common/layout
+     {:title (:title-tag-landing cfg/config)
       :description "Tracking progress and achievements"
       :extra-elements [profile-image-preload
-                       (export-data game-stats "GAME_STATS_DATA")
-                       (export-data cumulative-game-stats "CUMULATIVE_GAME_STATS_DATA")]}
-     [:container.mx-auto.px-4.space-y-8
-      (pages.landing.overview/render)
-      (pages.landing.gallery-link/render)
+                       (data/export-data game-stats "GAME_STATS_DATA")
+                       (data/export-data cumulative-game-stats "CUMULATIVE_GAME_STATS_DATA")]}
+      ;; NOTE: you probably meant Tailwind's `.container` class.
+      ;; Use a div with the class instead of a <container> element.
+     [:div.container.mx-auto.px-4.space-y-8
+      (overview/render)
+      (gallery-link/render)
       [:section.grid.grid-cols-1.md:grid-cols-2
-       (pages.landing.highlights/render)
-       (pages.landing.season-table/render game-stats time-log)]
-      (pages.landing.game-graph/render)]
-     ;; Load these after html is parsed to avoid using defer etc
-     (include-js (put-on-base "/extern/chart.js")
-                 (put-on-base "/js/cljs_base.js")
-                 (put-on-base "/js/landing.js")))))
+       (highlights/render)
+       (season-table/render game-stats time-log)]
+      (game-graph/render)]
+      ;; Scripts: placed after content so they run post-parse.
+     (include-js (url/put-on-base "/extern/chart.js")
+                 (url/put-on-base "/js/cljs_base.js")
+                 (url/put-on-base "/js/landing.js")))))

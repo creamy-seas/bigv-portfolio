@@ -1,14 +1,14 @@
 (ns utils.data.highlights
-  (:require [utils.date]
-            [utils.config]
-            [utils.data.core :refer [read-csv]]))
+  (:require [utils.date         :as date]
+            [utils.config       :as cfg]
+            [utils.data.core    :as data]))
 
 (defn read-highlights []
-  (->> (read-csv "data/highlights.csv")
+  (->> (data/read-csv "data/highlights.csv")
        (sort-by :date compare)
        (map
         (fn [{:keys [date] :as entry}]
           (assoc entry
-                 :age (utils.date/calculate-age
-                       (:bday utils.config/config)
+                 :age (date/calculate-age
+                       (:bday cfg/config)
                        date))))))

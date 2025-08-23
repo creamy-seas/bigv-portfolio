@@ -1,8 +1,8 @@
 (ns utils.data.game-stats
-  (:require [utils.data.core :refer [read-csv]]))
+  (:require [utils.data.core :as data]))
 
 (defn read-game-stats []
-  (->> (read-csv "data/game_stats.csv")
+  (->> (data/read-csv "data/game_stats.csv")
        (sort-by :date compare)
        (map-indexed
         (fn [index {:keys [timeOnIceM goals passes shots carries

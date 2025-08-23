@@ -1,13 +1,13 @@
 (ns pages.error.page
   (:require
-   [utils.url    :refer [put-on-base]]
-   [common.template :refer [layout]]
-   [common.elements :refer [fat-title]]))
+   [utils.url       :as url]
+   [common.template :as template]
+   [common.elements :as common]))
 
 (defn render
   "404 with a funny dude and redirect"
   []
-  (layout
+  (template/layout
    {:title       "BigV - 404 Page not found"
     :description "Nothing here!"}
    [:container.space-y-8.text-center.flex.flex-col.justify-center
@@ -18,8 +18,8 @@
                bg-gradient-to-br from-myflame via-orange-300/60 to-transparent
                filter blur-2xl"}]
      [:img
-      {:src   (put-on-base "/assets/favicon.svg")
+      {:src   (url/put-on-base "/assets/favicon.svg")
        :alt   "Let's go!"
        :class "relative z-10
                w-[40%] w-min-[200px] h-auto mb-4"}]]
-    (fat-title "404: Sorry, nothing here")]))
+    (common/fat-title "404: Sorry, nothing here")]))

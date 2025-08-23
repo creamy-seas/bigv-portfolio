@@ -1,8 +1,8 @@
 (ns common.template
   (:require
    [hiccup.page  :refer [html5 include-css]]
-   [utils.url    :refer [put-on-base]]
-   [utils.config :refer [config]]))
+   [utils.url    :as url]
+   [utils.config :as cfg]))
 
 (defn head
   "Head of the page, with `title`, `descriptions` and optional `extra-elements`"
@@ -10,16 +10,16 @@
     :or   {extra-elements []}}]
   [:head
    [:meta {:charset "UTF-8"}]
-   [:base {:href (:base config)}]
+   [:base {:href (:base cfg/config)}]
    [:title title]
    [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
    [:meta {:name "description" :content description}]
    [:link {:rel  "icon"
            :type "image/svg+xml"
-           :href (put-on-base "/assets/favicon.svg")}]
-   (include-css (put-on-base "css/style.css"))
+           :href (url/put-on-base "/assets/favicon.svg")}]
+   (include-css (url/put-on-base "css/style.css"))
    [:script {:src "//gc.zgo.at/count.js"
-             :data-goatcounter (:goat-counter-url config)
+             :data-goatcounter (:goat-counter-url cfg/config)
              :async true}]
    (for [p extra-elements] p)])
 
@@ -29,8 +29,8 @@
   [:header.text-center.my-8
    [:a.text-myflame.text-3xl.font-bold
     {:class "decoration-myflame underline-offset-4 hover:text-myflame/80 select-none"
-     :href (put-on-base "/")}
-    (:title config)]])
+     :href (url/put-on-base "/")}
+    (:title cfg/config)]])
 
 (defn layout
   "Main layout of the app - everything should inherit from here"

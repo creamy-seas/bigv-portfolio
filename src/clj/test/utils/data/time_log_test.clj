@@ -1,10 +1,10 @@
 (ns utils.data.time-log-test
-  (:require [clojure.test :refer [is deftest testing]]
-            [utils.data.time-log]))
+  (:require [clojure.test         :refer [is deftest testing]]
+            [utils.data.time-log  :as tlg]))
 
 (deftest valid-read-time-log
   (testing "good read of time_log.csv with correct fields"
-    (let [entries (utils.data.time-log/read-time-log)]
+    (let [entries (tlg/read-time-log)]
       (is (> (count entries) 1)
           "Expected more than one entry")
       (is (every? #(contains? % :timeOnIceH) entries)

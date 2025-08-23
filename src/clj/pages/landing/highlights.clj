@@ -1,7 +1,7 @@
 (ns pages.landing.highlights
-  (:require [utils.date]
-            [utils.data.highlights :refer [read-highlights]]
-            [common.elements]))
+  (:require [utils.date             :as date]
+            [utils.data.highlights  :as highlights]
+            [common.elements        :as common]))
 
 (defn highlight-entry
   "Single highlight entry"
@@ -9,14 +9,14 @@
   [:li.mb-2 {:key idx}
    [:div.font-semibold
     (str "Age " age " - ")
-    [:span.italic (utils.date/cast-date date "MMMM yyyy")]]
+    [:span.italic (date/cast-date date "MMMM yyyy")]]
    [:div.text-sm highlight]])
 
 (defn render
   "Timeline of big events!"
   []
-  (let [highlights (read-highlights)]
+  (let [highlights (highlights/read-highlights)]
     [:section.p-2.rounded-lg.overflow-auto
-     (common.elements/fat-title "🎉 Highlights")
+     (common/fat-title "🎉 Highlights")
      (into [:ul.p-4]
            (map-indexed highlight-entry highlights))]))

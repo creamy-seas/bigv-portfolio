@@ -1,7 +1,7 @@
 (ns utils.data.core
-  (:require [clojure.data.json :as json]
-            [clojure.java.io :as io]
-            [clojure.data.csv :as csv]))
+  (:require [clojure.data.json  :as json]
+            [clojure.java.io    :as io]
+            [clojure.data.csv   :as csv]))
 
 (defn export-data
   "Supplied data is dumped to json and stored in window.[label]"

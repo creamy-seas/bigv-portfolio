@@ -2,7 +2,7 @@
   (:require
    [clojure.edn     :as edn]
    [clojure.java.io :as io]
-   [utils.date :refer [calculate-age current-season]]))
+   [utils.date      :as date]))
 
 (defonce config
   ; Reading and exposing of config from resources/config.edn
@@ -11,5 +11,5 @@
                  slurp
                  edn/read-string)]
     (-> base
-        (assoc :age (calculate-age (:bday base)))
-        (assoc :season (current-season)))))
+        (assoc :age (date/calculate-age (:bday base)))
+        (assoc :season (date/current-season)))))
