@@ -1,5 +1,5 @@
 (ns gallery.collapse
-  (:require [utils.dom-operations :refer [get-all add-listener]]))
+  (:require [utils.dom-operations :as dom]))
 
 (defn open!   [el] (.add    (.-classList el) "collapse-open"))
 (defn close!  [el] (.remove (.-classList el) "collapse-open"))
@@ -10,7 +10,7 @@
   [event]
   (let [clicked-box (.closest
                      (.-currentTarget event) ".collapse[gallery-season-key]")]
-    (doseq [box (get-all ".collapse[gallery-season-key]")
+    (doseq [box (dom/get-all ".collapse[gallery-season-key]")
             :when (not= box clicked-box)]
       (close! box))
     (toggle! clicked-box)))
@@ -24,8 +24,8 @@
       (open! el))))
 
 (defn ^:export init []
-  (doseq [el (get-all ".collapse-title")]
-    (add-listener el "click" click-handler))
+  (doseq [el (dom/get-all ".collapse-title")]
+    (dom/add-listener el "click" click-handler))
   (on-load))
 
 (init)

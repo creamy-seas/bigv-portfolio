@@ -1,8 +1,5 @@
 (ns gallery.modal
-  (:require [utils.dom-operations :refer [get-element-by-id
-                                          get-all
-                                          add-listener
-                                          add-click-listener-by-id]]))
+  (:require [utils.dom-operations :as dom]))
 
 (defonce
   ;; Keep the gallery-idx that should be displayed or `nil` if closed"
@@ -14,7 +11,7 @@
 (defn set-gallery-modal-iframe
   "The iframe is populated with supplied values"
   [src description date]
-  (let [iframe (get-element-by-id "gallery-modal-iframe")
+  (let [iframe (dom/get-element-by-id "gallery-modal-iframe")
         date-opts #js {"day"   "numeric"
                        "month" "long"
                        "year"  "numeric"}
@@ -22,8 +19,8 @@
         date-str (.toLocaleDateString (js/Date. date) locale date-opts)]
     (set! (.-src iframe) src)
     (set! (.-title iframe) description)
-    (set! (.-textContent (get-element-by-id "gallery-modal-description")) description)
-    (set! (.-textContent (get-element-by-id "gallery-modal-date")) date-str)))
+    (set! (.-textContent (dom/get-element-by-id "gallery-modal-description")) description)
+    (set! (.-textContent (dom/get-element-by-id "gallery-modal-date")) date-str)))
 
 (defn display-gallery-modal
   "Populate modal with information for item gallery-idx in gallery"
@@ -36,11 +33,11 @@
       ;; Mysterious
       (set-gallery-modal-iframe
        (.-src item) (.-description item) (aget item "date"))
-      (.remove (.-classList (get-element-by-id "gallery-modal")) "hidden"))))
+      (.remove (.-classList (dom/get-element-by-id "gallery-modal")) "hidden"))))
 
 (defn close-gallery-modal [event]
   (.stopPropagation event)
-  (when-let [el (get-element-by-id "gallery-modal")]
+  (when-let [el (dom/get-element-by-id "gallery-modal")]
     (.add (.-classList el) "hidden")
     (reset! modal-state nil)
     (set-gallery-modal-iframe nil nil nil)))
@@ -70,11 +67,11 @@
       nil)))
 
 (defn ^:export init []
-  (add-click-listener-by-id "gallery-modal" close-gallery-modal)
-  (add-click-listener-by-id "gallery-modal-future" show-future)
-  (add-click-listener-by-id "gallery-modal-past" show-past)
-  (doseq [el (get-all ".gallery-card")]
-    (add-listener el "click" open-gallery-modal))
-  (add-listener js/document "keydown" handle-keydown))
+  (dom/add-click-listener-by-id "gallery-modal" close-gallery-modal)
+  (dom/add-click-listener-by-id "gallery-modal-future" show-future)
+  (dom/add-click-listener-by-id "gallery-modal-past" show-past)
+  (doseq [el (dom/get-all ".gallery-card")]
+    (dom/add-listener el "click" open-gallery-modal))
+  (dom/add-listener js/document "keydown" handle-keydown))
 
 (init)

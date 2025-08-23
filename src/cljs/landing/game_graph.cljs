@@ -1,6 +1,6 @@
 (ns landing.game-graph
-  (:require [landing.game-graph-config :refer [chart-opts make-line-collection]]
-            [utils.dom-operations :refer [get-element-by-id add-click-listener-by-id]]))
+  (:require [landing.game-graph-config  :as cfg]
+            [utils.dom-operations       :as dom]))
 
 (defonce view-mode* (atom :cumulative))
 
@@ -16,7 +16,7 @@
     per-game-stats*))
 
 (defn toggle-button []
-  (let [btn (get-element-by-id "toggle-game-graph")
+  (let [btn (dom/get-element-by-id "toggle-game-graph")
         new-label (if (= @view-mode* :cumulative)
                     "Show per-game"
                     "Show cumulative")]
@@ -28,21 +28,21 @@
   (swap! view-mode* (fn [m] (if (= m :cumulative) :per-game :cumulative)))
   (let [stats (current-stats)]
     (aset (aget chart "data") "labels" (clj->js (mapv :gameNumber stats)))
-    (aset (aget chart "data") "datasets" (clj->js (make-line-collection stats)))
+    (aset (aget chart "data") "datasets" (clj->js (cfg/make-line-collection stats)))
     (.call (aget chart "update") chart)
     (.update chart)
     (toggle-button)))
 
 (defn init-graph! []
-  (let [ctx (.getContext (get-element-by-id "game-graph") "2d")
+  (let [ctx (.getContext (dom/get-element-by-id "game-graph") "2d")
         cfg (clj->js {:type "line"
                       :data {:labels   (mapv :gameNumber cumulative-game-stats*)
-                             :datasets (make-line-collection cumulative-game-stats*)}
-                      :options (chart-opts cumulative-game-stats*)})]
+                             :datasets (cfg/make-line-collection cumulative-game-stats*)}
+                      :options (cfg/chart-opts cumulative-game-stats*)})]
     (js/Chart. ctx cfg)))
 
 (defn ^:export init []
   (let [chart (init-graph!)]
-    (add-click-listener-by-id "toggle-game-graph" #(toggle-view! chart))))
+    (dom/add-click-listener-by-id "toggle-game-graph" #(toggle-view! chart))))
 
 (init)
