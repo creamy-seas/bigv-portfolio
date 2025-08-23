@@ -12,7 +12,7 @@
 (defn render
   "A popup with large display of google content in iframe - to be manipulated using js"
   []
-  [:div#gallery-modal.select-none
+  [:div#gallery-modal.select-none.js-only
    {:class "fixed flex hidden
             items-center justify-center p-4
             bg-black/75  inset-0 z-50"}

@@ -15,7 +15,7 @@
       :description "A showcase of fun and action moments"
       :extra-elements [(data/export-data gallery-data "GALLERY_DATA")
                        (data/export-data (dec (count gallery-data)) "GALLERY_DATA_MAX_IDX")]}
-     (grid/render-js gallery-data)
+     (grid/render gallery-data)
      (modal/render)
      (include-js (url/put-on-base "/js/cljs_base.js")
                  (url/put-on-base "/js/gallery.js")))))
