@@ -1,6 +1,7 @@
 {:title             "🏒 BigV Webpage 🏒"
  :title-tag-landing "BigV Webpage"
  :title-tag-gallery "BigV Gallery"
+ :title-tag-404     "BigV - 404 Page not found"
  :team              "Slough Jets U10s"
  :name              "Viktor Antonov"
  :bday              "2019-10-15"
