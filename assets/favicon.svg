@@ -9,7 +9,7 @@
    viewBox="0 0 256 257"
    version="1.1"
    id="svg20"
-   sodipodi:docname="vite.svg"
+   sodipodi:docname="favicon.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -26,14 +26,15 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      inkscape:zoom="11.226119"
-     inkscape:cx="19.81985"
-     inkscape:cy="15.232334"
+     inkscape:cx="17.19205"
+     inkscape:cy="15.232335"
      inkscape:window-width="1366"
      inkscape:window-height="709"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg20" />
+     inkscape:current-layer="svg20"
+     inkscape:lockguides="true" />
   <defs
      id="defs14">
     <linearGradient
@@ -92,6 +93,15 @@
          ry="9.2263117" />
     </clipPath>
   </defs>
+  <rect
+     style="opacity:0.9;fill:#ffffff;stroke-width:151.771;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:8.4;stroke-opacity:0.979763;paint-order:stroke fill markers;stop-color:#000000"
+     id="rect533"
+     width="128.00739"
+     height="73.854889"
+     x="69.070847"
+     y="60.150997"
+     rx="22.98634"
+     ry="9.2263117" />
   <path
      style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:30.3544;paint-order:stroke fill markers;stop-color:#000000"
      d="m 67.213618,245.12774 51.060552,5.73505 74.09793,-9.66313 51.3917,-36.04719 -16.44322,-61.43823 -29.28158,39.44837 -43.31234,25.56554 -62.157247,12.03983 -37.173478,0.43369 z"
