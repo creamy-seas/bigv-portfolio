@@ -5,10 +5,15 @@
             [data.core    :as core]))
 
 (defn read-highlights []
-  (->> (core/read-csv "data/highlights.csv")
-       (sort-by :date compare)
-       (map
-        (fn [{:keys [date] :as entry}]
-          (assoc entry
-                 :age (date/calculate-age
-                       (:bday cfg/config) date))))))
+  (let [gallery-data (gallery/read-gallery)]
+      (->> (core/read-csv "data/highlights.csv")
+           (sort-by :date compare)
+           (map
+            (fn [{:keys [date gallery-description] :as entry}]
+              (assoc entry
+                     :age (date/calculate-age
+                           (:bday cfg/config) date)
+                     ;; Search the gallery data for a matching description
+                     :gallery-idx (some
+                                   #(when (= (:description %) gallery-description) (:gallery-idx %))
+                                   gallery-data)))))))
