@@ -66,12 +66,19 @@
       "Escape" (close-gallery-modal event)
       nil)))
 
+(defn on-load
+  "If ?gallery-idx=123 is present in url args, open the modal"
+  []
+  (when-let [gallery-idx (.get (js/URLSearchParams. (.-search js/location)) "gallery-idx")]
+    (display-gallery-modal gallery-idx)))
+
 (defn ^:export init []
   (dom/add-click-listener-by-id "gallery-modal" close-gallery-modal)
   (dom/add-click-listener-by-id "gallery-modal-future" show-future)
   (dom/add-click-listener-by-id "gallery-modal-past" show-past)
   (doseq [el (dom/get-all ".gallery-card")]
     (dom/add-listener el "click" open-gallery-modal))
-  (dom/add-listener js/document "keydown" handle-keydown))
+  (dom/add-listener js/document "keydown" handle-keydown)
+  (on-load))
 
 (init)
