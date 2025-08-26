@@ -1,6 +1,6 @@
 (ns pages.landing.highlights
   (:require [utils.date             :as date]
-            [utils.data.highlights  :as highlights]
+            [data.highlights  :as highlights]
             [common.elements        :as common]))
 
 (defn highlight-entry
