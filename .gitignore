@@ -27,3 +27,5 @@ pom.xml.asc
 !/resources/public/assets/**
 /.env
 /.token.json
+
+_temp*
