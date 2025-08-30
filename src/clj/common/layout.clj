@@ -60,17 +60,17 @@
 (defn header
   "Website name with link to root page and brother website"
   []
-  [:header {:class "grid items-center grid-cols-[1fr_auto_1fr] gap-2 px-4 py-3"}
-   [:a.justify-self-start {:href (:brother-link cfg/config)}
+  [:header {:class "grid items-center gap-2 px-4 py-3
+                   grid-cols-1 md:grid-cols-[1fr_auto_1fr]"}
+   [:a {:href (:brother-link cfg/config)
+        :class "justify-self-center md:justify-self-start"}
     [:div#to-brother]]
-   [:a {:href  (url/put-on-base "/")
+   [:a {:href (url/put-on-base "/")
         :class "justify-self-center
-                text-mytheme text-3xl font-bold
-                underline-offset-4
-                hover:text-mytheme/80
-                select-none"}
+               text-mytheme text-3xl font-bold
+               underline-offset-4 hover:text-mytheme/80 select-none"}
     (:title cfg/config)]
-   [:div#lang.justify-self-end]])
+   [:div#lang {:class "justify-self-center md:justify-self-end"}]])
 
 (def js-warning
   [:div.no-js-only.py-3.text-center

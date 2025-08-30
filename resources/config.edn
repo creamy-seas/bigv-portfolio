@@ -2,6 +2,7 @@
  :title-tag-landing "BigV Webpage"
  :title-tag-gallery "BigV Gallery"
  :title-tag-404     "BigV - 404 Page not found"
+ :error-bg          "via-orange-300/60"
  :team              "Slough Jets U10s"
  :name              "Viktor Antonov"
  :bday              "2019-10-15"

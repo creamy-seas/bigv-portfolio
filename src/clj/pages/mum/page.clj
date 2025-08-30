@@ -39,7 +39,7 @@
             (map-indexed (fn [idx {:keys [date location faceOff departTime]}]
                            [:tr.text-left.future-only {:key idx :data-date date}
                             [:td.font-medium.text-mytheme
-                             (date/cast-date date "d MMMM uuuu (EEEE)")]
+                             (date/cast-date date "d MMM (EEEE)")]
                             [:td
                              [:a.underline.hover:text-mytheme
                               {:href (gmap-directions-url (str location " ice rink"))
