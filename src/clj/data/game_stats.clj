@@ -2,12 +2,15 @@
   (:require [data.core :as core]
             [clojure.string :as str]))
 
+(defn blank-stats?
+  "For stats, we skip rows with missing game stats"
+  [row]
+  (some #(str/blank? (get row %))
+        [:goals :passes :shots :carries :takeaways]))
+
 (defn read-game-stats []
   (->> (core/read-org-table "data/game_stats.org")
-       ;; Drop any rows with empty stats
-       (remove (fn [row]
-                 (some #(str/blank? (get row %))
-                       [:goals :passes :shots :carries :takeaways])))
+       (remove blank-stats?)
        (sort-by :date compare)
        (map-indexed
         (fn [index {:keys [goals passes shots carries
@@ -26,9 +29,9 @@
   []
   (->> (core/read-org-table "data/game_stats.org")
        (sort-by :date compare)
-       (map (fn [{:keys [date rink faceOff departTime]}]
+       (map (fn [{:keys [date location faceOff departTime]}]
               {:date (re-find #"\d{4}-\d{2}-\d{2}" date)
-               :rink rink
+               :location location
                :faceOff faceOff
                :departTime departTime}))))
 

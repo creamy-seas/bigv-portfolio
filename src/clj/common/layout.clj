@@ -13,11 +13,9 @@
   [{:keys [title description extra-elements]
     :or   {extra-elements []}}]
   [:head
-   [:link {:rel "preload"
-          :as "image"
-          :href (url/put-on-base "/assets/brother-to-brother.svg")
-          :type "image/svg"
-          :fetchpriority "high"}]
+   [:link {:rel "prefetch"
+           :as "image"
+           :href (url/put-on-base "/assets/brother-to-brother.svg")}]
 
    ;; Flip <html> class from no-js -> js ASAP (runs before first paint) if js is enabled
    [:script "(d=>d.classList.replace('no-js','js'))(document.documentElement)"]
