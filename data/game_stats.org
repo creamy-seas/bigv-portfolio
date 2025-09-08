@@ -20,27 +20,27 @@
 | 2024-2025 | [2025-05-11 Sun] | Slough    | Cross ice   |          |                                  |          24 |     1 |      2 |     4 |       7 |         1 |
 | 2024-2025 | [2025-05-18 Sun] | Slough    | Cross ice   |          |                                  |          24 |     1 |      2 |     1 |       8 |        13 |
 |-----------+------------------+-----------+-------------+----------+----------------------------------+-------------+-------+--------+-------+---------+-----------|
-| 2025-2026 | [2025-09-06 Sat] | Slough    |             |    17:30 | <b>Not going<b>                  |             |       |        |       |         |           |
-| 2025-2026 | [2025-09-07 Sun] | Slough    |             |    15:20 | <b>Not going</b>                 |             |       |        |       |         |           |
-| 2025-2026 | [2025-09-20 Sat] | Oxford    |             |    16:40 | Morning + day out. 1400 latest   |             |       |        |       |         |           |
-| 2025-2026 | [2025-10-05 Sun] | Guildford |             |    08:30 | 06:45 leave house                |             |       |        |       |         |           |
-| 2025-2026 | [2025-10-19 Sun] | Solent    |             |    16:15 | After figure skating             |             |       |        |       |         |           |
-| 2025-2026 | [2025-10-25 Sat] | Swindon   |             |    13:10 | 11:00 leave house                |             |       |        |       |         |           |
-| 2025-2026 | [2025-11-16 Sun] | Streatham |             |    16:30 | 14:00 - can do after Masha/Yavor |             |       |        |       |         |           |
-| 2025-2026 | [2025-12-14 Sun] | Oxford    |             |    16:40 | Morning + day out. 1400 latest   |             |       |        |       |         |           |
-| 2025-2026 | [2026-01-04 Sun] | Bristol   |             |    15:30 | After figure skating             |             |       |        |       |         |           |
-| 2025-2026 | [2026-01-11 Sun] | Guildford |             |    08:30 | 06:45 leave house                |             |       |        |       |         |           |
-| 2025-2026 | [2026-01-17 Sat] | Swindon   |             |    13:10 | 11:00 leave house                |             |       |        |       |         |           |
-| 2025-2026 | [2026-01-25 Sun] | Solent    |             |    16:15 | After figure skating             |             |       |        |       |         |           |
-| 2025-2026 | [2025-02-01 Sat] | Guildford |             |    08:30 | 06:45 leave house                |             |       |        |       |         |           |
-| 2025-2026 | [2026-02-22 Sun] | Cardiff   |             |    16:00 | Day before + hotel. 1100 latest  |             |       |        |       |         |           |
-| 2025-2026 | [2026-03-01 Sun] | Slough    |             |    15:20 | After figure skating             |             |       |        |       |         |           |
-| 2025-2026 | [2026-03-22 Sun] | Solent    |             |    16:15 | After figure skating             |             |       |        |       |         |           |
-| 2025-2026 | [2026-03-29 Sun] | Bristol   |             |    15:30 | After figure skating             |             |       |        |       |         |           |
-| 2025-2026 | [2026-04-12 Sun] | Slough    |             |    15:20 | After figure skating             |             |       |        |       |         |           |
-| 2025-2026 | [2026-04-19 Sun] | Slough    |             |    15:20 | After figure skating             |             |       |        |       |         |           |
-| 2025-2026 | [2026-05-02 Sat] | Streatham |             |    16:30 | 14:00 leave house                |             |       |        |       |         |           |
-| 2025-2026 | [2026-05-03 Sun] | Cardiff   |             |    16:00 | Day before + hotel. 1100 latest  |             |       |        |       |         |           |
-| 2025-2026 | [2026-05-09 Sat] | Bristol   |             |    17:00 | 14:00 leave house                |             |       |        |       |         |           |
-| 2025-2026 | [2026-05-10 Sun] | Slough    |             |    15:20 | After figure skating             |             |       |        |       |         |           |
-| 2025-2026 | [2026-05-16 Sat] | Streatham |             |    16:30 | 14:00 leave house                |             |       |        |       |         |           |
+| 2025-2026 | [2025-09-06 Sat] | Slough    | Cross ice   |    17:30 | <b>Not going<b>                  |             |       |        |       |         |           |
+| 2025-2026 | [2025-09-07 Sun] | Slough    | Cross ice   |    15:20 | <b>Not going</b>                 |             |       |        |       |         |           |
+| 2025-2026 | [2025-09-20 Sat] | Oxford    | Cross ice   |    16:40 | Morning + day out. 1400 latest   |             |       |        |       |         |           |
+| 2025-2026 | [2025-10-05 Sun] | Guildford | Cross ice   |    08:30 | 06:45 leave house                |             |       |        |       |         |           |
+| 2025-2026 | [2025-10-19 Sun] | Solent    | Cross ice   |    16:15 | After figure skating             |             |       |        |       |         |           |
+| 2025-2026 | [2025-10-25 Sat] | Swindon   | Cross ice   |    13:10 | 11:00 leave house                |             |       |        |       |         |           |
+| 2025-2026 | [2025-11-16 Sun] | Streatham | Cross ice   |    16:30 | 14:00 - can do after Masha/Yavor |             |       |        |       |         |           |
+| 2025-2026 | [2025-12-14 Sun] | Oxford    | Cross ice   |    16:40 | Morning + day out. 1400 latest   |             |       |        |       |         |           |
+| 2025-2026 | [2026-01-04 Sun] | Bristol   | Cross ice   |    15:30 | After figure skating             |             |       |        |       |         |           |
+| 2025-2026 | [2026-01-11 Sun] | Guildford | Cross ice   |    08:30 | 06:45 leave house                |             |       |        |       |         |           |
+| 2025-2026 | [2026-01-17 Sat] | Swindon   | Cross ice   |    13:10 | 11:00 leave house                |             |       |        |       |         |           |
+| 2025-2026 | [2026-01-25 Sun] | Solent    | Cross ice   |    16:15 | After figure skating             |             |       |        |       |         |           |
+| 2025-2026 | [2025-02-01 Sat] | Guildford | Cross ice   |    08:30 | 06:45 leave house                |             |       |        |       |         |           |
+| 2025-2026 | [2026-02-22 Sun] | Cardiff   | Cross ice   |    16:00 | Day before + hotel. 1100 latest  |             |       |        |       |         |           |
+| 2025-2026 | [2026-03-01 Sun] | Slough    | Cross ice   |    15:20 | After figure skating             |             |       |        |       |         |           |
+| 2025-2026 | [2026-03-22 Sun] | Solent    | Cross ice   |    16:15 | After figure skating             |             |       |        |       |         |           |
+| 2025-2026 | [2026-03-29 Sun] | Bristol   | Cross ice   |    15:30 | After figure skating             |             |       |        |       |         |           |
+| 2025-2026 | [2026-04-12 Sun] | Slough    | Cross ice   |    15:20 | After figure skating             |             |       |        |       |         |           |
+| 2025-2026 | [2026-04-19 Sun] | Slough    | Cross ice   |    15:20 | After figure skating             |             |       |        |       |         |           |
+| 2025-2026 | [2026-05-02 Sat] | Streatham | Cross ice   |    16:30 | 14:00 leave house                |             |       |        |       |         |           |
+| 2025-2026 | [2026-05-03 Sun] | Cardiff   | Cross ice   |    16:00 | Day before + hotel. 1100 latest  |             |       |        |       |         |           |
+| 2025-2026 | [2026-05-09 Sat] | Bristol   | Cross ice   |    17:00 | 14:00 leave house                |             |       |        |       |         |           |
+| 2025-2026 | [2026-05-10 Sun] | Slough    | Cross ice   |    15:20 | After figure skating             |             |       |        |       |         |           |
+| 2025-2026 | [2026-05-16 Sat] | Streatham | Cross ice   |    16:30 | 14:00 leave house                |             |       |        |       |         |           |
