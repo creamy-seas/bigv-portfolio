@@ -23,8 +23,7 @@
 | 2025-2026 | [2025-09-06 Sat] | Slough    | Cross ice   |    17:30 | <b>Not going<b>                  |             |       |        |       |         |           |
 | 2025-2026 | [2025-09-07 Sun] | Slough    | Cross ice   |    15:20 | <b>Not going</b>                 |             |       |        |       |         |           |
 | 2025-2026 | [2025-09-20 Sat] | Oxford    | Cross ice   |    16:40 | Morning + day out. 1400 latest   |          18 |     1 |      0 |     2 |       9 |        11 |
-| 2025-2026 | [2025-10-05 Sun] | Guildford | Cross ice   |    08:30 | 06:45 leave house                |             |       |        |       |         |           |
-| 2025-2026 | [2025-10-19 Sun] | Solent    | Cross ice   |    16:15 | After figure skating             |             |       |        |       |         |           |
+| 2025-2026 | [2025-10-05 Sun] | Guildford | Cross ice   |    08:30 | 06:45 leave house                |          22 |     1 |      2 |     3 |       4 |         5 |
 | 2025-2026 | [2025-10-25 Sat] | Swindon   | Cross ice   |    13:10 | 11:00 leave house                |             |       |        |       |         |           |
 | 2025-2026 | [2025-11-16 Sun] | Streatham | Cross ice   |    16:30 | 14:00 - can do after Masha/Yavor |             |       |        |       |         |           |
 | 2025-2026 | [2026-01-11 Sun] | Guildford | Cross ice   |    08:30 | 06:45 leave house                |             |       |        |       |         |           |
@@ -44,3 +43,4 @@
 | 2025-2026 | [2026-05-09 Sat] | Bristol   | Cross ice   |    17:00 | 14:00 leave house                |             |       |        |       |         |           |
 | 2025-2026 | [2026-05-10 Sun] | Slough    | Cross ice   |    15:20 | After figure skating             |             |       |        |       |         |           |
 | 2025-2026 | [2026-05-16 Sat] | Swindon   | Cross ice   |    13:10 | 11:00 leave house                |             |       |        |       |         |           |
+| 2025-2026 | [2026-05-16 Sat] | Solent    | Cross ice   |    16:15 | After figure skating             |             |       |        |       |         |           |
