@@ -8,4 +8,10 @@
  :bday              "2019-10-15"
  :base              "/bigv-portfolio"
  :brother-link      "https://creamy-seas.github.io/flowboy-portfolio/"
- :goat-counter-url  "https://bigv-portfolio.goatcounter.com/count"}
+ :goat-counter-url  "https://bigv-portfolio.goatcounter.com/count"
+ :favourites        ["Kicking off first game with first goal"
+                     "Carrying and cutting in for the shot!"
+                     "My goal against Streatham"
+                     "Practicing my turns"
+                     "A big pile-up"
+                     "Off ice session at home"]}
