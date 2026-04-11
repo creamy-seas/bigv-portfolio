@@ -47,5 +47,6 @@
 | 2025-2026 | [2026-05-10 Sun] | Slough    | Cross ice      |    15:20 | After figure skating             |             |       |        |       |         |           |                                                 |
 | 2025-2026 | [2026-05-16 Sat] | Swindon   | Cross ice      |    13:10 | 11:00 leave house                |             |       |        |       |         |           |                                                 |
 | 2025-2026 | [2026-05-16 Sat] | Solent    | Cross ice      |    16:15 | After figure skating             |             |       |        |       |         |           |                                                 |
+| 2025-2026 | [2026-05-23 Sat] | Bracknell | Ozone 3x3      |    15:00 | Get whole family to come         |             |       |        |       |         |           |                                                 |
 | 2025-2026 | [2026-07-04 Sat] | Cambridge | Tournament     |    11:00 | Whole day                        |             |       |        |       |         |           |                                                 |
 | 2025-2026 | [2026-07-18 Sat] | Sheffield | Tournament     |    11:00 | Whole weekend                    |             |       |        |       |         |           |                                                 |
