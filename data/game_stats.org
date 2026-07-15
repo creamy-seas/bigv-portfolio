@@ -47,5 +47,6 @@
 | 2025-2026 | [2026-05-23 Sat] | Bracknell | Ozone 3x3      |    15:00 | 3x3 tournament                    |          25 |     1 |     11 |     8 |       3 |        12 | 3rd line - stop falling                         |
 | 2025-2026 | [2026-06-13 Sat] | Bracknell | U10 Nationals  |    12:00 | Whole day tournament              |          25 |     0 |      4 |     2 |       3 |        10 | 3rd line - D                                    |
 | 2025-2026 | [2026-07-04 Sat] | Cambridge | Tournament     |    11:00 | Whole day tournament, 12:30 start |          40 |     3 |     15 |     9 |      15 |        19 | 3rd line - D                                    |
-| 2025-2026 | [2026-07-19 Sun] | Bracknell | Summer league  |    14:15 |                                   |             |       |        |       |         |           |                                                 |
-| 2025-2026 | [2026-07-26 Sun] | Bracknell | Summer league  |    14:15 |                                   |             |       |        |       |         |           |                                                 |
+| 2025-2026 | [2026-07-19 Sun] | Bracknell | Summer league  |    14:15 | U12 summer league                 |             |       |        |       |         |           |                                                 |
+| 2025-2026 | [2026-07-26 Sun] | Bracknell | Summer league  |    14:15 | U12 summer league                 |             |       |        |       |         |           |                                                 |
+| 2025-2026 | [2026-08-01 Sat] | Bracknell | Ozone 3x3      |    14:15 | 3x3 tournament                    |             |       |        |       |         |           |                                                 |
