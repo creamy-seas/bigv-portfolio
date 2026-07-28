@@ -17,7 +17,7 @@
                        "month" "long"
                        "year"  "numeric"}
         locale (aget js/navigator "language")
-        date-str (str (.toLocaleDateString (js/Date. date) locale date-opts) " (" age " years old)")]
+        date-str (str (.toLocaleDateString (js/Date. date) locale date-opts) " (" age ")")]
     (set! (.-src iframe) src)
     (set! (.-title iframe) description)
     (set! (.-textContent (dom/get-element-by-id "gallery-modal-description")) description)
