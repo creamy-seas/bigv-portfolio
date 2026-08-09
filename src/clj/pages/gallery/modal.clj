@@ -21,9 +21,9 @@
 
    [:div.modal-content
     {:class "bg-bg
-             p-3 sm:p-6
+             m-3 sm:p-3
              rounded-lg
-             w-full lg:max-w-[70vw]
+             w-full lg:max-w-[67vw]
              max-h-screen overflow-auto"
      :onclick "event.stopPropagation()"}
 
