@@ -17,13 +17,13 @@
             (assoc entry
                    :gallery-idx index
                    :thumbnail (if (= type "image")
-                                (str "https://drive.google.com/thumbnail?id=" id)
+                                ;; TODO: for now we just use the image itself - it is heavy as all images will be loaded, so its best to default to google drive
+                                ;;(str "https://drive.google.com/thumbnail?id=" id)
+                                (str (:cdn-preamble cfg/config) id (:cdn-postamble cfg/config))
                                 (if (some #{description} favourites)
                                   (url/put-on-base "/assets/play-icon-favourite.svg")
                                   (url/put-on-base "/assets/play-icon.svg")))
-                   :src    (str "https://drive.google.com/file/d/"
-                                id
-                                "/preview")
+                   :src    (str (:cdn-preamble cfg/config) id (:cdn-postamble cfg/config))
                    :age (let [{:keys [years months]}
                               (date/calculate-age (:bday cfg/config) date)]
                           (format "%d years %d months" years months)))))

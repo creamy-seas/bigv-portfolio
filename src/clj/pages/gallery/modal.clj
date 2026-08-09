@@ -1,5 +1,4 @@
-(ns pages.gallery.modal
-  (:require [utils.url :as url]))
+(ns pages.gallery.modal)
 
 (def nav-arrow-class
   ;; Very tedious css class to ensure nice clicky navigation arrows
@@ -12,7 +11,7 @@
    rounded-lg")
 
 (defn render
-  "A popup with a large display of Google content in an iframe."
+  "A popup with a large display of gallery media."
   []
   [:div#gallery-modal.select-none.js-only
    {:class "fixed flex hidden
@@ -29,14 +28,15 @@
      :onclick "event.stopPropagation()"}
 
     [:div.w-full.aspect-video.overflow-hidden
-     [:iframe#gallery-modal-iframe.block.w-full.h-full.border-0
-      {:style (str "background: url("
-                   (url/put-on-base "/assets/favicon.svg")
-                   ") center center no-repeat;")
-       :src ""
-       :allow "autoplay; fullscreen; picture-in-picture"
-       :allowfullscreen ""
-       :title ""}]]
+     [:img#gallery-modal-image.hidden.w-full.h-full.object-contain
+      {:src ""
+       :alt ""}]
+
+     [:video#gallery-modal-video.hidden.w-full.h-full.object-contain
+      {:src ""
+       :controls true
+       :autoplay true
+       :playsinline true}]]
 
     [:div.flex.gap-4.mt-3
      [:button#gallery-modal-future
