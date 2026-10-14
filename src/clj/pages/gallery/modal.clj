@@ -48,7 +48,7 @@
       {:class "flex items-center justify-center w-10 shrink-0 invisible"
        :target "_blank"
        :rel "noopener noreferrer"}
-      [:img.w-8.h-8 {:src "/assets/instagram.svg"}]]
+      [:img.w-8.h-8 {:src "/assets/instagram-heart.svg"}]]
 
      [:button#gallery-modal-past
       {:class nav-arrow-class
