@@ -27,6 +27,10 @@ These files must be accessible from the root of the published website.
 | [[file:resources/public/sitemap.xml][sitemap.xml]] | Lists URLs available for search engine indexing. Submit to Google Search Console. |
 | [[file:resources/public/robots.txt][robots.txt]]  | Controls search engine crawler access and points to the sitemap.                  |
 
+Then visit [[https://search.google.com/search-console/welcome][Google Console]] and
+- Verify the domain - if automatic does not work add the TXT manually
+- Submit =sitemaps.xml= under Indexing
+
 ** Upload photos
 1. Setup google/s3 buckets if not setup (see below)
 2. Create a folder (folders) with the following season structure
