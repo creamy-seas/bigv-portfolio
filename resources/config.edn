@@ -8,6 +8,7 @@
  :bday              "2019-10-15"
  :brother-link      "https://flowboy.antonov-hq.com"
  :domain            "https://bigv.antonov-hq.com"
+ :instagram         "https://www.instagram.com/bigv.antonov"
  ;; :cdn-preamble      "https://drive.google.com/file/d/"
  ;; :cdn-postamble     "/preview"
  :cdn-preamble      "https://bigv-media.antonov-hq.com/"
