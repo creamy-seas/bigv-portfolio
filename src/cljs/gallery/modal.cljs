@@ -11,7 +11,7 @@
 
 (defn set-gallery-modal-media
   "Populate the modal with supplied media and metadata."
-  [src type description date age]
+  [src type description date age instagram]
   (let [image (dom/get-element-by-id "gallery-modal-image")
         video (dom/get-element-by-id "gallery-modal-video")
         date-opts #js {"day"   "numeric"
@@ -48,7 +48,12 @@
 
     (set! (.-textContent
            (dom/get-element-by-id "gallery-modal-date"))
-          date-str)))
+          date-str)
+
+    ;; Set heart to link to instagram (or hide it)
+    (let [el (dom/get-element-by-id "gallery-modal-instagram")]
+      (set! (.-href el) (or instagram "#"))
+      (set! (.. el -style -visibility) (if instagram "visible" "hidden")))))
 
 (defn clear-gallery-modal-media []
   (let [image (dom/get-element-by-id "gallery-modal-image")
@@ -80,7 +85,8 @@
        (aget item "type")
        (.-description item)
        (aget item "date")
-       (aget item "age"))
+       (aget item "age")
+       (aget item "instagram"))
 
       (.remove
        (.-classList (dom/get-element-by-id "gallery-modal"))

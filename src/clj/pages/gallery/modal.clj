@@ -44,6 +44,12 @@
        :aria-label "Show newer gallery item"}
       [:span.text-3xl "‹"]]
 
+     [:a#gallery-modal-instagram
+      {:class "flex items-center justify-center w-10 shrink-0 invisible"
+       :target "_blank"
+       :rel "noopener noreferrer"}
+      [:img.w-8.h-8 {:src "/assets/instagram.svg"}]]
+
      [:button#gallery-modal-past
       {:class nav-arrow-class
        :aria-label "Show older gallery item"}

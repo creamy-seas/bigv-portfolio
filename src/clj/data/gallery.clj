@@ -7,9 +7,14 @@
 (defn read-gallery
   "Reading of raw gallery data from csv sorted by descending dates
   - Each enty has both a thumbnail generated (for videos a default icon is used)
-  - Each enty has a url made that will be fetched if clicked"
+  - Each enty has a url made that will be fetched if clicked
+  - Entry may have an optional instagram link which is also stored"
   []
-  (let [favourites (:favourites cfg/config)]
+  (let [favourites (:favourites cfg/config)
+        instagram-links
+        (->> (core/read-csv "data/instagram.csv")
+             (map (juxt :gallery-description :instagram-link))
+             (into {}))]
     (->> (core/read-csv "data/gallery.csv")
          (sort-by :date)
          (map-indexed
@@ -24,6 +29,7 @@
                                   (url/put-on-base "/assets/play-icon-favourite.svg")
                                   (url/put-on-base "/assets/play-icon.svg")))
                    :src    (str (:cdn-preamble cfg/config) id (:cdn-postamble cfg/config))
+                   :instagram (get instagram-links description)
                    :age (let [{:keys [years months]}
                               (date/calculate-age (:bday cfg/config) date)]
                           (format "%d years %d months" years months)))))
