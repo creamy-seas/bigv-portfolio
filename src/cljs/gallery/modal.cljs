@@ -11,9 +11,10 @@
 
 (defn set-gallery-modal-media
   "Populate the modal with supplied media and metadata."
-  [src type description date age instagram]
-  (let [image (dom/get-element-by-id "gallery-modal-image")
-        video (dom/get-element-by-id "gallery-modal-video")
+  [src embed description date age instagram]
+  (let [media {"image"  (dom/get-element-by-id "gallery-modal-image")
+               "video"  (dom/get-element-by-id "gallery-modal-video")
+               "iframe" (dom/get-element-by-id "gallery-modal-iframe")}
         date-opts #js {"day"   "numeric"
                        "month" "long"
                        "year"  "numeric"}
@@ -24,24 +25,22 @@
                        date-opts)
                       " (" age ")")]
 
-    (if (= type "image")
-      (do
-        (.pause video)
-        (set! (.-src video) "")
-        (.add (.-classList video) "hidden")
+    ;; Hide and reset all media
+    (.pause (get media "video"))
+    (doseq [[_ el] media]
+      (set! (.-src el) "")
+      (.add (.-classList el) "hidden"))
 
-        (set! (.-src image) src)
-        (set! (.-alt image) description)
-        (.remove (.-classList image) "hidden"))
+    ;; Display selected media
+    (when-let [el (get media embed)]
+      (set! (.-src el) src)
+      (when (= embed "image")
+        (set! (.-alt el) description))
+      (.remove (.-classList el) "hidden")
+      (when (= embed "video")
+        (.play el)))
 
-      (do
-        (set! (.-src image) "")
-        (.add (.-classList image) "hidden")
-        (.play video)
-
-        (set! (.-src video) src)
-        (.remove (.-classList video) "hidden")))
-
+    ;; Metadata
     (set! (.-textContent
            (dom/get-element-by-id "gallery-modal-description"))
           description)
@@ -50,17 +49,19 @@
            (dom/get-element-by-id "gallery-modal-date"))
           date-str)
 
-    ;; Set heart to link to instagram (or hide it)
+    ;; Instagram link
     (let [el (dom/get-element-by-id "gallery-modal-instagram")]
       (set! (.-href el) (or instagram "#"))
-      (set! (.. el -style -visibility) (if instagram "visible" "hidden")))))
+      (set! (.. el -style -visibility)
+            (if instagram "visible" "hidden")))))
 
 (defn clear-gallery-modal-media []
-  (let [image (dom/get-element-by-id "gallery-modal-image")
-        video (dom/get-element-by-id "gallery-modal-video")]
+  (let [video (dom/get-element-by-id "gallery-modal-video")]
     (.pause video)
-    (set! (.-src video) "")
-    (set! (.-src image) "")))
+    (doseq [id ["gallery-modal-image"
+                "gallery-modal-video"
+                "gallery-modal-iframe"]]
+      (set! (.-src (dom/get-element-by-id id)) ""))))
 
 (defn sync-collapse
   "Ensures that item in view has its collapse box expanded."
@@ -82,7 +83,7 @@
       ;; but for data the .-PROP does not work. Mysterious.
       (set-gallery-modal-media
        (.-src item)
-       (aget item "type")
+       (aget item "embed")
        (.-description item)
        (aget item "date")
        (aget item "age")

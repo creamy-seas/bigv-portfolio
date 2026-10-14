@@ -4,6 +4,22 @@
             [utils.url    :as url]
             [utils.config :as cfg]))
 
+(defn gallery-media
+  "Define how to generate media links and embedding for different providers"
+  [id type]
+  (case (:gallery-provider cfg/config)
+    :google-drive {:src (str "https://drive.google.com/file/d/" id "/preview")
+                   :embed "iframe"}
+    :cdn          {:src (str (:cdn-url cfg/config) id)
+                   :embed type}))
+
+(defn gallery-thumbnail
+  "Define how to generate media preview in gallery grid"
+  [id]
+  (case (:gallery-provider cfg/config)
+    :google-drive (str "https://drive.google.com/thumbnail?id=" id)
+    :cdn          (str (:cdn-url cfg/config) id)))
+
 (defn read-gallery
   "Reading of raw gallery data from csv sorted by descending dates
   - Each enty has both a thumbnail generated (for videos a default icon is used)
@@ -24,11 +40,12 @@
                    :thumbnail (if (= type "image")
                                 ;; TODO: for now we just use the image itself - it is heavy as all images will be loaded, so its best to default to google drive
                                 ;;(str "https://drive.google.com/thumbnail?id=" id)
-                                (str (:cdn-preamble cfg/config) id (:cdn-postamble cfg/config))
+                                (gallery-thumbnail id)
                                 (if (some #{description} favourites)
                                   (url/put-on-base "/assets/play-icon-favourite.svg")
                                   (url/put-on-base "/assets/play-icon.svg")))
-                   :src    (str (:cdn-preamble cfg/config) id (:cdn-postamble cfg/config))
+                   :src (:src (gallery-media id type))
+                   :embed (:embed (gallery-media id type))
                    :instagram (get instagram-links description)
                    :age (let [{:keys [years months]}
                               (date/calculate-age (:bday cfg/config) date)]

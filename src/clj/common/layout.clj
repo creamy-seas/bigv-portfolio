@@ -75,16 +75,22 @@
   "Website name with link to root page and brother website"
   []
   [:header {:class "grid items-center gap-2 px-4 py-3
-                   grid-cols-1 md:grid-cols-[1fr_auto_1fr]"}
+                 grid-cols-2 md:grid-cols-[1fr_auto_1fr]"}
+
    [:a {:href (:brother-link cfg/config)
-        :class "justify-self-center md:justify-self-start"}
+        :class "justify-self-start"}
     [:div#to-brother]]
-   [:a.my-hover-link {:href (url/put-on-base "/")
-                      :class "justify-self-center
-               text-3xl font-bold
-               underline-offset-4 select-none"}
+
+   [:a.my-hover-link
+    {:href (url/put-on-base "/")
+     :class "col-span-2 row-start-2
+           md:col-span-1 md:col-start-2 md:row-start-1
+           justify-self-center text-3xl font-bold
+           underline-offset-4 select-none"}
     (:title cfg/config)]
-   [:div.flex.items-center.gap-4.justify-self-center.md:justify-self-end
+
+   [:div.flex.items-center.gap-4.justify-self-end
+    {:class "md:col-start-3 md:row-start-1"}
     [:div#lang]
     [:a {:href (str "https://www.instagram.com/" (:instagram cfg/config))
          :target "_blank"

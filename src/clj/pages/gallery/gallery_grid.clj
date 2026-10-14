@@ -1,13 +1,33 @@
 (ns pages.gallery.gallery-grid
-  (:require [data.gallery :as gallery]))
+  (:require [data.gallery :as gallery]
+            [utils.config :as cfg]))
 
 (defn gallery-card-js
-  "Single media element in grid view - interaction handled with a gallery-card listener"
-  [{:keys [thumbnail description date gallery-idx]}]
-  [:div.gallery-card {:gallery-idx gallery-idx}
-   [:img {:src thumbnail :alt description}]
-   [:p.description description]
-   [:p.date date]])
+  "Single media element in grid view - interaction handled with a gallery-card listener."
+  [{:keys [thumbnail description date gallery-idx src]}]
+  (if (= (:gallery-provider cfg/config) :google-drive)
+    [:div
+     ;; For Google temporarily opening directly on small screens as google drive messed up iframe embedding which dimmed the video
+     [:a.md:hidden
+      {:href src
+       :target "_blank"
+       :rel "noopener noreferrer"
+       :title description}
+      [:img {:src thumbnail :alt description}]
+      [:p.description description]
+      [:p.date date]]
+
+     [:div.gallery-card.hidden.md:block
+      {:gallery-idx gallery-idx}
+      [:img {:src thumbnail :alt description}]
+      [:p.description description]
+      [:p.date date]]]
+
+    [:div.gallery-card
+     {:gallery-idx gallery-idx}
+     [:img {:src thumbnail :alt description}]
+     [:p.description description]
+     [:p.date date]]))
 
 (defn render-js
   "Grid of media elements passed in as list in argument.

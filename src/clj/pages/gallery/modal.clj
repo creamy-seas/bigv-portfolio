@@ -1,4 +1,5 @@
-(ns pages.gallery.modal)
+(ns pages.gallery.modal
+  (:require [utils.url :as url]))
 
 (def nav-arrow-class
   ;; Very tedious css class to ensure nice clicky navigation arrows
@@ -36,7 +37,16 @@
       {:src ""
        :controls true
        :autoplay true
-       :playsinline true}]]
+       :playsinline true}]
+
+     [:iframe#gallery-modal-iframe.hidden.block.w-full.h-full.border-0
+      {:style (str "background: url("
+                   (url/put-on-base "/assets/favicon.svg")
+                   ") center center no-repeat;")
+       :src ""
+       :allow "autoplay; fullscreen; picture-in-picture"
+       :allowfullscreen ""
+       :title ""}]]
 
     [:div.flex.gap-4.mt-3
      [:button#gallery-modal-future
