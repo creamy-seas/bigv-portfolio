@@ -56,8 +56,13 @@
    [:title title]
    [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
    [:meta {:name "description" :content description}]
+   [:link {:rel "icon"
+           :type "image/png"
+           :sizes "96x96"
+           :href (url/put-on-base "/assets/favicon.png")}]
    [:link {:rel  "icon"
            :type "image/svg+xml"
+           :sizes "any"
            :href (url/put-on-base "/assets/favicon.svg")}]
 
    ;; --- Styles ---
