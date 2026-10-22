@@ -61,6 +61,7 @@
 | 2026-2027 | [2026-10-25 Sun] | Alexandra Palace | Cross ice      |    16:45 | After figure skating              |             |       |        |        |       |         |           |                                                 |
 | 2026-2027 | [2026-10-31 Sat] | Oxford           | Cross ice      |    16:40 | Morning + day out. 1400 latest    |             |       |        |        |       |         |           |                                                 |
 | 2026-2027 | [2026-11-01 Sun] | Bristol          | U12-B          |    17:30 | 14:00 leave house or day out      |             |       |        |        |       |         |           |                                                 |
+| 2026-2027 | [2026-11-07 Sat] | Swindon          | U8 Tournament  |    13:00 | After figure skating              |
 | 2026-2027 | [2026-11-08 Sun] | Swindon          | Cross ice      |    13:10 | After figure skating              |             |       |        |        |       |         |           |                                                 |
 | 2026-2027 | [2026-11-14 Sat] | Swindon          | Cross ice      |    13:10 | 11:10 leave house                 |             |       |        |        |       |         |           |                                                 |
 | 2026-2027 | [2026-11-14 Sat] | Slough           | U12-B          |    17:30 | Come after Swindon game           |             |       |        |        |       |         |           |                                                 |
@@ -68,6 +69,7 @@
 | 2026-2027 | [2026-11-21 Sat] | Cardiff          | Cross ice      |    16:00 | 11:00 leave house                 |             |       |        |        |       |         |           |                                                 |
 | 2026-2027 | [2026-11-29 Sun] | Basingstoke      | Cross ice      |    16:15 | 14:30 leave house                 |             |       |        |        |       |         |           |                                                 |
 | 2026-2027 | [2026-12-05 Sat] | Solent           | Cross ice      |    16:25 | 10:00 with visit to docks         |             |       |        |        |       |         |           |                                                 |
+| 2026-2027 | [2026-12-12 Sat] | Swindon          | U8 Tournament  |    13:00 | After figure skating              |
 | 2026-2027 | [2026-12-13 Sun] | Romford          | U12-B          |    17:50 | 16:00 leave house                 |             |       |        |        |       |         |           |                                                 |
 | 2026-2027 | [2026-12-20 Sun] | Cardiff          | Cross ice      |    16:00 | Day before + hotel. 11:00 latest  |             |       |        |        |       |         |           |                                                 |
 | 2026-2027 | [2027-01-06 Wed] | Streatham        | U12-B          |    16:30 | 14:00 leave house                 |             |       |        |        |       |         |           |                                                 |
