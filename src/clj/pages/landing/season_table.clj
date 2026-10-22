@@ -52,7 +52,7 @@
             (map-indexed (fn [idx {:keys [season games goals apples timeOnIceH]}]
                            [:tr {:key idx}
                             [:td
-                             [:a.underline.my-hover-link {:href (url/put-on-base (str "gallery?season=" season))}
+                             [:a.underline.my-hover-link {:href (url/put-on-base (str "gallery/?season=" season))}
                               season]]
                             [:td games]
                             [:td goals]
