@@ -12,8 +12,8 @@
  :domain            "https://bigv.antonov-hq.com"
  :instagram         "bigv.antonov"
  :goat-counter-url  "https://bigv-portfolio.goatcounter.com/count"
- :open-graph-img    "https://bigv-media.antonov-hq.com/2025-2026/2026-02-20_Bar%20down_low-res.JPG"
- :cdn-url           "https://bigv-media.antonov-hq.com/"
+ :open-graph-img    "https://bigv-media-yandex.antonov-hq.com/2025-2026/2026-02-20_Bar%20down_low-res.JPG"
+ :cdn-url           "https://bigv-media-yandex.antonov-hq.com/"
  :gallery-provider  :cdn
  :favourites        ["Top shelf breakaway goal"
                      "Checking the time"
